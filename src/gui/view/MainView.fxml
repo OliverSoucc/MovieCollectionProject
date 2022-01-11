@@ -12,20 +12,18 @@
    <children>
       <TableView layoutX="18.0" layoutY="74.0" prefHeight="511.0" prefWidth="778.0">
         <columns>
-          <TableColumn prefWidth="138.3999900817871" text="Name" />
-          <TableColumn prefWidth="51.20001220703125" text="Rating" />
-            <TableColumn prefWidth="97.60005187988281" text="Category 1" />
-            <TableColumn prefWidth="116.79998779296875" text="Category 2" />
-            <TableColumn prefWidth="118.39996337890625" text="Category 3" />
-            <TableColumn prefWidth="125.60003662109375" text="Category 4" />
-            <TableColumn prefWidth="131.20001220703125" text="Category 5" />
+          <TableColumn prefWidth="270.4000053405762" text="Name" />
+          <TableColumn prefWidth="84.79998779296875" text="Rating" />
+            <TableColumn prefWidth="138.4000244140625" text="Category 1" />
+            <TableColumn prefWidth="139.20001220703125" text="Category 2" />
+            <TableColumn prefWidth="146.4000244140625" text="Category 3" />
         </columns>
       </TableView>
       <Button layoutX="744.0" layoutY="29.0" mnemonicParsing="false" text="Clear" />
       <TextField layoutX="18.0" layoutY="29.0" prefHeight="26.0" prefWidth="702.0" />
       <Button fx:id="movieButton" layoutX="18.0" layoutY="595.0" mnemonicParsing="false" onAction="#movieButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Movie" />
       <Button layoutX="321.0" layoutY="595.0" mnemonicParsing="false" onAction="#categoryButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Category" />
-      <Button layoutX="624.0" layoutY="595.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="172.0" text="Add/change Rating" />
+      <Button layoutX="624.0" layoutY="595.0" mnemonicParsing="false" onAction="#ratingButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/change Rating" />
       <Label layoutX="18.0" layoutY="3.0" prefHeight="0.0" prefWidth="43.0" text="Filter">
          <font>
             <Font name="System Bold" size="16.0" />

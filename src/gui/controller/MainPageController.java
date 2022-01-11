@@ -37,4 +37,15 @@ public class MainPageController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    public void ratingButtonOnAction(ActionEvent actionEvent) throws IOException {
+        Parent root;
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/gui/view/AddChangeRating.fxml"));
+        root= loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Add/Change Rating");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
