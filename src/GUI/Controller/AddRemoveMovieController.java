@@ -28,7 +28,7 @@ public class AddRemoveMovieController {
         addRemoveMovieModel = new AddRemoveMovieModel();
     }
 
-    public void handleSaveNewMovie(ActionEvent actionEvent) {
+    public void handleSaveMovieBtn(ActionEvent actionEvent) {
         addRemoveMovieModel.createMovie(
                 titleTextField.getText(),
                 Float.parseFloat(ratingTextField.getText()),
