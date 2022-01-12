@@ -1,6 +1,4 @@
-
 package GUI.Model;
-
 
 import BE.Movie;
 import gui.Controller.MainPageController;

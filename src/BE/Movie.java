@@ -40,7 +40,7 @@ public class Movie {
         return name;
     }
 
-    public double getRating() {
+    public float getRating() {
         return rating;
     }
 

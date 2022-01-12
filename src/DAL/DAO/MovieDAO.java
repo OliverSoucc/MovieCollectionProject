@@ -1,13 +1,11 @@
 package DAL.DAO;
 
+import BE.Category;
 import BE.Movie;
 import DAL.DatabaseConnector;
 import DAL.Intefaces.MovieIDAO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +40,33 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public Movie createCategory(Movie movieToCreate) {
-        return null;
+    public Movie createMovie(Movie movieToCreate) {
+        int id = movieToCreate.getId();
+        String name = movieToCreate.getName();
+        float rating = movieToCreate.getRating();
+        String fileLink = movieToCreate.getFileLink();
+        int lastView = movieToCreate.getLastView();
+
+        try (Connection connection = DBconnector.getConnection()){
+            String sql = "INSERT INTO Category(Id, Name, Rating, FileLink, LastView) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, name);
+            preparedStatement.setFloat(3, rating);
+            preparedStatement.setString(4, fileLink);
+            preparedStatement.setInt(5, lastView);
+            preparedStatement.addBatch();
+            preparedStatement.executeBatch();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        movieToCreate = new Movie(id, name, rating, fileLink, lastView);
+        return movieToCreate; // returns created Category object
     }
 
     @Override
-    public void deleteCategory(Movie movieToDelete) {
+    public void deleteMovie(Movie movieToDelete) {
 
     }
 }
