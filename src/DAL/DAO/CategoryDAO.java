@@ -67,5 +67,5 @@ public class CategoryDAO implements CategoryIDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-    } // deletes the specific category
+    } // deletes the specific category by ID
 }

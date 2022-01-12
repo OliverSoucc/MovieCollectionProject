@@ -67,6 +67,14 @@ public class MovieDAO implements MovieIDAO {
 
     @Override
     public void deleteMovie(Movie movieToDelete) {
+        try (Connection connection = DBconnector.getConnection()){
+            String sql = "DELETE FROM Movie WHERE Id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, movieToDelete.getId());
+            preparedStatement.execute();
 
-    }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    } // deletes the specific movie by ID
 }
