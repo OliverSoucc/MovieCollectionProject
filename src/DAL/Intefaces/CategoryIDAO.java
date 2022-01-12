@@ -6,8 +6,7 @@ import java.util.List;
 
 public interface CategoryIDAO {
     public List<Category> getAllCategories();
-    Category createCategory(Category categoryToCreate);
+    public Category createCategory(Category categoryToCreate);
     public void deleteCategory(Category categoryToDelete);
-    //public void updateCategory();
-
+    // public Category updateCategory(Category categoryToUpdate);
 }
