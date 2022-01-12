@@ -35,7 +35,7 @@ public class MainPageController implements Initializable {
     @FXML
     public TextField filter;
     @FXML
-    public TableView tableView;
+    public TableView <Movie> tableView;
 
 
     float newValueFloat;
@@ -89,9 +89,12 @@ public class MainPageController implements Initializable {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         category1Column.setCellValueFactory(new PropertyValueFactory<>("category1"));
         category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
-        category3Column.setCellValueFactory(new PropertyValueFactory<>("categoty3"));
+        category3Column.setCellValueFactory(new PropertyValueFactory<>("category3"));
 
-        movieObservableList.addAll(); // there will be movies from database
+        Movie movie = new Movie("Star wars", 6.5F,"Fiction", "Sci-fi","Action");
+        Movie movie1 = new Movie("Star wars 1", 7.5F,"Sci-fi", "Fiction","Lolo");
+        Movie movie2 = new Movie("Star wars 2", 5.5F,"Fiction", "Action","Lolo");
+        movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
     }
 
     private void filterLogic(){
@@ -103,23 +106,19 @@ public class MainPageController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                // Compare first name and last name of every person with filter text.
+                
                 String stringLowerCaseFilter = newValue.toLowerCase();
 
                 if (employee.getName().toLowerCase().contains(stringLowerCaseFilter)) {
-                    //System.out.println("a");
                     return true;
                 } else if ((employee.getCategory1() + " " + employee.getCategory2() + " "
                             + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    //System.out.println("b");
                     return true;
                 } else if ((employee.getCategory1() + " " + employee.getCategory3() + " "
                         + employee.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    //System.out.println("c");
                     return true;
                 } else if ((employee.getCategory2() + " " + employee.getCategory1() + " "
                         + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    //System.out.println("d");
                     return true;
                 }else if((employee.getCategory2() + " " + employee.getCategory3() + " "
                         + employee.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
@@ -133,7 +132,6 @@ public class MainPageController implements Initializable {
                 }else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
                     if (employee.getRating() >= newValueFloat) {
-                        //System.out.println("e");
                         return true;
                     }
                 }
