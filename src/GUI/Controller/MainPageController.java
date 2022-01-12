@@ -3,6 +3,7 @@ package gui.Controller;
 import BE.Movie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,6 +34,8 @@ public class MainPageController implements Initializable {
     @FXML
     public TextField filter;
 
+
+    float newValueFloat;
     private final ObservableList <Movie> movieObservableList = FXCollections.observableArrayList();
 
     public void movieButtonOnAction(ActionEvent actionEvent) throws IOException {
@@ -84,5 +87,51 @@ public class MainPageController implements Initializable {
         category3Column.setCellValueFactory(new PropertyValueFactory<>("categoty3"));
 
         movieObservableList.addAll(); // there will be movies from database
+    }
+
+    private void filterLogic(){
+//        FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);
+//
+//        filter.textProperty().addListener((observable, oldValue, newValue) -> {
+//            filteredData.setPredicate(employee -> {
+//                // If filter text is empty, display all persons.
+//                if (newValue == null || newValue.isEmpty()) {
+//                    return true;
+//                }
+//                // Compare first name and last name of every person with filter text.
+//                String stringLowerCaseFilter = newValue.toLowerCase();
+//
+//                if (employee.getFirstName().toLowerCase().contains(stringLowerCaseFilter)) {
+//                    System.out.println("a");
+//                    return true; // Filter matches first name.
+//                } else if (employee.getDepartment().toLowerCase().contains(stringLowerCaseFilter)) {
+//                    System.out.println("b");
+//                    return true; // Filter matches last name.
+//                } else if (String.valueOf(employee.getSalary()).contains(stringLowerCaseFilter)) {
+//                    System.out.println("c");
+//                    return true;
+//                } else if ((employee.getFirstName() + " " + employee.getDepartment()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    System.out.println("d");
+//                    return true;
+//                }else if (isNumeric(stringLowerCaseFilter)) {
+//                    newValueFloat = Float.parseFloat(stringLowerCaseFilter);
+//                    if (employee.getSalary() >= newValueInteger) {
+//                        System.out.println("e");
+//                        return true;
+//                    }
+//                }
+//                return false;
+//            });
+//        });
+//        tableview.setItems(filteredData);
+    }
+
+    public static boolean isNumeric(String str) {
+        try {
+            Float.parseFloat(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
