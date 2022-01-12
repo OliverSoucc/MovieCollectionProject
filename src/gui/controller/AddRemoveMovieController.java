@@ -1,5 +1,6 @@
 package gui.controller;
 
+import gui.model.AddRemoveMovieModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,18 +15,26 @@ import java.io.File;
 
 public class AddRemoveMovieController {
     @FXML
-    public TextField songTitleField;
-    @FXML
     public Button cancelSongBtn;
     @FXML
-    public TextField titleTextfield, ratingTextField, pathTextField, timeTextField;
+    public TextField titleTextField, ratingTextField, pathTextField, timeTextField;
     @FXML
     public AnchorPane anchorPane;
 
-    Add
+    AddRemoveMovieModel addRemoveMovieModel;
+
+    public AddRemoveMovieController() {
+        addRemoveMovieModel = new AddRemoveMovieModel();
+    }
 
     public void handleSaveNewMovie(ActionEvent actionEvent) {
-
+        addRemoveMovieModel.createMovie(
+                titleTextField.getText(),
+                Float.parseFloat(ratingTextField.getText()),
+                pathTextField.getText(),
+                handleTimeField(timeTextField.getText())
+        );
+        System.out.println(addRemoveMovieModel.getMovieDB());
     }
 
 
@@ -66,5 +75,15 @@ public class AddRemoveMovieController {
     }
 
     public void actionErotic(ActionEvent actionEvent) {
+    }
+    private int handleTimeField(String actualTime) {
+        int time;
+        if (actualTime.equals(" ") || actualTime.isEmpty()) {
+            time = 0;
+        }
+        else {
+            time = Integer.parseInt(actualTime);
+        }
+        return time;
     }
 }

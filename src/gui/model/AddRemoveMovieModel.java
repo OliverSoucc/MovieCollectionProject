@@ -13,8 +13,11 @@ public class AddRemoveMovieModel {
     public AddRemoveMovieModel() {
         movieDB = new ArrayList<>();
     }
-    public void createMovie(String movieName, float movieRating, String movieLink) {
-        Movie newMovie = new Movie(movieName, movieRating, movieLink);
+    public ArrayList<Movie> getMovieDB(){
+        return movieDB;
+    }
+    public void createMovie(String movieName, float movieRating, String movieLink, int movieDuration) {
+        Movie newMovie = new Movie(movieName, movieRating, movieLink, movieDuration);
         movieDB.add(newMovie);
     }
 }
