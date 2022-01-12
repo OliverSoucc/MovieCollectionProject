@@ -1,13 +1,11 @@
 package dal.dao;
 
 import be.Category;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import dal.CategoryIDAO;
 import dal.DatabaseConnector;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +38,27 @@ public class CategoryDAO implements CategoryIDAO {
     }
 
     @Override
-    public Category createCategory() {
-        return null;
-    }
+    public Category createCategory(Category categorytoCreate) {
+        int id = categorytoCreate.getId();
+        String name = categorytoCreate.getName();
 
+        try (Connection connection = DBconnector.getConnection()){
+            String sql = "INSERT INTO Category(Id, Name) VALUES (?, ?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.setString(2, name);
+            preparedStatement.addBatch();
+            preparedStatement.executeBatch();
+
+        } catch (SQLServerException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        categorytoCreate = new Category(id, name);
+        return categorytoCreate;
+    }
+    
     @Override
     public void deleteCategory() {
 
