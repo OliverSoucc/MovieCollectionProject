@@ -1,6 +1,5 @@
 package DAL.DAO;
 
-import BE.Category;
 import BE.Movie;
 import DAL.DatabaseConnector;
 import DAL.Intefaces.MovieIDAO;
@@ -30,6 +29,7 @@ public class MovieDAO implements MovieIDAO {
                 float rating = resultSet.getFloat("Rating");
                 String fileLink = resultSet.getString("FileLink");
                 int lastView = resultSet.getInt("LastView");
+                int duration = resultSet.getInt("Duration");
                 Movie movie = new Movie(id, name, rating, fileLink, lastView);
                 allMovies.add(movie);
             }

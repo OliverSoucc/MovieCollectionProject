@@ -20,6 +20,13 @@ public class Movie {
         this.lastView = lastView;
         this.duration = duration;
     }
+    public Movie(int id, String name, float rating, String fileLink, int lastView) {
+        this.id = id;
+        this.name = name;
+        this.rating = rating;
+        this.fileLink = fileLink;
+        this.lastView = lastView;
+    }
     public Movie(String name, float rating, String fileLink, int duration) {
         this.name = name;
         this.rating = rating;

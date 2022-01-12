@@ -1,9 +1,6 @@
 package gui.model;
 
-import be.Movie;
-import gui.controller.MainPageController;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import BE.Movie;
 
 import java.util.ArrayList;
 

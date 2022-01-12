@@ -1,13 +1,20 @@
-package GUI.Model;
+package gui.model;
 
 import BE.Movie;
-import gui.Controller.MainPageController;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
-//771223ae28497088a4c013cdc5ba604c21972f17
 
 public class AddRemoveMovieModel {
+    ArrayList<Movie> movieDB;
 
+    public AddRemoveMovieModel() {
+        movieDB = new ArrayList<>();
+    }
+    public ArrayList<Movie> getMovieDB(){
+        return movieDB;
+    }
+    public void createMovie(String movieName, float movieRating, String movieLink, int movieDuration) {
+        Movie newMovie = new Movie(movieName, movieRating, movieLink, movieDuration);
+        movieDB.add(newMovie);
+    }
 }

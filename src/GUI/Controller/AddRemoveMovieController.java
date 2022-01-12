@@ -21,6 +21,7 @@ public class AddRemoveMovieController {
     @FXML
     public AnchorPane anchorPane;
 
+    AddRemoveMovieModel addRemoveMovieModel;
 
 
     public AddRemoveMovieController() {
