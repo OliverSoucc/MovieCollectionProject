@@ -1,0 +1,13 @@
+package dal;
+
+import be.Category;
+
+import java.util.List;
+
+public interface CategoryIDAO {
+    public List<Category> getAllCategories();
+    Category createCategory();
+    public void deleteCategory();
+    //public void alterCategory();
+
+}
