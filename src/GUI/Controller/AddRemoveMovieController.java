@@ -22,6 +22,7 @@ public class AddRemoveMovieController {
     @FXML
     public AnchorPane anchorPane;
 
+    Add
 
     public void handleSaveNewMovie(ActionEvent actionEvent) {
 
