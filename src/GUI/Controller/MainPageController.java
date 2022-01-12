@@ -1,4 +1,4 @@
-package GUI.Controller;
+package gui.Controller;
 
 import BE.Movie;
 import javafx.collections.FXCollections;
