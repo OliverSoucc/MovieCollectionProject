@@ -6,6 +6,9 @@ public class Movie {
     private float rating;
     private String fileLink;
     private int lastView;
+    private String category1;
+    private String category2;
+    private String category3;
 
     public Movie(int id, String name, float rating, String fileLink, int lastView) {
         this.id = id;
@@ -20,6 +23,14 @@ public class Movie {
         this.fileLink = fileLink;
     }
 
+
+    public Movie(String name, float rating, String category1, String category2, String category3){
+        this.name = name;
+        this.rating = rating;
+        this.category1 = category1;
+        this.category2 = category2;
+        this.category3 = category3;
+    }
 
     public int getId() {
         return id;

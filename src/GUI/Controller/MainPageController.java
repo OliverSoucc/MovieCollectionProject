@@ -76,11 +76,13 @@ public class MainPageController implements Initializable {
 
     }
 
-    private void tableView(){
+    private void tableViewProperty(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        //category1Column.setCellValueFactory(new PropertyValueFactory<>(""));
-        //category2Column.setCellValueFactory(new PropertyValueFactory<>(""));
-        //category3Column.setCellValueFactory(new PropertyValueFactory<>(""));
+        category1Column.setCellValueFactory(new PropertyValueFactory<>("category1"));
+        category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
+        category3Column.setCellValueFactory(new PropertyValueFactory<>("categoty3"));
+
+        movieObservableList.addAll(); // there will be movies from database
     }
 }
