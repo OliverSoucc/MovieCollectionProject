@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
@@ -33,6 +34,8 @@ public class MainPageController implements Initializable {
     public TableColumn <Movie, String> category3Column;
     @FXML
     public TextField filter;
+    @FXML
+    public TableView tableView;
 
 
     float newValueFloat;
@@ -76,6 +79,8 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tableViewProperty();
+        filterLogic();
 
     }
 
@@ -90,40 +95,52 @@ public class MainPageController implements Initializable {
     }
 
     private void filterLogic(){
-//        FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);
-//
-//        filter.textProperty().addListener((observable, oldValue, newValue) -> {
-//            filteredData.setPredicate(employee -> {
-//                // If filter text is empty, display all persons.
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                // Compare first name and last name of every person with filter text.
-//                String stringLowerCaseFilter = newValue.toLowerCase();
-//
-//                if (employee.getFirstName().toLowerCase().contains(stringLowerCaseFilter)) {
-//                    System.out.println("a");
-//                    return true; // Filter matches first name.
-//                } else if (employee.getDepartment().toLowerCase().contains(stringLowerCaseFilter)) {
-//                    System.out.println("b");
-//                    return true; // Filter matches last name.
-//                } else if (String.valueOf(employee.getSalary()).contains(stringLowerCaseFilter)) {
-//                    System.out.println("c");
-//                    return true;
-//                } else if ((employee.getFirstName() + " " + employee.getDepartment()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    System.out.println("d");
-//                    return true;
-//                }else if (isNumeric(stringLowerCaseFilter)) {
-//                    newValueFloat = Float.parseFloat(stringLowerCaseFilter);
-//                    if (employee.getSalary() >= newValueInteger) {
-//                        System.out.println("e");
-//                        return true;
-//                    }
-//                }
-//                return false;
-//            });
-//        });
-//        tableview.setItems(filteredData);
+        FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);
+
+        filter.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(employee -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                // Compare first name and last name of every person with filter text.
+                String stringLowerCaseFilter = newValue.toLowerCase();
+
+                if (employee.getName().toLowerCase().contains(stringLowerCaseFilter)) {
+                    //System.out.println("a");
+                    return true;
+                } else if ((employee.getCategory1() + " " + employee.getCategory2() + " "
+                            + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+                    //System.out.println("b");
+                    return true;
+                } else if ((employee.getCategory1() + " " + employee.getCategory3() + " "
+                        + employee.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+                    //System.out.println("c");
+                    return true;
+                } else if ((employee.getCategory2() + " " + employee.getCategory1() + " "
+                        + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+                    //System.out.println("d");
+                    return true;
+                }else if((employee.getCategory2() + " " + employee.getCategory3() + " "
+                        + employee.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
+                    return true;
+                }else if((employee.getCategory3() + " " + employee.getCategory2() + " "
+                        + employee.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
+                    return true;
+                }else if((employee.getCategory3() + " " + employee.getCategory1() + " "
+                        + employee.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+                    return true;
+                }else if (isNumeric(stringLowerCaseFilter)) {
+                    newValueFloat = Float.parseFloat(stringLowerCaseFilter);
+                    if (employee.getRating() >= newValueFloat) {
+                        //System.out.println("e");
+                        return true;
+                    }
+                }
+                return false;
+            });
+        });
+        tableView.setItems(filteredData);
     }
 
     public static boolean isNumeric(String str) {

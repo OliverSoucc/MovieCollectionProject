@@ -51,4 +51,16 @@ public class Movie {
     public int getLastView() {
         return lastView;
     }
+
+    public String getCategory1() {
+        return category1;
+    }
+
+    public String getCategory2() {
+        return category2;
+    }
+
+    public String getCategory3() {
+        return category3;
+    }
 }
