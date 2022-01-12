@@ -18,12 +18,16 @@ public class AddRemoveMovieController {
     @FXML
     public Button cancelSongBtn;
     @FXML
-    public TextField pathField;
+    public TextField titleTextfield, ratingTextField, pathTextField, timeTextField;
     @FXML
     public AnchorPane anchorPane;
 
+    Add
+
     public void handleSaveNewMovie(ActionEvent actionEvent) {
+
     }
+
 
     public void handleCancelMovieBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -37,6 +41,8 @@ public class AddRemoveMovieController {
         }
     }
 
+
+    // Choosing a movie from the finder
     public void handleChooseFile(ActionEvent actionEvent) {
         final DirectoryChooser directoryChooser = new DirectoryChooser();
 
@@ -44,7 +50,7 @@ public class AddRemoveMovieController {
         File file = directoryChooser.showDialog(stage);
 
         if(file != null){
-            pathField.setText(file.getAbsolutePath());
+            pathTextField.setText(file.getAbsolutePath());
             //System.out.println(file.getAbsolutePath());
         }
 
