@@ -30,14 +30,14 @@ public class AddRemoveMovieController {
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) {
-        addRemoveMovieModel.createMovie(
+        /*addRemoveMovieModel.createMovie(
                 titleTextField.getText(),
                 Float.parseFloat(ratingTextField.getText()),
                 fileTextField.getText(),
                 handleTimeField(timeTextField.getText())
-        );
+        );*/
         System.out.println(addRemoveMovieModel.getMovieDB());
-    }
+    } //TODO this has to be changed
 
 
     public void handleCancelMovieBtn(ActionEvent actionEvent) {

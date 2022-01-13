@@ -13,8 +13,8 @@ public class AddRemoveMovieModel {
     public ArrayList<Movie> getMovieDB(){
         return movieDB;
     }
-    public void createMovie(String movieName, float movieRating, String movieLink, int movieDuration) {
-        Movie newMovie = new Movie(movieName, movieRating, movieLink, movieDuration);
+    public void createMovie(int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3) {
+        Movie newMovie = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
         movieDB.add(newMovie);
     }
 }

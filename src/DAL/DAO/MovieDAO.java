@@ -30,7 +30,12 @@ public class MovieDAO implements MovieIDAO {
                 String fileLink = resultSet.getString("FileLink");
                 int lastView = resultSet.getInt("LastView");
                 int duration = resultSet.getInt("Duration");
-                Movie movie = new Movie(id, name, rating, fileLink, lastView);
+                String category1 = resultSet.getString("Category1");
+                String category2 = resultSet.getString("Category2");
+                String category3 = resultSet.getString("Category3");
+
+                Movie movie = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
+
                 allMovies.add(movie);
             }
         } catch (SQLException e) {
@@ -46,21 +51,26 @@ public class MovieDAO implements MovieIDAO {
         float rating = movieToCreate.getRating();
         String fileLink = movieToCreate.getFileLink();
         int lastView = movieToCreate.getLastView();
+        String category1 = movieToCreate.getCategory1();
+        String category2 = movieToCreate.getCategory2();
+        String category3 = movieToCreate.getCategory3();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            //preparedStatement.setInt(1, id);
             preparedStatement.setString(1, name);
             preparedStatement.setFloat(2, rating);
             preparedStatement.setString(3, fileLink);
             preparedStatement.setInt(4, lastView);
+            preparedStatement.setString(5, category1);
+            preparedStatement.setString(6, category2);
+            preparedStatement.setString(7, category3);
             preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        movieToCreate = new Movie(id, name, rating, fileLink, lastView);
+        movieToCreate = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
         return movieToCreate; // returns created movie object
     }
 

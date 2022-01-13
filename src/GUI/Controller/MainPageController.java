@@ -100,11 +100,13 @@ public class MainPageController implements Initializable {
         category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
         category3Column.setCellValueFactory(new PropertyValueFactory<>("category3"));
 
-        Movie movie = new Movie("Star wars", 9.5F,5.5F,"Fiction", "Sci-fi","Action");
-        Movie movie1 = new Movie("Star wars 1", 7.5F,8.5F,"Sci-fi", "Fiction","Lolo");
-        Movie movie2 = new Movie("Star wars 2", 5.5F,7.5F,"Fiction", "Action","Lolo");
+        Movie movie = new Movie(0, "Star wars", 9.5F,"gay",3, "Fiction", "Sci-fi","Action");
+        Movie movie1 = new Movie(0, "Star wars 1", 7.5F,"gay",4, "Sci-fi", "Fiction","Lolo");
+        Movie movie2 = new Movie(0, "Star wars 2", 5.5F,"gay",5, "Fiction", "Action","Lolo");
         movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
     }
+    // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
+
 
     private void filterLogic(){
         FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);

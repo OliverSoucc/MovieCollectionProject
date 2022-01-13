@@ -6,40 +6,19 @@ public class Movie {
     private float rating;
     private String fileLink;
     private int lastView;
-    private float imdb;
-    private int duration;
     private String category1;
     private String category2;
     private String category3;
+    private float imdb;
 
 
-    public Movie(int id, String name, float rating, String fileLink, int lastView, int duration) {
+   public Movie(int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3){
         this.id = id;
-        this.name = name;
-        this.rating = rating;
-        this.fileLink = fileLink;
-        this.lastView = lastView;
-        this.duration = duration;
-    }
-    public Movie(int id, String name, float rating, String fileLink, int lastView) {
-        this.id = id;
-        this.name = name;
-        this.rating = rating;
-        this.fileLink = fileLink;
-        this.lastView = lastView;
-    }
-    public Movie(String name, float rating, String fileLink, int duration) {
-        this.name = name;
-        this.rating = rating;
-        this.fileLink = fileLink;
-        this.duration = duration;
-    }
-
-
-    public Movie(String name, float rating, float imdb, String category1, String category2, String category3){
         this.name = name;
         this.rating = rating;
         this.imdb = imdb;
+        this.fileLink = fileLink;
+        this.lastView = lastView;
         this.category1 = category1;
         this.category2 = category2;
         this.category3 = category3;
@@ -78,7 +57,7 @@ public class Movie {
         return category3;
     }
 
-    public float getImdb() {
-        return imdb;
-    }
+    public float getImdb() {return imdb;}
+
+    public void setImdb(float imdb) {this.imdb = imdb;}
 }
