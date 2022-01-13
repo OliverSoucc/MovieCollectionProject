@@ -53,7 +53,7 @@
                         <Button mnemonicParsing="false" onAction="#handleSaveButton" text="Save" BorderPane.alignment="CENTER" />
                      </right>
                      <left>
-                        <Button mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" BorderPane.alignment="CENTER" />
+                        <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" BorderPane.alignment="CENTER" />
                      </left>
                   </BorderPane>
                </children>
