@@ -41,28 +41,27 @@ public class MovieDAO implements MovieIDAO {
 
     @Override
     public Movie createMovie(Movie movieToCreate) {
-        int id = movieToCreate.getId();
+        int id = 0;
         String name = movieToCreate.getName();
         float rating = movieToCreate.getRating();
         String fileLink = movieToCreate.getFileLink();
         int lastView = movieToCreate.getLastView();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Movie(Id, Name, Rating, FileLink, LastView) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, name);
-            preparedStatement.setFloat(3, rating);
-            preparedStatement.setString(4, fileLink);
-            preparedStatement.setInt(5, lastView);
-            preparedStatement.addBatch();
-            preparedStatement.executeBatch();
+            //preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, name);
+            preparedStatement.setFloat(2, rating);
+            preparedStatement.setString(3, fileLink);
+            preparedStatement.setInt(4, lastView);
+            preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         movieToCreate = new Movie(id, name, rating, fileLink, lastView);
-        return movieToCreate; // returns created Category object
+        return movieToCreate; // returns created movie object
     }
 
     @Override
@@ -72,7 +71,6 @@ public class MovieDAO implements MovieIDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, movieToDelete.getId());
             preparedStatement.execute();
-
         } catch (SQLException ex) {
             System.out.println(ex);
         }

@@ -42,10 +42,9 @@ public class CategoryDAO implements CategoryIDAO {
         String name = categoryToCreate.getName();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Category(Id, Name) VALUES (?, ?)";
+            String sql = "INSERT INTO Category(Name) VALUES (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
-            preparedStatement.setString(2, name);
+            preparedStatement.setString(1, name);
             preparedStatement.addBatch();
             preparedStatement.executeBatch();
 
