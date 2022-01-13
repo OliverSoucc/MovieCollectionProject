@@ -1,6 +1,6 @@
 package GUI.Controller;
 
-import gui.model.AddRemoveMovieModel;
+import GUI.model.AddRemoveMovieModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,7 +16,7 @@ import java.io.File;
 
 public class AddRemoveMovieController {
     @FXML
-    public Button cancelSongBtn;
+    public Button cancelBtn;
     @FXML
     public TextField titleTextField, ratingTextField, fileTextField, timeTextField;
     @FXML
@@ -46,7 +46,7 @@ public class AddRemoveMovieController {
         alert.setHeaderText("Do you want to close this window?");
 
         if(alert.showAndWait().get() == ButtonType.OK ) {
-            Stage stage = (Stage) cancelSongBtn.getScene().getWindow();
+            Stage stage = (Stage) cancelBtn.getScene().getWindow();
             stage.close();
         }
     }

@@ -1,4 +1,4 @@
-package gui.model;
+package GUI.model;
 
 import BE.Movie;
 
