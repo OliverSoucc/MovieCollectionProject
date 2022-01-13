@@ -1,4 +1,4 @@
-package gui.Controller;
+package GUI.Controller;
 
 import gui.model.AddRemoveMovieModel;
 import javafx.event.ActionEvent;
@@ -9,6 +9,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -17,7 +18,7 @@ public class AddRemoveMovieController {
     @FXML
     public Button cancelSongBtn;
     @FXML
-    public TextField titleTextField, ratingTextField, pathTextField, timeTextField;
+    public TextField titleTextField, ratingTextField, fileTextField, timeTextField;
     @FXML
     public AnchorPane anchorPane;
 
@@ -32,7 +33,7 @@ public class AddRemoveMovieController {
         addRemoveMovieModel.createMovie(
                 titleTextField.getText(),
                 Float.parseFloat(ratingTextField.getText()),
-                pathTextField.getText(),
+                fileTextField.getText(),
                 handleTimeField(timeTextField.getText())
         );
         System.out.println(addRemoveMovieModel.getMovieDB());
@@ -60,7 +61,7 @@ public class AddRemoveMovieController {
         File file = directoryChooser.showDialog(stage);
 
         if(file != null){
-            pathTextField.setText(file.getAbsolutePath());
+            fileTextField.setText(file.getAbsolutePath());
             //System.out.println(file.getAbsolutePath());
         }
 
@@ -86,5 +87,12 @@ public class AddRemoveMovieController {
             time = Integer.parseInt(actualTime);
         }
         return time;
+    }
+    public void isFileChooserPressed(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        String filepath = selectedFile.getAbsolutePath();
+        fileTextField.setText(filepath);
     }
 }
