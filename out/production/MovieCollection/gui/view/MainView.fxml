@@ -19,8 +19,8 @@
             <TableColumn fx:id="category3Column" prefWidth="146.4000244140625" text="Category 3" />
         </columns>
       </TableView>
-      <Button layoutX="744.0" layoutY="29.0" mnemonicParsing="false" text="Clear" />
-      <TextField fx:id="filter" layoutX="18.0" layoutY="29.0" prefHeight="26.0" prefWidth="702.0" />
+      <Button fx:id="filterButton" layoutX="744.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterButtonOnAction" text="Clear" />
+      <TextField fx:id="filter" layoutX="18.0" layoutY="29.0" onKeyPressed="#filterOnAction" prefHeight="26.0" prefWidth="702.0" />
       <Button fx:id="movieButton" layoutX="18.0" layoutY="595.0" mnemonicParsing="false" onAction="#movieButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Movie" />
       <Button layoutX="321.0" layoutY="595.0" mnemonicParsing="false" onAction="#categoryButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Category" />
       <Button layoutX="624.0" layoutY="595.0" mnemonicParsing="false" onAction="#ratingButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/change Rating" />

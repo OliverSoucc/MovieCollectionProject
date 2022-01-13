@@ -38,7 +38,9 @@ public class MainPageController implements Initializable {
     public TextField filter;
     @FXML
     public TableView <Movie> tableView;
+    @FXML
     public Button filterButton;
+    @FXML
     public Button movieButton;
 
 
@@ -155,8 +157,11 @@ public class MainPageController implements Initializable {
     }
 
     public void filterOnAction(KeyEvent keyEvent) {
+        filterButton.setText("Clear");
     }
 
     public void filterButtonOnAction(ActionEvent actionEvent) {
+        filter.clear();
+        filterButton.setText("Search");
     }
 }
