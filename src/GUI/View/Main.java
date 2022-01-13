@@ -1,6 +1,5 @@
 package GUI.View;
 
-import GUI.Controller.MainPageController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
