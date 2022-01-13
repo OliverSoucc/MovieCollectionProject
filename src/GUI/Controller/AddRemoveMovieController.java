@@ -65,7 +65,7 @@ public class AddRemoveMovieController {
         }
 
     }
-    
+
 
     private int handleTimeField(String actualTime) {
         int time;
