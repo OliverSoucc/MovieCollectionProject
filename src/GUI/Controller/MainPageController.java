@@ -106,7 +106,7 @@ public class MainPageController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                
+
                 String stringLowerCaseFilter = newValue.toLowerCase();
 
                 if (employee.getName().toLowerCase().contains(stringLowerCaseFilter)) {
@@ -141,7 +141,7 @@ public class MainPageController implements Initializable {
         tableView.setItems(filteredData);
     }
 
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         try {
             Float.parseFloat(str);
             return true;
