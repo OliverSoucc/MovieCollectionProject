@@ -11,10 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +38,8 @@ public class MainPageController implements Initializable {
     public TextField filter;
     @FXML
     public TableView <Movie> tableView;
+    public Button filterButton;
+    public Button movieButton;
 
 
     float newValueFloat;
@@ -148,5 +152,11 @@ public class MainPageController implements Initializable {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public void filterOnAction(KeyEvent keyEvent) {
+    }
+
+    public void filterButtonOnAction(ActionEvent actionEvent) {
     }
 }
