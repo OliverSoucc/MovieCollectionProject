@@ -45,7 +45,6 @@ public class AddRemoveMovieController {
         alert.setTitle("Alert window");
         alert.setHeaderText("Do you want to close this window?");
 
-
         if(alert.showAndWait().get() == ButtonType.OK ) {
             Stage stage = (Stage) cancelSongBtn.getScene().getWindow();
             stage.close();
@@ -66,18 +65,8 @@ public class AddRemoveMovieController {
         }
 
     }
+    
 
-    public void horrorAction(ActionEvent actionEvent) {
-    }
-
-    public void trillerAction(ActionEvent actionEvent) {
-    }
-
-    public void actionOnAction(ActionEvent actionEvent) {
-    }
-
-    public void actionErotic(ActionEvent actionEvent) {
-    }
     private int handleTimeField(String actualTime) {
         int time;
         if (actualTime.equals(" ") || actualTime.isEmpty()) {
@@ -88,6 +77,7 @@ public class AddRemoveMovieController {
         }
         return time;
     }
+
     public void isFileChooserPressed(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
