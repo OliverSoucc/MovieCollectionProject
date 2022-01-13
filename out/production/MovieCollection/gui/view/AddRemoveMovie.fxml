@@ -35,7 +35,9 @@
                 <TextField fx:id="ratingTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <right>
-                        <Button mnemonicParsing="false" onAction="#handleCancelMovieBtn" text="Cancel" BorderPane.alignment="CENTER_RIGHT" />
+
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#handleCancelMovieBtn" text="Cancel" BorderPane.alignment="CENTER_RIGHT" />
+
                     </right>
                 </BorderPane>
                 <BorderPane prefHeight="200.0" prefWidth="200.0">

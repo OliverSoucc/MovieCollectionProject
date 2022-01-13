@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="635.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Controller.MainPageController">
+<AnchorPane prefHeight="635.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainPageController">
    <children>
       <TableView fx:id="tableView" layoutX="18.0" layoutY="74.0" prefHeight="511.0" prefWidth="778.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="270.4000053405762" text="Name" />
-          <TableColumn fx:id="ratingColumn" prefWidth="84.79998779296875" text="Imdb Rating" />
-            <TableColumn prefWidth="75.0" text="Personal Rating" />
+          <TableColumn fx:id="imdbRatingColumn" prefWidth="84.79998779296875" text="Imdb Rating" />
+            <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="Personal Rating" />
             <TableColumn fx:id="category1Column" prefWidth="138.4000244140625" text="Category 1" />
             <TableColumn fx:id="category2Column" prefWidth="139.20001220703125" text="Category 2" />
             <TableColumn fx:id="category3Column" prefWidth="146.4000244140625" text="Category 3" />

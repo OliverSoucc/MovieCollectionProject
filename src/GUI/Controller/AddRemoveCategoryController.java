@@ -1,6 +1,6 @@
-package gui.Controller;
+package GUI.Controller;
 
-import gui.model.AddRemoveCategoryModel;
+import GUI.model.AddRemoveCategoryModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
