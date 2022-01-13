@@ -42,6 +42,8 @@ public class MainPageController implements Initializable {
     public Button filterButton;
     @FXML
     public Button movieButton;
+    @FXML
+    public TableColumn<Movie, String> imdbRatingColumn;
 
 
     float newValueFloat;
@@ -93,13 +95,14 @@ public class MainPageController implements Initializable {
     private void tableViewProperty(){
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         category1Column.setCellValueFactory(new PropertyValueFactory<>("category1"));
         category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
         category3Column.setCellValueFactory(new PropertyValueFactory<>("category3"));
 
-        Movie movie = new Movie("Star wars", 6.5F,"Fiction", "Sci-fi","Action");
-        Movie movie1 = new Movie("Star wars 1", 7.5F,"Sci-fi", "Fiction","Lolo");
-        Movie movie2 = new Movie("Star wars 2", 5.5F,"Fiction", "Action","Lolo");
+        Movie movie = new Movie("Star wars", 9.5F,5.5F,"Fiction", "Sci-fi","Action");
+        Movie movie1 = new Movie("Star wars 1", 7.5F,8.5F,"Sci-fi", "Fiction","Lolo");
+        Movie movie2 = new Movie("Star wars 2", 5.5F,7.5F,"Fiction", "Action","Lolo");
         movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
     }
 
@@ -137,7 +140,7 @@ public class MainPageController implements Initializable {
                     return true;
                 }else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
-                    if (employee.getRating() >= newValueFloat) {
+                    if (employee.getRating() >= newValueFloat && employee.getImdb() >= newValueFloat) {
                         return true;
                     }
                 }
