@@ -1,4 +1,7 @@
 package BLL.Exceptions;
 
-public class CategoryException extends Exception{
+public class CategoryException extends Throwable{
+    public CategoryException(String message, Exception exception){
+
+    }
 }

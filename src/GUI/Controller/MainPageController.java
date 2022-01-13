@@ -11,10 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,6 +38,10 @@ public class MainPageController implements Initializable {
     public TextField filter;
     @FXML
     public TableView <Movie> tableView;
+    @FXML
+    public Button filterButton;
+    @FXML
+    public Button movieButton;
 
 
     float newValueFloat;
@@ -106,7 +112,7 @@ public class MainPageController implements Initializable {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-                
+
                 String stringLowerCaseFilter = newValue.toLowerCase();
 
                 if (employee.getName().toLowerCase().contains(stringLowerCaseFilter)) {
@@ -141,12 +147,21 @@ public class MainPageController implements Initializable {
         tableView.setItems(filteredData);
     }
 
-    public static boolean isNumeric(String str) {
+    private static boolean isNumeric(String str) {
         try {
             Float.parseFloat(str);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public void filterOnAction(KeyEvent keyEvent) {
+        filterButton.setText("Clear");
+    }
+
+    public void filterButtonOnAction(ActionEvent actionEvent) {
+        filter.clear();
+        filterButton.setText("Search");
     }
 }
