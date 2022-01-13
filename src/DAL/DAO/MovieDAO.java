@@ -48,7 +48,7 @@ public class MovieDAO implements MovieIDAO {
         int lastView = movieToCreate.getLastView();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Category(Id, Name, Rating, FileLink, LastView) VALUES (?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Movie(Id, Name, Rating, FileLink, LastView) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.setString(2, name);
