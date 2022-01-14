@@ -1,4 +1,4 @@
-package GUI.model;
+package GUI.Model;
 
 import BE.Movie;
 
@@ -13,8 +13,8 @@ public class AddRemoveMovieModel {
     public ArrayList<Movie> getMovieDB(){
         return movieDB;
     }
-    public void createMovie(int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3) {
-        Movie newMovie = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
+    public void createMovie(int id, String name, float rating, String fileLink, int lastView, float imdb, String category1, String category2, String category3) {
+        Movie newMovie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
         movieDB.add(newMovie);
     }
 }

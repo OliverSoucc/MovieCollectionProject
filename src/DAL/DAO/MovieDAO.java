@@ -29,12 +29,13 @@ public class MovieDAO implements MovieIDAO {
                 float rating = resultSet.getFloat("Rating");
                 String fileLink = resultSet.getString("FileLink");
                 int lastView = resultSet.getInt("LastView");
-                int duration = resultSet.getInt("Duration");
+                float imdb = resultSet.getFloat("Imdb");
+                //int duration = resultSet.getInt("Duration");
                 String category1 = resultSet.getString("Category1");
                 String category2 = resultSet.getString("Category2");
                 String category3 = resultSet.getString("Category3");
 
-                Movie movie = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
+                Movie movie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
 
                 allMovies.add(movie);
             }
@@ -51,26 +52,28 @@ public class MovieDAO implements MovieIDAO {
         float rating = movieToCreate.getRating();
         String fileLink = movieToCreate.getFileLink();
         int lastView = movieToCreate.getLastView();
+        float imdb = movieToCreate.getImdb();
         String category1 = movieToCreate.getCategory1();
         String category2 = movieToCreate.getCategory2();
         String category3 = movieToCreate.getCategory3();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
             preparedStatement.setFloat(2, rating);
             preparedStatement.setString(3, fileLink);
             preparedStatement.setInt(4, lastView);
-            preparedStatement.setString(5, category1);
-            preparedStatement.setString(6, category2);
-            preparedStatement.setString(7, category3);
+            preparedStatement.setFloat(5, imdb);
+            preparedStatement.setString(6, category1);
+            preparedStatement.setString(7, category2);
+            preparedStatement.setString(8, category3);
             preparedStatement.execute();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        movieToCreate = new Movie(id, name, rating, fileLink, lastView, category1, category2, category3);
+        movieToCreate = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
         return movieToCreate; // returns created movie object
     }
 

@@ -1,6 +1,6 @@
 package GUI.Controller;
 
-import GUI.model.AddRemoveMovieModel;
+import GUI.Model.AddRemoveMovieModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
