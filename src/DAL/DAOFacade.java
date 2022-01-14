@@ -23,11 +23,11 @@ public class DAOFacade implements IDALMovieFacade{
         return categoryDAO.getAllCategories();
     }
 
-    public Category createCategory(String categoryName){
-        return categoryDAO.createCategory(categoryName);
-    }
+    public Category createCategory(String name){
+        return categoryDAO.createCategory(name);}
 
-    public void deleteCategory(Category categoryToDelete){
+
+    public void deleteCategory (Category categoryToDelete) {
         categoryDAO.deleteCategory(categoryToDelete);
     }
 

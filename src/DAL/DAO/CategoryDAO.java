@@ -17,7 +17,7 @@ public class CategoryDAO implements CategoryIDAO {
 
     @Override
     public List<Category> getAllCategories() {
-        ArrayList<Category> allCategories = new ArrayList<>();
+        List<Category> allCategories = new ArrayList<>();
         try (Connection connection = DBconnector.getConnection()) {
             String sql = "SELECT * FROM Category";
             Statement statement = connection.createStatement();
@@ -37,10 +37,8 @@ public class CategoryDAO implements CategoryIDAO {
     }
 
     @Override
-    public Category createCategory(Category categoryToCreate) {
-        int id = categoryToCreate.getId();
-        String name = categoryToCreate.getName();
-
+    public Category createCategory(String name) {
+        int id = 0;
         try (Connection connection = DBconnector.getConnection()){
             String sql = "INSERT INTO Category(Name) VALUES (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -51,7 +49,7 @@ public class CategoryDAO implements CategoryIDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        categoryToCreate = new Category(id, name);
+        Category categoryToCreate = new Category(id, name);
         return categoryToCreate; // returns created Category object
     }
 
