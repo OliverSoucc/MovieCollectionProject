@@ -8,7 +8,7 @@ import DAL.DAO.MovieDAO;
 
 import java.util.List;
 
-public class DAOFacade {
+public class DAOFacade implements IDALMovieFacade{
     CategoryDAO categoryDAO;
     CatMovieDAO catMovieDAO;
     MovieDAO movieDAO;
@@ -19,7 +19,7 @@ public class DAOFacade {
         movieDAO = new MovieDAO();
     }
 
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return categoryDAO.getAllCategories();
     }
 

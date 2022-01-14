@@ -178,12 +178,12 @@ public class MainPageController implements Initializable {
     {
         for(int i = 0;i < tableView.getItems().size();i++) {
             float rating = tableView.getItems().get(i).getRating();
-            System.out.println(rating);
                 if (rating < 6.0) {
                     showMessageDialog(null, "Remember to delete movies with personal rating under 6.0");
                     break;
                 }
         }
     }
+
 
 }
