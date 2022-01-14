@@ -116,37 +116,37 @@ public class MainPageController implements Initializable {
         FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);
 
         filter.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(employee -> {
+            filteredData.setPredicate(movie -> {
                 // If filter text is empty, display all persons.
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
 
                 String stringLowerCaseFilter = newValue.toLowerCase();
-
-                if (employee.getName().toLowerCase().contains(stringLowerCaseFilter)) {
+                
+                if (movie.getName().toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                } else if ((employee.getCategory1() + " " + employee.getCategory2() + " "
-                            + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+                } else if ((movie.getCategory1() + " " + movie.getCategory2() + " "
+                            + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                } else if ((employee.getCategory1() + " " + employee.getCategory3() + " "
-                        + employee.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+                } else if ((movie.getCategory1() + " " + movie.getCategory3() + " "
+                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                } else if ((employee.getCategory2() + " " + employee.getCategory1() + " "
-                        + employee.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+                } else if ((movie.getCategory2() + " " + movie.getCategory1() + " "
+                        + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                }else if((employee.getCategory2() + " " + employee.getCategory3() + " "
-                        + employee.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
+                }else if((movie.getCategory2() + " " + movie.getCategory3() + " "
+                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
                     return true;
-                }else if((employee.getCategory3() + " " + employee.getCategory2() + " "
-                        + employee.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
+                }else if((movie.getCategory3() + " " + movie.getCategory2() + " "
+                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                }else if((employee.getCategory3() + " " + employee.getCategory1() + " "
-                        + employee.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+                }else if((movie.getCategory3() + " " + movie.getCategory1() + " "
+                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
                 }else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
-                    if (employee.getRating() >= newValueFloat && employee.getImdb() >= newValueFloat) {
+                    if (movie.getRating() >= newValueFloat && movie.getImdb() >= newValueFloat) {
                         return true;
                     }
                 }
