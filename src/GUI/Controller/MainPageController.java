@@ -108,7 +108,6 @@ public class MainPageController implements Initializable {
         Movie movie2 = new Movie(0, "Star wars 2", 5.5F,"gay",5, "Fiction", "Action","Lolo");
         movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
 
-
     }
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
@@ -179,12 +178,12 @@ public class MainPageController implements Initializable {
     {
         for(int i = 0;i < tableView.getItems().size();i++) {
             float rating = tableView.getItems().get(i).getRating();
-            System.out.println(rating);
                 if (rating < 6.0) {
                     showMessageDialog(null, "Remember to delete movies with personal rating under 6.0");
                     break;
                 }
         }
     }
+
 
 }
