@@ -24,16 +24,12 @@ public class DAOFacade implements IDALMovieFacade{
     }
 
     public Category createCategory(String name){
-        return categoryDAO.createCategory(name);}
-
+        return categoryDAO.createCategory(name);
+    }
 
     public void deleteCategory (Category categoryToDelete) {
         categoryDAO.deleteCategory(categoryToDelete);
     }
-
-    /*public void updateCategory (Category categoryToUpdate) {
-        categoryDAO.updateCategory(categoryToUpdate);
-     } */
 
     public List<Movie> getAllMovies() {
         return movieDAO.getAllMovies();
@@ -47,14 +43,16 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO.deleteMovie(movieToDelete);
     }
 
+
+    // TODO: Create methods in MovieDAO!!!
+
     @Override
     public void updateMovie(Movie movie) throws Exception {
 
     }
 
-    /*public void updateCategory (Movie movieToUpdate) {
-        movieDAO.updateMovie(movieToUpdate);
-     } */
-
-
+    @Override
+    public Movie getMovie(int id) throws Exception {
+        return null;
+    }
 }
