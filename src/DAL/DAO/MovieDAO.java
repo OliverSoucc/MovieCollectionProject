@@ -91,7 +91,26 @@ public class MovieDAO implements MovieIDAO {
 
     @Override
     public Movie getMovie(int id) throws Exception {
-        return null;
+        Movie movie = null;
+        String sql = "SELECT *  FROM Movie WHERE Id=?";
+        try (Connection connection = DBconnector.getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            ResultSet resultSet = preparedStatement.getResultSet();
+            if (resultSet.next()) {
+                String name = resultSet.getString("Name");
+                float rating = resultSet.getFloat("Rating");
+                String fileLink = resultSet.getString("FileLink");
+                int lastView = resultSet.getInt("LastView");
+                float imdb = resultSet.getFloat("Imdb");
+                String category1 = resultSet.getString("Category1");
+                String category2 = resultSet.getString("Category2");
+                String category3 = resultSet.getString("Category3");
+                movie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
+            }
+        }
+        return movie;
     }
 
     @Override
