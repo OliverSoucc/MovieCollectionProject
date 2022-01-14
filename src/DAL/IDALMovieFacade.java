@@ -14,4 +14,6 @@ public interface IDALMovieFacade {
     List<Movie> getAllMovies() throws Exception;
     Movie createMovie(Movie movieToCreate) throws Exception;
     void deleteMovie(Movie movieToDelete) throws Exception;
+    void updateMovie(Movie movie) throws Exception;
+    Movie getMovie(int id) throws Exception;
 }

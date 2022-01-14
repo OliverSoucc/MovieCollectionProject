@@ -47,6 +47,11 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO.deleteMovie(movieToDelete);
     }
 
+    @Override
+    public void updateMovie(Movie movie) throws Exception {
+
+    }
+
     /*public void updateCategory (Movie movieToUpdate) {
         movieDAO.updateMovie(movieToUpdate);
      } */
