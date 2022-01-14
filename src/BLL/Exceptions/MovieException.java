@@ -1,7 +1,14 @@
 package BLL.Exceptions;
 
 public class MovieException extends Throwable{
-    public MovieException(String message, Exception exception){
+    String message;
 
+    public MovieException(String message, Exception e){
+        this.message = message;
+        e.printStackTrace();
+    }
+    @Override
+    public String getMessage() {
+        return message;
     }
 }

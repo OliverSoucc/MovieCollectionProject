@@ -1,7 +1,14 @@
 package BLL.Exceptions;
 
 public class CategoryException extends Throwable{
-    public CategoryException(String message, Exception exception){
+    private String message;
 
+    public CategoryException(String message, Exception e){
+        this.message = message;
+        e.printStackTrace();
+    }
+    @Override
+    public String getMessage(){
+        return message;
     }
 }
