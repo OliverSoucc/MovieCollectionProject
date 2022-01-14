@@ -16,5 +16,5 @@ public class CatMovieDAO implements CatMovieIDAO {
     @Override
     public void setCategoriesForMovie(Movie movie, Category category1, Category category2, Category category3) {
 
-    } //This method should 
+    } //This method should
 }

@@ -12,7 +12,7 @@ public class Movie {
     private float imdb;
 
 
-   public Movie(int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3){
+   public Movie(int id, String name, float rating, String fileLink, int lastView, float imdb, String category1, String category2, String category3){
         this.id = id;
         this.name = name;
         this.rating = rating;
