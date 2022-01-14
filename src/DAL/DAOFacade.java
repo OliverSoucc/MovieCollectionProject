@@ -19,40 +19,35 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO = new MovieDAO();
     }
 
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategories() throws Exception {
         return categoryDAO.getAllCategories();
     }
 
-    public Category createCategory(String name){
+    public Category createCategory(String name) throws Exception{
         return categoryDAO.createCategory(name);
     }
 
-    public void deleteCategory (Category categoryToDelete) {
+    public void deleteCategory (Category categoryToDelete) throws Exception{
         categoryDAO.deleteCategory(categoryToDelete);
     }
 
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies() throws Exception {
         return movieDAO.getAllMovies();
     }
 
-    public Movie createMovie(Movie movieToCreate){
+    public Movie createMovie(Movie movieToCreate) throws Exception{
         return movieDAO.createMovie(movieToCreate);
     }
 
-    public void deleteMovie(Movie movieToDelete){
+    public void deleteMovie(Movie movieToDelete) throws Exception{
         movieDAO.deleteMovie(movieToDelete);
     }
 
-
-    // TODO: Create methods in MovieDAO!!!
-
-    @Override
     public void updateMovie(Movie movie) throws Exception {
-
+        movieDAO.updateMovie(movie);
     }
 
-    @Override
     public Movie getMovie(int id) throws Exception {
-        return null;
+        return movieDAO.getMovie(id);
     }
 }

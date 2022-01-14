@@ -16,7 +16,7 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public List<Movie> getAllMovies() {
+    public List<Movie> getAllMovies() throws Exception{
         ArrayList<Movie> allMovies = new ArrayList<>();
         try (Connection connection = DBconnector.getConnection()) {
             String sql = "SELECT * FROM Movie";
@@ -39,14 +39,12 @@ public class MovieDAO implements MovieIDAO {
 
                 allMovies.add(movie);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return allMovies; // returns List of all Movies
     }
 
     @Override
-    public Movie createMovie(Movie movieToCreate) {
+    public Movie createMovie(Movie movieToCreate) throws Exception{
         int id = 0;
         String name = movieToCreate.getName();
         float rating = movieToCreate.getRating();
@@ -70,22 +68,18 @@ public class MovieDAO implements MovieIDAO {
             preparedStatement.setString(8, category3);
             preparedStatement.execute();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         movieToCreate = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
         return movieToCreate; // returns created movie object
     }
 
     @Override
-    public void deleteMovie(Movie movieToDelete) {
+    public void deleteMovie(Movie movieToDelete) throws Exception{
         try (Connection connection = DBconnector.getConnection()){
             String sql = "DELETE FROM Movie WHERE Id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, movieToDelete.getId());
             preparedStatement.execute();
-        } catch (SQLException ex) {
-            System.out.println(ex);
         }
     } // deletes the specific movie by ID
 

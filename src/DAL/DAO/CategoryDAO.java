@@ -16,7 +16,7 @@ public class CategoryDAO implements CategoryIDAO {
     }
 
     @Override
-    public List<Category> getAllCategories() {
+    public List<Category> getAllCategories() throws Exception{
         List<Category> allCategories = new ArrayList<>();
         try (Connection connection = DBconnector.getConnection()) {
             String sql = "SELECT * FROM Category";
@@ -30,14 +30,12 @@ public class CategoryDAO implements CategoryIDAO {
                 allCategories.add(category);
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         return allCategories; // returns List of all Categories
     }
 
     @Override
-    public Category createCategory(String name) {
+    public Category createCategory(String name) throws Exception {
         int id = 0;
         try (Connection connection = DBconnector.getConnection()){
             String sql = "INSERT INTO Category(Name) VALUES (?)";
@@ -46,23 +44,19 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.addBatch();
             preparedStatement.executeBatch();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
         Category categoryToCreate = new Category(id, name);
         return categoryToCreate; // returns created Category object
     }
 
     @Override
-    public void deleteCategory(Category categoryToDelete) {
+    public void deleteCategory(Category categoryToDelete) throws Exception{
         try (Connection connection = DBconnector.getConnection()){
             String sql = "DELETE FROM Category WHERE Id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, categoryToDelete.getId());
             preparedStatement.execute();
 
-        } catch (SQLException ex) {
-            System.out.println(ex);
         }
     } // deletes the specific category by ID
 }
