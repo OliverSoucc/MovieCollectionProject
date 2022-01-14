@@ -88,4 +88,14 @@ public class MovieDAO implements MovieIDAO {
             System.out.println(ex);
         }
     } // deletes the specific movie by ID
+
+    @Override
+    public Movie getMovie(int id) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void updateMovie(Movie movie) throws Exception {
+
+    }
 }

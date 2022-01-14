@@ -16,6 +16,4 @@ public interface MovieCollectionFacade {
     Movie getMovie(int id) throws MovieDAOException;
     Category createCategory(String categoryName) throws CategoryDAOException;
     void deleteCategory(Category category) throws CategoryDAOException;
-
-
 }
