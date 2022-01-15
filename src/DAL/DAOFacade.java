@@ -2,6 +2,7 @@ package DAL;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CategoryDAOException;
 import DAL.DAO.CatMovieDAO;
 import DAL.DAO.CategoryDAO;
 import DAL.DAO.MovieDAO;
@@ -19,15 +20,15 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO = new MovieDAO();
     }
 
-    public List<Category> getAllCategories() throws Exception {
+    public List<Category> getAllCategories() throws CategoryDAOException {
         return categoryDAO.getAllCategories();
     }
 
-    public Category createCategory(String name) throws Exception{
+    public Category createCategory(String name) throws CategoryDAOException{
         return categoryDAO.createCategory(name);
     }
 
-    public void deleteCategory (Category categoryToDelete) throws Exception{
+    public void deleteCategory (Category categoryToDelete) throws CategoryDAOException{
         categoryDAO.deleteCategory(categoryToDelete);
     }
 
