@@ -22,5 +22,6 @@ public class CatMovieDAO implements CatMovieIDAO {
 
 
     public List<Movie> getCategoryMovie(int id) {
+        return null;
     }
 }

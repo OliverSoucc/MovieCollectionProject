@@ -58,11 +58,11 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" BorderPane.alignment="CENTER" />
                      </left>
                   </BorderPane>
-                  <TableView minWidth="360.0" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                  <TableView fx:id="tableView" minWidth="360.0" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn minWidth="90.0" prefWidth="-1.0" text="Name" />
-                      <TableColumn minWidth="90.0" prefWidth="-1.0" text="IMDB Rating" />
-                        <TableColumn minWidth="90.0" prefWidth="-1.0" text="User rating" />
+                      <TableColumn fx:id="nameColumn" minWidth="90.0" prefWidth="-1.0" text="Name" />
+                      <TableColumn fx:id="imdbRatingColumn" minWidth="90.0" prefWidth="-1.0" text="IMDB Rating" />
+                        <TableColumn fx:id="ratingColumn" minWidth="90.0" prefWidth="-1.0" text="User rating" />
                         <TableColumn minWidth="90.0" prefWidth="-1.0" text="Last viewed" />
                     </columns>
                   </TableView>
@@ -75,16 +75,17 @@
                      <left>
                         <HBox spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="Button" />
-                              <Button mnemonicParsing="false" text="Button" />
-                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" onAction="#createNewMovie" text="New" />
+                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button mnemonicParsing="false" onAction="#createNewRating" text="Add Rating" />
+                              <Button mnemonicParsing="false" text="Edit Rating" />
                            </children>
                         </HBox>
                      </left>
                   </BorderPane>
-                  <TableView fixedCellSize="0.0" minWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TableView fixedCellSize="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn minWidth="150.0" prefWidth="264.99999237060547" text="Name of the movie" />
+                      <TableColumn minWidth="150.0" prefWidth="267.50001525878906" text="Name of the movie" />
                     </columns>
                   </TableView>
                   <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -96,7 +97,7 @@
                      <left>
                         <HBox spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button mnemonicParsing="false" text="New" />
+                              <Button mnemonicParsing="false" onAction="#createNewCategory" text="New" />
                               <Button mnemonicParsing="false" text="Delete" />
                            </children>
                         </HBox>

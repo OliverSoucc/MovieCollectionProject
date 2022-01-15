@@ -91,7 +91,7 @@ public class MainPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         tableViewProperty();
         filterLogic();
-        alertWindow();
+//        alertWindow();
 
     }
 
@@ -153,16 +153,16 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    public void alertWindow()
-    {
-        for(int i = 0;i < tableView.getItems().size();i++) {
-            float rating = tableView.getItems().get(i).getRating();
-                if (rating < 6.0) {
-                    showMessageDialog(null, "Remember to delete movies with personal rating under 6.0");
-                    break;
-                }
-        }
-    }
+//    public void alertWindow()
+//    {
+//        for(int i = 0;i < tableView.getItems().size();i++) {
+//            float rating = tableView.getItems().get(i).getRating();
+//                if (rating < 6.0) {
+//                    showMessageDialog(null, "Remember to delete movies with personal rating under 6.0");
+//                    break;
+//                }
+//        }
+//    }
 
 
 }

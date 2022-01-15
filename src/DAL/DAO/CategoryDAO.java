@@ -39,17 +39,22 @@ public class CategoryDAO implements CategoryIDAO {
 
     @Override
     public Category createCategory(String name) throws Exception {
-        int id = 0;
-        try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Category(Name) VALUES (?)";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, name);
-            preparedStatement.addBatch();
-            preparedStatement.executeBatch();
-        }
-        Category categoryToCreate = new Category(id, name);
-        return categoryToCreate; // returns created Category object
+        return null;
     }
+
+//    @Override
+//    public Category createCategory(String name) throws Exception {
+//        int id = 0;
+//        try (Connection connection = DBconnector.getConnection()){
+//            String sql = "INSERT INTO Category(Name) VALUES (?)";
+//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//            preparedStatement.setString(1, name);
+//            preparedStatement.addBatch();
+//            preparedStatement.executeBatch();
+//        }
+//        Category categoryToCreate = new Category(id, name);
+//        return categoryToCreate; // returns created Category object
+//    }
 
     @Override
     public void deleteCategory(Category categoryToDelete) throws Exception{
