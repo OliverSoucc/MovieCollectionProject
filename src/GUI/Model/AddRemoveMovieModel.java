@@ -14,7 +14,7 @@ public class AddRemoveMovieModel {
         return movieDB;
     }
     public void createMovie(int id, String name, float rating, String fileLink, int lastView, float imdb, String category1, String category2, String category3) {
-        Movie newMovie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
+        Movie newMovie = new Movie(id, name, rating, fileLink, lastView, imdb);
         movieDB.add(newMovie);
     }
 }

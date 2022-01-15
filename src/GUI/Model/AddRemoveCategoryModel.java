@@ -1,4 +1,4 @@
-package GUI.model;
+package GUI.Model;
 
 import BE.Category;
 

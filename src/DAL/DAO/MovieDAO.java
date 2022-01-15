@@ -31,11 +31,7 @@ public class MovieDAO implements MovieIDAO {
                 int lastView = resultSet.getInt("LastView");
                 float imdb = resultSet.getFloat("Imdb");
                 //int duration = resultSet.getInt("Duration");
-                String category1 = resultSet.getString("Category1");
-                String category2 = resultSet.getString("Category2");
-                String category3 = resultSet.getString("Category3");
-
-                Movie movie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
+                Movie movie = new Movie(id, name, rating, fileLink, lastView, imdb);
 
                 allMovies.add(movie);
             }
@@ -51,25 +47,19 @@ public class MovieDAO implements MovieIDAO {
         String fileLink = movieToCreate.getFileLink();
         int lastView = movieToCreate.getLastView();
         float imdb = movieToCreate.getImdb();
-        String category1 = movieToCreate.getCategory1();
-        String category2 = movieToCreate.getCategory2();
-        String category3 = movieToCreate.getCategory3();
 
         try (Connection connection = DBconnector.getConnection()){
-            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
             preparedStatement.setFloat(2, rating);
             preparedStatement.setString(3, fileLink);
             preparedStatement.setInt(4, lastView);
             preparedStatement.setFloat(5, imdb);
-            preparedStatement.setString(6, category1);
-            preparedStatement.setString(7, category2);
-            preparedStatement.setString(8, category3);
             preparedStatement.execute();
 
         }
-        movieToCreate = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
+        movieToCreate = new Movie(id, name, rating, fileLink, lastView, imdb);
         return movieToCreate; // returns created movie object
     }
 
@@ -98,10 +88,7 @@ public class MovieDAO implements MovieIDAO {
                 String fileLink = resultSet.getString("FileLink");
                 int lastView = resultSet.getInt("LastView");
                 float imdb = resultSet.getFloat("Imdb");
-                String category1 = resultSet.getString("Category1");
-                String category2 = resultSet.getString("Category2");
-                String category3 = resultSet.getString("Category3");
-                movie = new Movie(id, name, rating, fileLink, lastView, imdb, category1, category2, category3);
+                movie = new Movie(id, name, rating, fileLink, lastView, imdb);
             }
         }
         return movie;
@@ -109,13 +96,10 @@ public class MovieDAO implements MovieIDAO {
 
     @Override
     public void updateMovie(Movie movie) throws Exception {
-        String sql = "UPDATE Movie SET Rating = ?, Category1 = ?,Category2 = ?,Category3 = ? WHERE Id = ? ";
+        String sql = "UPDATE Movie SET Rating = ? WHERE Id = ? ";
         try (Connection connection = DBconnector.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setFloat(1, movie.getRating());
-            statement.setString(2, movie.getCategory1());
-            statement.setString(3, movie.getCategory2());
-            statement.setString(4, movie.getCategory3());
             statement.executeUpdate();
         }
     }

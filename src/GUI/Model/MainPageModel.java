@@ -1,4 +1,4 @@
-package GUI.model;
+package GUI.Model;
 
 public class MainPageModel {
 

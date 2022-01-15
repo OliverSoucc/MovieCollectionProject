@@ -29,7 +29,6 @@ public class CategoryDAO implements CategoryIDAO {
                 Category category = new Category(id, name);
                 allCategories.add(category);
             }
-
         }
         return allCategories; // returns List of all Categories
     }
@@ -43,7 +42,6 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.setString(1, name);
             preparedStatement.addBatch();
             preparedStatement.executeBatch();
-
         }
         Category categoryToCreate = new Category(id, name);
         return categoryToCreate; // returns created Category object
@@ -56,7 +54,6 @@ public class CategoryDAO implements CategoryIDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, categoryToDelete.getId());
             preparedStatement.execute();
-
         }
     } // deletes the specific category by ID
 }

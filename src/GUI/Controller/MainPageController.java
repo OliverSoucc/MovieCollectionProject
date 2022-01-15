@@ -103,9 +103,9 @@ public class MainPageController implements Initializable {
         category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
         category3Column.setCellValueFactory(new PropertyValueFactory<>("category3"));
 
-        Movie movie = new Movie(0, "Star wars", 9.5F,"gay",3,5.8F, "Fiction", "Sci-fi","Action");
-        Movie movie1 = new Movie(0, "Star wars 1", 7.5F,"gay",4,7.0F, "Sci-fi", "Fiction","Lolo");
-        Movie movie2 = new Movie(0, "Star wars 2", 5.5F,"gay",5,8.0F, "Fiction", "Action","Lolo");
+        Movie movie = new Movie(0, "Star wars", 9.5F,"gay",3,5.8F);
+        Movie movie1 = new Movie(0, "Star wars 1", 7.5F,"gay",4,7.0F);
+        Movie movie2 = new Movie(0, "Star wars 2", 5.5F,"gay",5,8.0F);
         movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
 
     }
@@ -126,24 +126,24 @@ public class MainPageController implements Initializable {
                 
                 if (movie.getName().toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                } else if ((movie.getCategory1() + " " + movie.getCategory2() + " "
-                            + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    return true;
-                } else if ((movie.getCategory1() + " " + movie.getCategory3() + " "
-                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    return true;
-                } else if ((movie.getCategory2() + " " + movie.getCategory1() + " "
-                        + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    return true;
-                }else if((movie.getCategory2() + " " + movie.getCategory3() + " "
-                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
-                    return true;
-                }else if((movie.getCategory3() + " " + movie.getCategory2() + " "
-                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    return true;
-                }else if((movie.getCategory3() + " " + movie.getCategory1() + " "
-                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
-                    return true;
+//                } else if ((movie.getCategory1() + " " + movie.getCategory2() + " "
+//                            + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    return true;
+//                } else if ((movie.getCategory1() + " " + movie.getCategory3() + " "
+//                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    return true;
+//                } else if ((movie.getCategory2() + " " + movie.getCategory1() + " "
+//                        + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    return true;
+//                }else if((movie.getCategory2() + " " + movie.getCategory3() + " "
+//                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
+//                    return true;
+//                }else if((movie.getCategory3() + " " + movie.getCategory2() + " "
+//                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    return true;
+//                }else if((movie.getCategory3() + " " + movie.getCategory1() + " "
+//                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
+//                    return true;
                 }else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
                     if (movie.getRating() >= newValueFloat && movie.getImdb() >= newValueFloat) {
