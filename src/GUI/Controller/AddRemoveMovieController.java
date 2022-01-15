@@ -32,17 +32,11 @@ public class AddRemoveMovieController {
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) {
-        /*addRemoveMovieModel.createMovie(
-                titleTextField.getText(),
-                Float.parseFloat(ratingTextField.getText()),
-                fileTextField.getText(),
-                handleTimeField(timeTextField.getText())
-        );*/
         Movie movie = new Movie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), 0, Float.parseFloat(imdbRating.getText()));
         mainPageModel.createMovie(movie);
         System.out.println(mainPageModel.getMovieObservableList());
         closeWindow(saveBtn);
-    } //TODO this has to be changed
+    }
 
 
     public void handleCancelMovieBtn(ActionEvent actionEvent) {

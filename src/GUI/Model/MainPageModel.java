@@ -3,6 +3,8 @@ package GUI.Model;
 import BE.Movie;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MainPageModel {
     private final ObservableList<Movie> movieObservableList;
@@ -25,4 +27,5 @@ public class MainPageModel {
         Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         movieObservableList.add(newMovie);
     }
+
 }
