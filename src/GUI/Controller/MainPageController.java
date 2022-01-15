@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Movie;
+import GUI.Model.MainPageModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -47,9 +48,11 @@ public class MainPageController implements Initializable {
     @FXML
     public TableColumn<Movie, String> imdbRatingColumn;
 
-
+    MainPageModel mainPageModel;
     float newValueFloat;
-    private final ObservableList <Movie> movieObservableList = FXCollections.observableArrayList();
+    public MainPageController() {
+        mainPageModel = new MainPageModel();
+    }
 
     public void createNewMovie(ActionEvent actionEvent) throws IOException {
         Parent root;
@@ -98,17 +101,13 @@ public class MainPageController implements Initializable {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
 
-        Movie movie = new Movie(0, "Star wars", 9.5F,"gay",3,5.8F);
-        Movie movie1 = new Movie(0, "Star wars 1", 7.5F,"gay",4,7.0F);
-        Movie movie2 = new Movie(0, "Star wars 2", 5.5F,"gay",5,8.0F);
-        movieObservableList.addAll(movie, movie1, movie2); // there will be movies from database
 
     }
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
 
     private void filterLogic(){
-        FilteredList<Movie> filteredData = new FilteredList<>(movieObservableList, b -> true);
+        FilteredList<Movie> filteredData = new FilteredList<>(mainPageModel.getMovieObservableList(), b -> true);
 
         filter.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(movie -> {

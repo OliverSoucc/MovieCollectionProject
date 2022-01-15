@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import GUI.Model.AddRemoveMovieModel;
+import GUI.Model.MainPageModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,11 +23,11 @@ public class AddRemoveMovieController {
     @FXML
     public AnchorPane anchorPane;
 
-    AddRemoveMovieModel addRemoveMovieModel;
+    MainPageModel mainPageModel;
 
 
     public AddRemoveMovieController() {
-        addRemoveMovieModel = new AddRemoveMovieModel();
+        mainPageModel = new MainPageModel();
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) {
@@ -36,7 +37,8 @@ public class AddRemoveMovieController {
                 fileTextField.getText(),
                 handleTimeField(timeTextField.getText())
         );*/
-        System.out.println(addRemoveMovieModel.getMovieDB());
+
+        mainPageModel.createMovie();
     } //TODO this has to be changed
 
 
