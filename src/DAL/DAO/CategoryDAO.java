@@ -1,6 +1,7 @@
 package DAL.DAO;
 
 import BE.Category;
+import BE.Movie;
 import DAL.Intefaces.CategoryIDAO;
 import DAL.DatabaseConnector;
 
@@ -9,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryDAO implements CategoryIDAO {
+    private CatMovieDAO catMovieDAO;
     private DatabaseConnector DBconnector;
 
     public CategoryDAO(){
         DBconnector = new DatabaseConnector();
+        catMovieDAO = new CatMovieDAO();
     }
 
     @Override
@@ -26,7 +29,8 @@ public class CategoryDAO implements CategoryIDAO {
             while(resultSet.next()){
                 int id = resultSet.getInt("Id");
                 String name = resultSet.getString("Name");
-                Category category = new Category(id, name);
+                List <Movie> listMoviesCategory = catMovieDAO.getCategoryMovie(id);
+                Category category = new Category(id, name, listMoviesCategory);
                 allCategories.add(category);
             }
         }

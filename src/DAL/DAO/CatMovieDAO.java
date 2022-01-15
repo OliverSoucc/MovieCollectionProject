@@ -5,6 +5,8 @@ import BE.Movie;
 import DAL.DatabaseConnector;
 import DAL.Intefaces.CatMovieIDAO;
 
+import java.util.List;
+
 public class CatMovieDAO implements CatMovieIDAO {
     private DatabaseConnector DBconnector;
 
@@ -19,4 +21,6 @@ public class CatMovieDAO implements CatMovieIDAO {
     } //This method should
 
 
+    public List<Movie> getCategoryMovie(int id) {
+    }
 }
