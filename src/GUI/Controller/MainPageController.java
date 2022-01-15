@@ -49,13 +49,16 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableViewProperty();
         try {
-            filterLogic();
+            tableViewProperty();
         } catch (MovieDAOException e) {
             e.printStackTrace();
         }
-        //updateTableView();
+//        try {
+////            filterLogic();
+//        } catch (MovieDAOException e) {
+//            e.printStackTrace();
+//        }
     }
 
 
@@ -95,12 +98,11 @@ public class MainPageController implements Initializable {
     }
 
 
-    private void tableViewProperty() {
+    private void tableViewProperty() throws MovieDAOException {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
-
-
+        tableView.setItems(mainPageModel.getMovieObservableList());
     }
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
@@ -149,13 +151,26 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    private void updateTableView() throws MovieDAOException {
+    private void updateTableView() {
         tableView.getItems().clear();
         tableView.refresh();
+        System.out.println("1");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
-        tableView.getItems().setAll(mainPageModel.getMovieObservableList());
+        System.out.println("2");
+        try {
+            tableView.getItems().setAll(mainPageModel.getMovieObservableList());
+            tableView.refresh();
+            System.out.println("3");
+        } catch (MovieDAOException e) {
+            System.out.println(e);;
+        }
 
+
+    }
+
+    public void handleRefresh(ActionEvent event) throws MovieDAOException {
+        updateTableView();
     }
 }
