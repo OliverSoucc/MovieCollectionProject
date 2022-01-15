@@ -43,8 +43,8 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO.deleteMovie(movieToDelete);
     }
 
-    public void updateMovie(Movie movie) throws Exception {
-        movieDAO.updateMovie(movie);
+    public void updateMovie(Movie movie, float newRating) throws Exception {
+        movieDAO.updateMovieRating(movie, newRating);
     }
 
     public Movie getMovie(int id) throws Exception {
