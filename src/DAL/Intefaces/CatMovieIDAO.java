@@ -5,5 +5,6 @@ import BE.Movie;
 
 public interface CatMovieIDAO {
 
-    public void setCategoriesForMovie(Movie movie, Category category1, Category category2, Category category3);
+    void setCategoriesForMovie(Movie movie, Category category1, Category category2, Category category3) //This method should
+    ;
 }
