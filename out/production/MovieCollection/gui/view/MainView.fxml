@@ -91,9 +91,9 @@
                       <TableColumn minWidth="150.0" prefWidth="267.50001525878906" text="Name of the movie" />
                     </columns>
                   </TableView>
-                  <TableView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                  <TableView fx:id="categoryTableView" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <columns>
-                      <TableColumn prefWidth="198.9999885559082" text="Categories" />
+                      <TableColumn fx:id="categoryColumn" prefWidth="198.9999885559082" text="Categories" />
                     </columns>
                   </TableView>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">

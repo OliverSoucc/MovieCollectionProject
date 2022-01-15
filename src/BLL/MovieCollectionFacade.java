@@ -11,6 +11,7 @@ import java.util.List;
 public interface MovieCollectionFacade {
     Movie createMovie(Movie movie) throws MovieDAOException;
     List<Movie> getAllMovies() throws MovieDAOException;
+    List<Category> getAllCategories() throws CategoryDAOException;
     void deleteMovie(Movie movie) throws MovieDAOException;
     void updateMovie(Movie movie) throws MovieDAOException;
     Movie getMovie(int id) throws MovieDAOException;

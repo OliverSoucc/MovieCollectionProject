@@ -1,6 +1,8 @@
 package GUI.Controller;
 
+import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
 import GUI.Model.MainPageModel;
@@ -30,7 +32,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class MainPageController implements Initializable {
     @FXML
-    public TableColumn<Movie, String> nameColumn, ratingColumn;
+    public TableColumn<Movie, String> nameColumn, ratingColumn, imdbRatingColumn;
     @FXML
     public TextField filter;
     @FXML
@@ -38,7 +40,9 @@ public class MainPageController implements Initializable {
     @FXML
     public Button filterButton;
     @FXML
-    public TableColumn<Movie, String> imdbRatingColumn;
+    private TableView<Category> categoryTableView;
+    @FXML
+    TableColumn<Category, String> categoryColumn;
 
     MainPageModel mainPageModel;
     float newValueFloat;
@@ -52,6 +56,11 @@ public class MainPageController implements Initializable {
         try {
             tableViewProperty();
         } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
+        try {
+            setupCategoryTableView();
+        } catch (CategoryDAOException e) {
             e.printStackTrace();
         }
 //        try {
@@ -103,6 +112,11 @@ public class MainPageController implements Initializable {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         tableView.setItems(mainPageModel.getMovieObservableList());
+    }
+
+    private void setupCategoryTableView() throws CategoryDAOException {
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryTableView.setItems(mainPageModel.getAllCategories());
     }
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
@@ -164,7 +178,8 @@ public class MainPageController implements Initializable {
             tableView.refresh();
             System.out.println("3");
         } catch (MovieDAOException e) {
-            System.out.println(e);;
+            System.out.println(e);
+            ;
         }
 
 

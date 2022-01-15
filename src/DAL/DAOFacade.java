@@ -56,4 +56,5 @@ public class DAOFacade implements IDALMovieFacade{
     public Movie getMovie(int id) throws Exception {
         return movieDAO.getMovie(id);
     }
+
 }

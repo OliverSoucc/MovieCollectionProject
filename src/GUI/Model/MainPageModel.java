@@ -2,6 +2,7 @@ package GUI.Model;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
 import BLL.MovieCollectionFacade;
@@ -23,7 +24,7 @@ public class MainPageModel {
         movieCollectionFacade = new MovieCollectionManager();
 
     }
-    
+    //Movie methods
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
         movieObservableList.clear();
         List<Movie> newMovieList = movieCollectionFacade.getAllMovies();
@@ -33,9 +34,15 @@ public class MainPageModel {
     public void createMovie(Movie movie) throws MovieDAOException {
         Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         movieCollectionFacade.createMovie(newMovie);
-        movieObservableList.addAll(newMovie);
     }
-
-
-
+    //Category methods
+    public ObservableList<Category> getAllCategories() throws CategoryDAOException {
+        categoryObservableList.clear();
+        List<Category> newCategoryList = movieCollectionFacade.getAllCategories();
+        categoryObservableList.addAll(newCategoryList);
+        return categoryObservableList;
+    }
+    public void createCategory(String name) throws CategoryDAOException {
+        movieCollectionFacade.createCategory(name);
+    }
 }

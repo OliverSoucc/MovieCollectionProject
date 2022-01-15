@@ -10,4 +10,5 @@ public interface MovieIDAO {
     public void deleteMovie(Movie movieToDelete) throws Exception;
     Movie getMovie(int id) throws Exception;
     public Movie updateMovieRating(Movie movie, float newRating) throws Exception;
+
 }

@@ -40,6 +40,16 @@ public class MovieCollectionManager implements MovieCollectionFacade {
     }
 
     @Override
+    public List<Category> getAllCategories() throws CategoryDAOException {
+        try {
+            return idalMovieFacade.getAllCategories();
+        } catch (Exception e) {
+            throw new CategoryDAOException("Couldn't get all categories", e);
+        }
+    }
+
+
+    @Override
     public void deleteMovie(Movie movie) throws MovieDAOException {
         try {
             idalMovieFacade.deleteMovie(movie);
