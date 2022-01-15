@@ -51,7 +51,7 @@ public class MainPageController implements Initializable {
     float newValueFloat;
     private final ObservableList <Movie> movieObservableList = FXCollections.observableArrayList();
 
-    public void movieButtonOnAction(ActionEvent actionEvent) throws IOException {
+    public void createNewMovie(ActionEvent actionEvent) throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddRemoveMovie.fxml"));
@@ -65,7 +65,7 @@ public class MainPageController implements Initializable {
     }
 
 
-    public void categoryButtonOnAction(ActionEvent actionEvent) throws IOException {
+    public void createNewCategory(ActionEvent actionEvent) throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddRemoveCategory.fxml"));
@@ -76,7 +76,7 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
-    public void ratingButtonOnAction(ActionEvent actionEvent) throws IOException {
+    public void createNewRating(ActionEvent actionEvent) throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddChangeRating.fxml"));
