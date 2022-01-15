@@ -99,9 +99,6 @@ public class MainPageController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
-//        category1Column.setCellValueFactory(new PropertyValueFactory<>("category1"));
-//        category2Column.setCellValueFactory(new PropertyValueFactory<>("category2"));
-//        category3Column.setCellValueFactory(new PropertyValueFactory<>("category3"));
 
         Movie movie = new Movie(0, "Star wars", 9.5F,"gay",3,5.8F);
         Movie movie1 = new Movie(0, "Star wars 1", 7.5F,"gay",4,7.0F);
@@ -126,24 +123,6 @@ public class MainPageController implements Initializable {
                 
                 if (movie.getName().toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-//                } else if ((movie.getCategory1() + " " + movie.getCategory2() + " "
-//                            + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    return true;
-//                } else if ((movie.getCategory1() + " " + movie.getCategory3() + " "
-//                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    return true;
-//                } else if ((movie.getCategory2() + " " + movie.getCategory1() + " "
-//                        + movie.getCategory3()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    return true;
-//                }else if((movie.getCategory2() + " " + movie.getCategory3() + " "
-//                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)){
-//                    return true;
-//                }else if((movie.getCategory3() + " " + movie.getCategory2() + " "
-//                        + movie.getCategory1()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    return true;
-//                }else if((movie.getCategory3() + " " + movie.getCategory1() + " "
-//                        + movie.getCategory2()).toLowerCase().contains(stringLowerCaseFilter)) {
-//                    return true;
                 }else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
                     if (movie.getRating() >= newValueFloat && movie.getImdb() >= newValueFloat) {
