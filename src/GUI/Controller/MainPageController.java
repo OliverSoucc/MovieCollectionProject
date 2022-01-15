@@ -28,39 +28,37 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class MainPageController implements Initializable {
     @FXML
-    public TableColumn<Movie, String> nameColumn;
-    @FXML
-    public TableColumn<Movie, String> ratingColumn;
-    @FXML
-    public TableColumn<Movie, String> category1Column;
-    @FXML
-    public TableColumn <Movie, String> category2Column;
-    @FXML
-    public TableColumn <Movie, String> category3Column;
+    public TableColumn<Movie, String> nameColumn, ratingColumn;
     @FXML
     public TextField filter;
     @FXML
-    public TableView <Movie> tableView;
+    public TableView<Movie> tableView;
     @FXML
     public Button filterButton;
-    @FXML
-    public Button movieButton;
     @FXML
     public TableColumn<Movie, String> imdbRatingColumn;
 
     MainPageModel mainPageModel;
     float newValueFloat;
+
     public MainPageController() {
         mainPageModel = new MainPageModel();
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        tableViewProperty();
+        filterLogic();
+        updateTableView();
+    }
+
+
+    //Button methods
     public void createNewMovie(ActionEvent actionEvent) throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddRemoveMovie.fxml"));
-        root= loader.load();
-        //AddRemoveMovieController movieController = loader.getController();
-        //movieController.setController(this);
+        root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("Add/Remove Movie");
         stage.setScene(new Scene(root));
@@ -72,7 +70,7 @@ public class MainPageController implements Initializable {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddRemoveCategory.fxml"));
-        root= loader.load();
+        root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("Add/Remove Category");
         stage.setScene(new Scene(root));
@@ -83,20 +81,15 @@ public class MainPageController implements Initializable {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddChangeRating.fxml"));
-        root= loader.load();
+        root = loader.load();
         Stage stage = new Stage();
         stage.setTitle("Add/Change Rating");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        tableViewProperty();
-        filterLogic();
-    }
 
-    private void tableViewProperty(){
+    private void tableViewProperty() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
@@ -106,7 +99,7 @@ public class MainPageController implements Initializable {
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
 
-    private void filterLogic(){
+    private void filterLogic() {
         FilteredList<Movie> filteredData = new FilteredList<>(mainPageModel.getMovieObservableList(), b -> true);
 
         filter.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -117,10 +110,10 @@ public class MainPageController implements Initializable {
                 }
 
                 String stringLowerCaseFilter = newValue.toLowerCase();
-                
+
                 if (movie.getName().toLowerCase().contains(stringLowerCaseFilter)) {
                     return true;
-                }else if (isNumeric(stringLowerCaseFilter)) {
+                } else if (isNumeric(stringLowerCaseFilter)) {
                     newValueFloat = Float.parseFloat(stringLowerCaseFilter);
                     if (movie.getRating() >= newValueFloat && movie.getImdb() >= newValueFloat) {
                         return true;
@@ -150,4 +143,13 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
+    private void updateTableView() {
+        tableView.getItems().clear();
+        tableView.refresh();
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
+        tableView.getItems().setAll(mainPageModel.getMovieObservableList());
+
+    }
 }
