@@ -1,6 +1,8 @@
 package GUI.Controller;
 
+import BE.Movie;
 import GUI.Model.AddRemoveMovieModel;
+import GUI.Model.MainPageModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,17 +18,17 @@ import java.io.File;
 
 public class AddRemoveMovieController {
     @FXML
-    public Button cancelBtn;
+    public Button cancelBtn, saveBtn;
     @FXML
-    public TextField titleTextField, ratingTextField, fileTextField, timeTextField;
+    public TextField titleTextField, ratingTextField, fileTextField, imdbRating;
     @FXML
     public AnchorPane anchorPane;
 
-    AddRemoveMovieModel addRemoveMovieModel;
+    MainPageModel mainPageModel;
 
 
     public AddRemoveMovieController() {
-        addRemoveMovieModel = new AddRemoveMovieModel();
+        mainPageModel = new MainPageModel();
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) {
@@ -36,7 +38,10 @@ public class AddRemoveMovieController {
                 fileTextField.getText(),
                 handleTimeField(timeTextField.getText())
         );*/
-        System.out.println(addRemoveMovieModel.getMovieDB());
+        Movie movie = new Movie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), 0, Float.parseFloat(imdbRating.getText()));
+        mainPageModel.createMovie(movie);
+        System.out.println(mainPageModel.getMovieObservableList());
+        closeWindow(saveBtn);
     } //TODO this has to be changed
 
 
@@ -46,8 +51,7 @@ public class AddRemoveMovieController {
         alert.setHeaderText("Do you want to close this window?");
 
         if(alert.showAndWait().get() == ButtonType.OK ) {
-            Stage stage = (Stage) cancelBtn.getScene().getWindow();
-            stage.close();
+            closeWindow(cancelBtn);
         }
     }
 
@@ -66,23 +70,18 @@ public class AddRemoveMovieController {
 
     }
 
-
-    private int handleTimeField(String actualTime) {
-        int time;
-        if (actualTime.equals(" ") || actualTime.isEmpty()) {
-            time = 0;
-        }
-        else {
-            time = Integer.parseInt(actualTime);
-        }
-        return time;
-    }
-
+    //Handles choosing a file
     public void isFileChooserPressed(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
         File selectedFile = fileChooser.showOpenDialog(null);
         String filepath = selectedFile.getAbsolutePath();
         fileTextField.setText(filepath);
+    }
+
+    //Closes current window
+    private void closeWindow(Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
     }
 }
