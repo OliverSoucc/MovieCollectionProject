@@ -109,7 +109,7 @@ public class MovieDAO implements MovieIDAO {
 
     @Override
     public void updateMovie(Movie movie) throws Exception {
-        String sql = "UPDATE Movie SET Rating = ?, Category1 = ?,Category2 = ?,Category3 = ?, WHERE Id = ? ";
+        String sql = "UPDATE Movie SET Rating = ?, Category1 = ?,Category2 = ?,Category3 = ? WHERE Id = ? ";
         try (Connection connection = DBconnector.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setFloat(1, movie.getRating());
