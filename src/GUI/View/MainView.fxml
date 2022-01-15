@@ -6,28 +6,84 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="635.0" prefWidth="815.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.MainPageController">
    <children>
-      <TableView fx:id="tableView" layoutX="18.0" layoutY="74.0" prefHeight="511.0" prefWidth="778.0">
-        <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="270.4000053405762" text="Name" />
-          <TableColumn fx:id="imdbRatingColumn" prefWidth="84.79998779296875" text="Imdb Rating" />
-            <TableColumn fx:id="ratingColumn" prefWidth="75.0" text="Personal Rating" />
-            <TableColumn fx:id="category1Column" prefWidth="138.4000244140625" text="Category 1" />
-            <TableColumn fx:id="category2Column" prefWidth="139.20001220703125" text="Category 2" />
-            <TableColumn fx:id="category3Column" prefWidth="146.4000244140625" text="Category 3" />
-        </columns>
-      </TableView>
-      <Button fx:id="filterButton" layoutX="744.0" layoutY="29.0" mnemonicParsing="false" onAction="#filterButtonOnAction" text="Clear" />
-      <TextField fx:id="filter" layoutX="18.0" layoutY="29.0" onKeyPressed="#filterOnAction" prefHeight="26.0" prefWidth="702.0" />
-      <Button fx:id="movieButton" layoutX="18.0" layoutY="595.0" mnemonicParsing="false" onAction="#movieButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Movie" />
-      <Button layoutX="321.0" layoutY="595.0" mnemonicParsing="false" onAction="#categoryButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/remove Category" />
-      <Button layoutX="624.0" layoutY="595.0" mnemonicParsing="false" onAction="#ratingButtonOnAction" prefHeight="26.0" prefWidth="172.0" text="Add/change Personal Rating" />
-      <Label layoutX="18.0" layoutY="3.0" prefHeight="0.0" prefWidth="43.0" text="Filter">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font></Label>
+      <VBox spacing="20.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label prefHeight="0.0" prefWidth="43.0" text="Filter">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox spacing="20.0">
+                     <children>
+                        <TextField fx:id="filter" onKeyPressed="#filterOnAction" prefHeight="26.0" prefWidth="702.0" />
+                        <Button fx:id="filterButton" mnemonicParsing="false" onAction="#filterButtonOnAction" text="Clear" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <BorderPane>
+               <center>
+                  <Button mnemonicParsing="false" text="Play movie" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="0.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                     <left>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" BorderPane.alignment="CENTER" />
+                     </left>
+                  </BorderPane>
+                  <TableView minWidth="360.0" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                    <columns>
+                      <TableColumn minWidth="90.0" prefWidth="-1.0" text="Name" />
+                      <TableColumn minWidth="90.0" prefWidth="-1.0" text="IMDB Rating" />
+                        <TableColumn minWidth="90.0" prefWidth="-1.0" text="User rating" />
+                        <TableColumn minWidth="90.0" prefWidth="-1.0" text="Last viewed" />
+                    </columns>
+                  </TableView>
+                  <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <top>
+                        <Button mnemonicParsing="false" text="Add" BorderPane.alignment="TOP_CENTER" />
+                     </top>
+                  </BorderPane>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <right>
+                        <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" text="Button" />
+                           </children>
+                        </HBox>
+                     </right>
+                  </BorderPane>
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
