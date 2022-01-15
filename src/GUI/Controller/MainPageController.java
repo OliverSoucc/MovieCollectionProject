@@ -63,6 +63,11 @@ public class MainPageController implements Initializable {
         } catch (CategoryDAOException e) {
             e.printStackTrace();
         }
+        try {
+            updateTableView();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
 //        try {
 ////            filterLogic();
 //        } catch (MovieDAOException e) {
@@ -165,23 +170,11 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    private void updateTableView() {
-        tableView.getItems().clear();
-        tableView.refresh();
-        System.out.println("1");
+    private void updateTableView() throws MovieDAOException {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
-        System.out.println("2");
-        try {
-            tableView.getItems().setAll(mainPageModel.getMovieObservableList());
-            tableView.refresh();
-            System.out.println("3");
-        } catch (MovieDAOException e) {
-            System.out.println(e);
-            ;
-        }
-
+        tableView.setItems(mainPageModel.getMovieObservableList());
 
     }
 
