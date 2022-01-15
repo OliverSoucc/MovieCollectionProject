@@ -1,6 +1,8 @@
 package GUI.Controller;
 
 import BE.Movie;
+import BLL.Exceptions.MovieCollectionManagerException;
+import BLL.Exceptions.MovieDAOException;
 import GUI.Model.MainPageModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,15 +43,19 @@ public class MainPageController implements Initializable {
     MainPageModel mainPageModel;
     float newValueFloat;
 
-    public MainPageController() {
+    public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = new MainPageModel();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tableViewProperty();
-        filterLogic();
-        updateTableView();
+        try {
+            filterLogic();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
+        //updateTableView();
     }
 
 
@@ -99,7 +105,7 @@ public class MainPageController implements Initializable {
     // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
 
-    private void filterLogic() {
+    private void filterLogic() throws MovieDAOException {
         FilteredList<Movie> filteredData = new FilteredList<>(mainPageModel.getMovieObservableList(), b -> true);
 
         filter.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -143,7 +149,7 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    private void updateTableView() {
+    private void updateTableView() throws MovieDAOException {
         tableView.getItems().clear();
         tableView.refresh();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

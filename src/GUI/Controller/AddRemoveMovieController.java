@@ -1,6 +1,8 @@
 package GUI.Controller;
 
 import BE.Movie;
+import BLL.Exceptions.MovieCollectionManagerException;
+import BLL.Exceptions.MovieDAOException;
 import GUI.Model.AddRemoveMovieModel;
 import GUI.Model.MainPageModel;
 import javafx.event.ActionEvent;
@@ -27,11 +29,11 @@ public class AddRemoveMovieController {
     MainPageModel mainPageModel;
 
 
-    public AddRemoveMovieController() {
+    public AddRemoveMovieController() throws MovieCollectionManagerException {
         mainPageModel = new MainPageModel();
     }
 
-    public void handleSaveMovieBtn(ActionEvent actionEvent) {
+    public void handleSaveMovieBtn(ActionEvent actionEvent) throws MovieDAOException {
         Movie movie = new Movie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), 0, Float.parseFloat(imdbRating.getText()));
         mainPageModel.createMovie(movie);
         System.out.println(mainPageModel.getMovieObservableList());

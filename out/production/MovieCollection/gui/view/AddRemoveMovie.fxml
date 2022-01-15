@@ -50,7 +50,7 @@
                         <Label text="File:" BorderPane.alignment="CENTER" />
                     </right>
                 </BorderPane>
-                <Button alignment="CENTER" mnemonicParsing="false" onAction="#isFileChooserPressed" text="Choose" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleChooseFile" text="Choose" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <right>
                         <Button fx:id="saveBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleSaveMovieBtn" text="Save" BorderPane.alignment="CENTER" />
