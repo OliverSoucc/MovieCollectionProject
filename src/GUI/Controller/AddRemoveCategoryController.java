@@ -18,7 +18,7 @@ public class AddRemoveCategoryController {
     @FXML
     private TextField nameTextField;
     @FXML
-    private Button cancelButton;
+    private Button cancelButton, saveBtn;
 
     MainPageModel mainPageModel;
     JFrame jFrame;
@@ -29,6 +29,8 @@ public class AddRemoveCategoryController {
 
     public void handleSaveButton(ActionEvent event) throws CategoryDAOException {
         mainPageModel.createCategory(nameTextField.getText());
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
     public void handleCancelButton(ActionEvent event) {

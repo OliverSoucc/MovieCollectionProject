@@ -50,7 +50,7 @@
                   </BorderPane>
                   <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <right>
-                        <Button mnemonicParsing="false" onAction="#handleSaveButton" text="Save" BorderPane.alignment="CENTER" />
+                        <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#handleSaveButton" text="Save" BorderPane.alignment="CENTER" />
                      </right>
                      <left>
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#handleCancelButton" text="Cancel" BorderPane.alignment="CENTER" />
