@@ -9,7 +9,6 @@ public class Movie {
     private float rating;
     private String fileLink;
     private int lastView;
-    private List<Category> categoryList;
     private float imdb;
 
 
@@ -20,10 +19,8 @@ public class Movie {
         this.imdb = imdb;
         this.fileLink = fileLink;
         this.lastView = lastView;
-        this.categoryList = new ArrayList<>();
     }
-
-
+    
     public int getId() {
         return id;
     }
