@@ -18,11 +18,16 @@ public class MainPageModel {
     private final MovieCollectionFacade movieCollectionFacade;
 
     public MainPageModel() throws MovieCollectionManagerException {
+
         movieObservableList = FXCollections.observableArrayList();
+<<<<<<< HEAD
+        movieCollectionManager = new MovieCollectionManager();
+=======
         categoryObservableList = FXCollections.observableArrayList();
 
         movieCollectionFacade = new MovieCollectionManager();
 
+>>>>>>> b67774f333867a99b525009da524cbde13b0fbed
     }
     //Movie methods
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
