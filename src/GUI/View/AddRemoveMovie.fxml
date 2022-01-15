@@ -50,10 +50,10 @@
                         <Label text="File:" BorderPane.alignment="CENTER" />
                     </right>
                 </BorderPane>
-                <Button alignment="CENTER" mnemonicParsing="false" onAction="#isFileChooserPressed" text="Choose" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleChooseFile" text="Choose" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                 <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <right>
-                        <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleSaveMovieBtn" text="Save" BorderPane.alignment="CENTER" />
+                        <Button fx:id="saveBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleSaveMovieBtn" text="Save" BorderPane.alignment="CENTER" />
                     </right>
                 </BorderPane>
                 <BorderPane GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -66,7 +66,7 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="IMDB Rating:" BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
-            <TextField promptText="Enter IMDB rating" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="imdbRating" promptText="Enter IMDB rating" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             </children>
             <padding>
                 <Insets bottom="20.0" right="20.0" top="20.0" />
