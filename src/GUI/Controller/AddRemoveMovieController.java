@@ -3,7 +3,6 @@ package GUI.Controller;
 import BE.Movie;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
-import GUI.Model.AddRemoveMovieModel;
 import GUI.Model.MainPageModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

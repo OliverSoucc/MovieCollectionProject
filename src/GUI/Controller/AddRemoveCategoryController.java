@@ -1,6 +1,8 @@
 package GUI.Controller;
 
-import GUI.Model.AddRemoveCategoryModel;
+import BLL.Exceptions.CategoryDAOException;
+import BLL.Exceptions.MovieCollectionManagerException;
+import GUI.Model.MainPageModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,16 +20,15 @@ public class AddRemoveCategoryController {
     @FXML
     private Button cancelButton;
 
-    AddRemoveCategoryModel addRemoveCategoryModel;
+    MainPageModel mainPageModel;
     JFrame jFrame;
 
-    public AddRemoveCategoryController() {
-        addRemoveCategoryModel = new AddRemoveCategoryModel();
+    public AddRemoveCategoryController() throws MovieCollectionManagerException {
+       mainPageModel = new MainPageModel();
     }
 
-    public void handleSaveButton(ActionEvent event) {
-        addRemoveCategoryModel.createCategory(nameTextField.getText());
-        System.out.println(addRemoveCategoryModel.getCategoryArrayList());
+    public void handleSaveButton(ActionEvent event) throws CategoryDAOException {
+        mainPageModel.createCategory(nameTextField.getText());
     }
 
     public void handleCancelButton(ActionEvent event) {
