@@ -3,8 +3,12 @@ package DAL.Intefaces;
 import BE.Category;
 import BE.Movie;
 
-public interface CatMovieIDAO {
+import java.util.List;
 
-    void setCategoriesForMovie(Movie movie, Category category1, Category category2, Category category3) //This method should
-    ;
+public interface CatMovieIDAO {
+    List<Movie> getCategoryMovie(int id) throws Exception;
+    void addToCategory(Category selectedItem, Movie selectedMovie) throws Exception;
+    void removeFromCategory(Category selectedItem, Movie selectedMovie) throws Exception;
+    void removeFromCat(Category selectedItem) throws Exception;
+    void removeMoviesFromCat(Movie selectedItem) throws Exception;
 }
