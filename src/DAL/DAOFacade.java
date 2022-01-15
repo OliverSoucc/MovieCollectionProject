@@ -20,15 +20,15 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO = new MovieDAO();
     }
 
-    public List<Category> getAllCategories() throws CategoryDAOException {
+    public List<Category> getAllCategories() throws Exception {
         return categoryDAO.getAllCategories();
     }
 
-    public Category createCategory(String name) throws CategoryDAOException{
+    public Category createCategory(String name) throws Exception{
         return categoryDAO.createCategory(name);
     }
 
-    public void deleteCategory (Category categoryToDelete) throws CategoryDAOException{
+    public void deleteCategory (Category categoryToDelete) throws Exception{
         categoryDAO.deleteCategory(categoryToDelete);
     }
 
