@@ -1,5 +1,6 @@
 package GUI.Model;
 
+import BE.Category;
 import BE.Movie;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
@@ -7,36 +8,34 @@ import BLL.MovieCollectionFacade;
 import BLL.MovieCollectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
 
 public class MainPageModel {
-    private ObservableList<Movie> movieObservableList;
-    private MovieCollectionFacade movieCollectionManager;
+    private final ObservableList<Movie> movieObservableList;
+    private final ObservableList<Category> categoryObservableList;
+    private final MovieCollectionFacade movieCollectionFacade;
+
     public MainPageModel() throws MovieCollectionManagerException {
         movieObservableList = FXCollections.observableArrayList();
-        movieCollectionManager = new MovieCollectionManager();
-        Movie movie1 = new Movie("Penis", 6.4f, "pornhub.com", 6, 5.5f);
-        Movie movie2 = new Movie("Penis", 6.4f, "pornhub.com", 5, 5.2f);
-        Movie movie3 = new Movie("Penis", 9.4f, "pornhub.com", 4, 1.3f);
-        Movie movie4 = new Movie("Kokot", 3.4f, "pornhub.com", 3, 3f);
+        categoryObservableList = FXCollections.observableArrayList();
 
-        movieObservableList.add(movie1);
-        movieObservableList.add(movie2);
-        movieObservableList.add(movie3);
-        movieObservableList.add(movie4);
+        movieCollectionFacade = new MovieCollectionManager();
+
     }
+    
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
-        List<Movie> newMovieList = movieCollectionManager.getAllMovies();
+        movieObservableList.clear();
+        List<Movie> newMovieList = movieCollectionFacade.getAllMovies();
         movieObservableList.addAll(newMovieList);
         return movieObservableList;
     }
-    public void createMovie(Movie movie) {
+    public void createMovie(Movie movie) throws MovieDAOException {
         Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
+        movieCollectionFacade.createMovie(newMovie);
         movieObservableList.addAll(newMovie);
     }
+
 
 
 }
