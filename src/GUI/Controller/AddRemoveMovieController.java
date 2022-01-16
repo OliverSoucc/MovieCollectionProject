@@ -52,11 +52,12 @@ public class AddRemoveMovieController {
 
 
     // Choosing a movie from the finder
-    public void handleChooseFile(ActionEvent actionEvent) {
+    public void handleChooseFile1(ActionEvent actionEvent) {
         final DirectoryChooser directoryChooser = new DirectoryChooser();
 
         Stage stage = (Stage) anchorPane.getScene().getWindow();
         File file = directoryChooser.showDialog(stage);
+
 
         if(file != null){
             fileTextField.setText(file.getAbsolutePath());
@@ -66,7 +67,7 @@ public class AddRemoveMovieController {
     }
 
     //Handles choosing a file
-    public void isFileChooserPressed(ActionEvent actionEvent) {
+    public void handleChooseFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
         File selectedFile = fileChooser.showOpenDialog(null);

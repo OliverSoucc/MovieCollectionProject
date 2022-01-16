@@ -46,6 +46,7 @@ public class MainPageController implements Initializable {
 
     MainPageModel mainPageModel;
     float newValueFloat;
+    boolean wasChecked = false;
 
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = new MainPageModel();
@@ -117,6 +118,12 @@ public class MainPageController implements Initializable {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         tableView.setItems(mainPageModel.getMovieObservableList());
+
+        if(wasChecked == false)
+        {
+            alertWindow();
+        }
+        wasChecked = true;
     }
 
     private void setupCategoryTableView() throws CategoryDAOException {
@@ -180,5 +187,28 @@ public class MainPageController implements Initializable {
 
     public void handleRefresh(ActionEvent event) throws MovieDAOException {
         updateTableView();
+    }
+
+    public void playMovie(ActionEvent actionEvent) {
+        Runtime runtime = Runtime.getRuntime();
+        try {
+            String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
+            Process p =  runtime.exec(command);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public void alertWindow()
+    {
+        for(int i = 0;i < tableView.getItems().size();i++) {
+            float rating = tableView.getItems().get(i).getRating();
+            if (rating < 6.0) {
+                showMessageDialog(null, "Remember to delete movies with personal rating under 6.0 and movies that have not been watched for over two years");
+                break;
+            }
+        }
     }
 }

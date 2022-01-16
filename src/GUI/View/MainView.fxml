@@ -37,7 +37,7 @@
             </VBox>
             <BorderPane>
                <center>
-                  <Button mnemonicParsing="false" text="Play movie" BorderPane.alignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#playMovie" text="Play movie" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
             <GridPane hgap="20.0" vgap="20.0">
