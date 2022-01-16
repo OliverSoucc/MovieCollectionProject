@@ -66,7 +66,7 @@ public class MainPageController implements Initializable {
         }
         try {
             updateTableView();
-        } catch (MovieDAOException e) {
+        } catch (MovieDAOException | CategoryDAOException e) {
             e.printStackTrace();
         }
 //        try {
@@ -177,15 +177,18 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    private void updateTableView() throws MovieDAOException {
+    private void updateTableView() throws MovieDAOException, CategoryDAOException {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         tableView.setItems(mainPageModel.getMovieObservableList());
 
+        categoryColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        categoryTableView.setItems(mainPageModel.getAllCategories());
+
     }
 
-    public void handleRefresh(ActionEvent event) throws MovieDAOException {
+    public void handleRefresh(ActionEvent event) throws MovieDAOException, CategoryDAOException {
         updateTableView();
     }
 
