@@ -22,7 +22,6 @@ public class MainPageModel {
         categoryObservableList = FXCollections.observableArrayList();
 
         movieCollectionFacade = new MovieCollectionManager();
-
     }
     //Movie methods
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
@@ -34,6 +33,9 @@ public class MainPageModel {
     public void createMovie(Movie movie) throws MovieDAOException {
         Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         movieCollectionFacade.createMovie(newMovie);
+    }
+    public void removeMovie(Movie movie) throws MovieDAOException {
+        movieCollectionFacade.deleteMovie(movie);
     }
     //Category methods
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
