@@ -225,4 +225,10 @@ public class MainPageController implements Initializable {
         tableView.getItems().remove(tableView.getSelectionModel().getSelectedIndex());
         tableView.getSelectionModel().clearSelection();
     }
+
+    public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException {
+        mainPageModel.removeCategory(categoryTableView.getSelectionModel().getSelectedItem());
+        categoryTableView.getItems().remove(categoryTableView.getSelectionModel().getSelectedIndex());
+        categoryTableView.getSelectionModel().clearSelection();
+    }
 }

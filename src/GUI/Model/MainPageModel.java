@@ -47,4 +47,7 @@ public class MainPageModel {
     public void createCategory(String name) throws CategoryDAOException {
         movieCollectionFacade.createCategory(name);
     }
+    public void removeCategory(Category category) throws CategoryDAOException {
+        movieCollectionFacade.deleteCategory(category);
+    }
 }

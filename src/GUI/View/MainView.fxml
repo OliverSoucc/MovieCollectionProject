@@ -101,7 +101,7 @@
                         <HBox spacing="20.0" BorderPane.alignment="CENTER">
                            <children>
                               <Button mnemonicParsing="false" onAction="#createNewCategory" text="New" />
-                              <Button mnemonicParsing="false" text="Delete" />
+                              <Button mnemonicParsing="false" onAction="#handleDeleteCategoryBtn" text="Delete" />
                            </children>
                         </HBox>
                      </left>
