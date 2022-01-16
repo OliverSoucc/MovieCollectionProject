@@ -121,7 +121,7 @@ public class MainPageController implements Initializable {
 
         if(wasChecked == false)
         {
-            alertWindow();
+            //alertWindow();
         }
         wasChecked = true;
     }
