@@ -80,6 +80,7 @@
                            <children>
                               <Button mnemonicParsing="false" onAction="#createNewMovie" text="New" />
                               <Button fx:id="deleteMovieBtn" mnemonicParsing="false" text="Delete" />
+                               <Button mnemonicParsing="false" onAction="#handleDeleteMovieBtn" text="Delete" />
                               <Button mnemonicParsing="false" onAction="#createNewRating" text="Add Rating" />
                               <Button mnemonicParsing="false" text="Edit Rating" />
                            </children>

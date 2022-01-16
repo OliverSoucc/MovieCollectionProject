@@ -23,6 +23,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -35,7 +37,7 @@ public class MainPageController implements Initializable {
     @FXML
     public TableView<Movie> tableView;
     @FXML
-    public Button filterButton;
+    public Button filterButton, deleteMovieBtn;
     @FXML
     private TableView<Category> categoryTableView;
     @FXML
@@ -47,6 +49,7 @@ public class MainPageController implements Initializable {
 
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = new MainPageModel();
+
     }
 
     @Override
@@ -217,5 +220,11 @@ public class MainPageController implements Initializable {
 
             }
         }
+    }
+
+    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException {
+        mainPageModel.removeMovie(tableView.getSelectionModel().getSelectedItem());
+        tableView.getItems().remove(tableView.getSelectionModel().getSelectedIndex());
+        tableView.getSelectionModel().clearSelection();
     }
 }
