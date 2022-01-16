@@ -16,10 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -121,7 +118,7 @@ public class MainPageController implements Initializable {
 
         if(wasChecked == false)
         {
-            //alertWindow();
+            warningWindow();
         }
         wasChecked = true;
     }
@@ -204,13 +201,18 @@ public class MainPageController implements Initializable {
     }
 
 
-    public void alertWindow()
+    public void warningWindow()
     {
         for(int i = 0;i < tableView.getItems().size();i++) {
             float rating = tableView.getItems().get(i).getRating();
             if (rating < 6.0) {
-                showMessageDialog(null, "Remember to delete movies with personal rating under 6.0 and movies that have not been watched for over two years");
-                break;
+
+                    Alert alert;
+                    alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setContentText("Remember to delete movies with personal rating under 6.0 and movies that have not been watched for over two years.");
+                    alert.showAndWait();
+                    break;
+
             }
         }
     }
