@@ -200,7 +200,7 @@ public class MainPageController implements Initializable {
             String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
             Process p =  runtime.exec(command);}
             else {
-            String[] command2 = {"open -a /Applications/Utilities/Terminal.app " + tableView.getSelectionModel().getSelectedItem().getFileLink()};
+            String[] command2 = {"open -a /Applications/Utilities/Terminal.app ", tableView.getSelectionModel().getSelectedItem().getFileLink()};
             Process p = runtime.exec(command2);}
         } catch (IOException e) {
             e.printStackTrace();
