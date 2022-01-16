@@ -194,11 +194,14 @@ public class MainPageController implements Initializable {
 
     public void playMovie(ActionEvent actionEvent) {
         Runtime runtime = Runtime.getRuntime();
+        String os = System.getProperty("os.name");
         try {
+            if(os.contains("Windows")){
             String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
-            Process p =  runtime.exec(command);
+            Process p =  runtime.exec(command);}
+            else {
             String[] command2 = {"open -a /Applications/Utilities/Terminal.app " + tableView.getSelectionModel().getSelectedItem().getFileLink()};
-            Process chmod = runtime.exec(command2);
+            Process p = runtime.exec(command2);}
         } catch (IOException e) {
             e.printStackTrace();
         }
