@@ -38,6 +38,11 @@
                         </Button>
                      </children>
                   </HBox>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <Label fx:id="currentMovie" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
                </children>
             </VBox>
             <BorderPane>
@@ -63,7 +68,7 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" BorderPane.alignment="CENTER" />
                      </left>
                   </BorderPane>
-                  <TableView fx:id="tableView" minWidth="360.0" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+                  <TableView fx:id="tableView" minWidth="360.0" onMousePressed="#selectedMovie" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn fx:id="nameColumn" minWidth="90.0" prefWidth="-1.0" text="Name" />
                       <TableColumn fx:id="imdbRatingColumn" minWidth="90.0" prefWidth="-1.0" text="IMDB Rating" />

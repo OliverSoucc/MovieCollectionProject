@@ -47,7 +47,8 @@ public class MainPageController implements Initializable {
     private TableView<Movie> MovieListTableView;
     @FXML
     private TableColumn<Movie, String> nameMovieTableColumn;
-
+    @FXML
+    private Label currentMovie;
     MainPageModel mainPageModel;
     float newValueFloat;
     boolean wasChecked = false;
@@ -277,6 +278,10 @@ public class MainPageController implements Initializable {
         currentCategory = categoryMoviesToShow;
     }
 
+    public void selectedMovie(MouseEvent mouseEvent) {
+        if(tableView.getSelectionModel().getSelectedItem() != null)
+        currentMovie.setText(tableView.getSelectionModel().getSelectedItem().getName());
+    }
 }
 
 
