@@ -10,12 +10,24 @@ import BLL.MovieCollectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class MainPageModel {
     private final ObservableList<Movie> movieObservableList;
     private final ObservableList<Category> categoryObservableList;
     private final MovieCollectionFacade movieCollectionFacade;
+
+    private static MainPageModel single_instance = null;
+
+    // Static method
+    // Static method to create instance of Singleton class
+    public static MainPageModel getInstance() throws MovieCollectionManagerException {
+        if (single_instance == null)
+            single_instance = new MainPageModel();
+
+        return single_instance;
+    }
 
     public MainPageModel() throws MovieCollectionManagerException {
         movieObservableList = FXCollections.observableArrayList();
@@ -27,12 +39,13 @@ public class MainPageModel {
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
         movieObservableList.clear();
         List<Movie> newMovieList = movieCollectionFacade.getAllMovies();
-        movieObservableList.addAll(newMovieList);
+        movieObservableList.setAll(newMovieList);
         return movieObservableList;
     }
     public void createMovie(Movie movie) throws MovieDAOException {
         Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         movieCollectionFacade.createMovie(newMovie);
+        movieObservableList.add(newMovie);
     }
     public void removeMovie(Movie movie) throws MovieDAOException {
         movieCollectionFacade.deleteMovie(movie);
@@ -41,11 +54,12 @@ public class MainPageModel {
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
         categoryObservableList.clear();
         List<Category> newCategoryList = movieCollectionFacade.getAllCategories();
-        categoryObservableList.addAll(newCategoryList);
+        categoryObservableList.setAll(newCategoryList);
         return categoryObservableList;
     }
     public void createCategory(String name) throws CategoryDAOException {
         movieCollectionFacade.createCategory(name);
+        categoryObservableList.add(new Category(name)); // NEW
     }
     public void removeCategory(Category category) throws CategoryDAOException {
         movieCollectionFacade.deleteCategory(category);

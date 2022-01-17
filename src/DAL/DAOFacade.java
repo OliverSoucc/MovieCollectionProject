@@ -57,4 +57,29 @@ public class DAOFacade implements IDALMovieFacade{
         return movieDAO.getMovie(id);
     }
 
+    @Override
+    public List<Movie> getCategoryMovie(int id) throws Exception {
+        return catMovieDAO.getCategoryMovie(id);
+    }
+
+    @Override
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
+        catMovieDAO.addToCategory(selectedCategory, selectedMovie);
+    }
+
+    @Override
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
+        catMovieDAO.removeFromCategory(selectedCatagory, selectedMovie);
+    }
+
+    @Override
+    public void removeFromCat(Category selectedItem) throws Exception {
+        catMovieDAO.removeFromCat(selectedItem);
+    }
+
+    @Override
+    public void removeMoviesFromCat(Movie selectedItem) throws Exception {
+        catMovieDAO.removeMoviesFromCat(selectedItem);
+    }
+
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public class MovieCollectionManager implements MovieCollectionFacade {
     IDALMovieFacade idalMovieFacade;
 
+
     public MovieCollectionManager() throws MovieCollectionManagerException {
         try {
             idalMovieFacade = new DAOFacade();

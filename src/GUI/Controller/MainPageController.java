@@ -48,7 +48,7 @@ public class MainPageController implements Initializable {
     boolean wasChecked = false;
 
     public MainPageController() throws MovieCollectionManagerException {
-        mainPageModel = new MainPageModel();
+        mainPageModel = MainPageModel.getInstance();
 
     }
 
@@ -121,7 +121,8 @@ public class MainPageController implements Initializable {
 
         if(wasChecked == false)
         {
-            warningWindow();
+            //warningWindow();
+            System.out.println("not checked");
         }
         wasChecked = true;
     }
@@ -177,7 +178,9 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    private void updateTableView() throws MovieDAOException, CategoryDAOException {
+    public void updateTableView() throws MovieDAOException, CategoryDAOException {
+        //tableView.refresh();
+        //categoryTableView.refresh();
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
@@ -209,7 +212,7 @@ public class MainPageController implements Initializable {
     }
 
 
-    public void warningWindow()
+    /*public void warningWindow()
     {
         for(int i = 0;i < tableView.getItems().size();i++) {
             float rating = tableView.getItems().get(i).getRating();
@@ -223,7 +226,7 @@ public class MainPageController implements Initializable {
 
             }
         }
-    }
+    }*/
 
     public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException {
         mainPageModel.removeMovie(tableView.getSelectionModel().getSelectedItem());
@@ -235,5 +238,10 @@ public class MainPageController implements Initializable {
         mainPageModel.removeCategory(categoryTableView.getSelectionModel().getSelectedItem());
         categoryTableView.getItems().remove(categoryTableView.getSelectionModel().getSelectedIndex());
         categoryTableView.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void toCloseApp(ActionEvent event) {
+        System.exit(0);
     }
 }

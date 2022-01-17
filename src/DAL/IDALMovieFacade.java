@@ -17,4 +17,11 @@ public interface IDALMovieFacade {
     void deleteMovie(Movie movieToDelete) throws Exception;
     void updateMovie(Movie movie) throws Exception;
     Movie getMovie(int id) throws Exception;
+
+    public List<Movie> getCategoryMovie(int id) throws Exception;
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception;
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception;
+    public void removeFromCat(Category selectedItem) throws Exception;
+    public void removeMoviesFromCat(Movie selectedItem) throws Exception;
+
 }

@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Movie;
+import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
 import GUI.Model.MainPageModel;
@@ -26,10 +27,12 @@ public class AddRemoveMovieController {
     public AnchorPane anchorPane;
 
     MainPageModel mainPageModel;
+    MainPageController mainPageController;
 
 
     public AddRemoveMovieController() throws MovieCollectionManagerException {
-        mainPageModel = new MainPageModel();
+        mainPageModel = MainPageModel.getInstance();
+        mainPageController = new MainPageController();
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) throws MovieDAOException {
@@ -51,8 +54,24 @@ public class AddRemoveMovieController {
     }
 
 
-    // Choosing a movie from the finder
-    public void handleChooseFile1(ActionEvent actionEvent) {
+    //Handles choosing a file
+    public void handleChooseFile(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (!selectedFile.getAbsolutePath().equals("")) {
+            String filepath = selectedFile.getAbsolutePath();
+            fileTextField.setText(filepath);
+        }
+    } // TODO fix this
+
+    //Closes current window
+    private void closeWindow(Button button) {
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+    }
+
+    /*public void handleChooseFile1(ActionEvent actionEvent) {
         final DirectoryChooser directoryChooser = new DirectoryChooser();
 
         Stage stage = (Stage) anchorPane.getScene().getWindow();
@@ -64,20 +83,5 @@ public class AddRemoveMovieController {
             //System.out.println(file.getAbsolutePath());
         }
 
-    }
-
-    //Handles choosing a file
-    public void handleChooseFile(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
-        File selectedFile = fileChooser.showOpenDialog(null);
-        String filepath = selectedFile.getAbsolutePath();
-        fileTextField.setText(filepath);
-    }
-
-    //Closes current window
-    private void closeWindow(Button button) {
-        Stage stage = (Stage) button.getScene().getWindow();
-        stage.close();
-    }
+    }*/   // old method
 }

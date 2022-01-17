@@ -24,7 +24,7 @@ public class AddRemoveCategoryController {
     JFrame jFrame;
 
     public AddRemoveCategoryController() throws MovieCollectionManagerException {
-       mainPageModel = new MainPageModel();
+       mainPageModel = MainPageModel.getInstance();
     }
 
     public void handleSaveButton(ActionEvent event) throws CategoryDAOException {
