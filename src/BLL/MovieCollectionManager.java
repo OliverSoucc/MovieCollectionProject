@@ -94,4 +94,29 @@ public class MovieCollectionManager implements MovieCollectionFacade {
             throw new CategoryDAOException("Couldn't delete a category", e);
         }
     }
+
+    @Override
+    public List<Movie> getCategoryMovie(int id) throws Exception {
+        return idalMovieFacade.getCategoryMovie(id);
+    }
+
+    @Override
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
+        idalMovieFacade.addToCategory(selectedCategory, selectedMovie);
+    }
+
+    @Override
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
+        idalMovieFacade.removeFromCategory(selectedCatagory, selectedMovie);
+    }
+
+    @Override
+    public void removeFromCat(Category selectedItem) throws Exception {
+        idalMovieFacade.removeFromCat(selectedItem);
+    }
+
+    @Override
+    public void removeMoviesFromCat(Movie selectedItem) throws Exception {
+        idalMovieFacade.removeMoviesFromCat(selectedItem);
+    }
 }

@@ -64,4 +64,20 @@ public class MainPageModel {
     public void removeCategory(Category category) throws CategoryDAOException {
         movieCollectionFacade.deleteCategory(category);
     }
+
+    public List<Movie> getCategoryMovie(int id) throws Exception {
+        return movieCollectionFacade.getCategoryMovie(id);
+    }
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
+        movieCollectionFacade.addToCategory(selectedCategory, selectedMovie);
+    }
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
+        movieCollectionFacade.removeFromCategory(selectedCatagory, selectedMovie);
+    }
+    public void removeFromCat(Category selectedItem) throws Exception {
+        movieCollectionFacade.removeFromCat(selectedItem);
+    }
+    public void removeMoviesFromCat(Movie selectedItem) throws Exception {
+        movieCollectionFacade.removeMoviesFromCat(selectedItem);
+    } // these last 5 methods need to change exceptions
 }
