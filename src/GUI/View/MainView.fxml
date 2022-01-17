@@ -62,9 +62,6 @@
                      <left>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Movies" BorderPane.alignment="CENTER" />
                      </left>
-                     <right>
-                        <Button mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" BorderPane.alignment="CENTER" />
-                     </right>
                   </BorderPane>
                   <TableView fx:id="tableView" minWidth="360.0" GridPane.columnIndex="3" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
                     <columns>

@@ -52,6 +52,7 @@ public class MainPageController implements Initializable {
     float newValueFloat;
     boolean wasChecked = false;
     private ObservableList<Movie> catMoviesToShowList;
+    private Category currentCategory;
 
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = MainPageModel.getInstance();
@@ -71,7 +72,8 @@ public class MainPageController implements Initializable {
             e.printStackTrace();
         }
         try {
-            updateTableView();
+            updateTableViewMovie();
+            updateTableViewCategory();
         } catch (MovieDAOException | CategoryDAOException e) {
             e.printStackTrace();
         }
@@ -183,22 +185,23 @@ public class MainPageController implements Initializable {
         filterButton.setText("Search");
     }
 
-    public void updateTableView() throws MovieDAOException, CategoryDAOException {
-        //tableView.refresh();
-        //categoryTableView.refresh();
+    public void updateTableViewMovie() throws MovieDAOException, CategoryDAOException {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         tableView.setItems(mainPageModel.getMovieObservableList());
+    }
 
+    public void updateTableViewCategory() throws MovieDAOException, CategoryDAOException {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryTableView.setItems(mainPageModel.getAllCategories());
-
     }
 
-    public void handleRefresh(ActionEvent event) throws MovieDAOException, CategoryDAOException {
-        updateTableView();
+    public void updateTableViewCatMovies() throws MovieDAOException, CategoryDAOException {
+        nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        MovieListTableView.setItems(catMoviesToShowList);
     }
+
 
     public void playMovie(ActionEvent actionEvent) {
         Runtime runtime = Runtime.getRuntime();
@@ -216,20 +219,31 @@ public class MainPageController implements Initializable {
 
     }
 
-    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException, Exception {
+    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException, Exception, CategoryDAOException {
         Movie movieToDelete = tableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeMoviesFromCat(movieToDelete);
         mainPageModel.removeMovie(movieToDelete);
-        //tableView.getItems().remove(tableView.getSelectionModel().getSelectedIndex());
-        //tableView.getSelectionModel().clearSelection();
+        updateTableViewMovie();
     }
 
     public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException, Exception {
         Category categoryToDelete = categoryTableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeFromCat(categoryToDelete);
         mainPageModel.removeCategory(categoryToDelete);
-        //categoryTableView.getItems().remove(categoryTableView.getSelectionModel().getSelectedIndex());
-        //categoryTableView.getSelectionModel().clearSelection();
+        setupCategoryTableView();
+
+
+        try {
+            updateTableViewMovie();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
+        setupCategoryTableView();
+        try {
+            updateTableViewCatMovies();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -238,17 +252,19 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void handleRemoveMovieFromCategory(ActionEvent event) throws Exception {
-        Movie movietoDelete = tableView.getSelectionModel().getSelectedItem();
-        Category categoryToBeDeleted = categoryTableView.getSelectionModel().getSelectedItem();
-        mainPageModel.removeFromCategory(categoryToBeDeleted, movietoDelete);
-        System.out.println("after delete: " + categoryToBeDeleted.getAllMoviesInCategory().size());
+    void handleRemoveMovieFromCategory(ActionEvent event) throws Exception, CategoryDAOException, MovieDAOException {
+        Movie movietoDelete = MovieListTableView.getSelectionModel().getSelectedItem();
+        mainPageModel.removeFromCategory(currentCategory, movietoDelete);
+        //updateTableViewCatMovies();
+        catMoviesToShowList.remove(movietoDelete);
     }
+
     @FXML
     void handleAddMovieToCategory(ActionEvent event) throws Exception {
         Movie movietoAdd = tableView.getSelectionModel().getSelectedItem();
         Category categoryToBeAdded = categoryTableView.getSelectionModel().getSelectedItem();
         mainPageModel.addToCategory(categoryToBeAdded, movietoAdd);
+        catMoviesToShowList.add(movietoAdd);
     }
 
     @FXML
@@ -256,9 +272,9 @@ public class MainPageController implements Initializable {
         Category categoryMoviesToShow = categoryTableView.getSelectionModel().getSelectedItem();
         catMoviesToShowList = FXCollections.observableArrayList();
         catMoviesToShowList.setAll(categoryMoviesToShow.getAllMoviesInCategory());
-    //MovieListTableView   nameMovieTableColumn
         nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         MovieListTableView.setItems(catMoviesToShowList);
+        currentCategory = categoryMoviesToShow;
     }
 
 }
