@@ -44,13 +44,14 @@ public class MainPageController implements Initializable {
     @FXML
     TableColumn<Category, String> categoryColumn;
     @FXML
-    private TableView<?> MovieListTableView;
+    private TableView<Movie> MovieListTableView;
     @FXML
-    private TableColumn<?, ?> nameMovieTableColumn;
+    private TableColumn<Movie, String> nameMovieTableColumn;
 
     MainPageModel mainPageModel;
     float newValueFloat;
     boolean wasChecked = false;
+    private ObservableList<Movie> catMoviesToShowList;
 
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = MainPageModel.getInstance();
@@ -252,7 +253,12 @@ public class MainPageController implements Initializable {
 
     @FXML
     void handleShowMoviesInCategory(MouseEvent event) {
-
+        Category categoryMoviesToShow = categoryTableView.getSelectionModel().getSelectedItem();
+        catMoviesToShowList = FXCollections.observableArrayList();
+        catMoviesToShowList.setAll(categoryMoviesToShow.getAllMoviesInCategory());
+    //MovieListTableView   nameMovieTableColumn
+        nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        MovieListTableView.setItems(catMoviesToShowList);
     }
 
 }
