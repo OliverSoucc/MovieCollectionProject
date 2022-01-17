@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,6 +43,10 @@ public class MainPageController implements Initializable {
     private TableView<Category> categoryTableView;
     @FXML
     TableColumn<Category, String> categoryColumn;
+    @FXML
+    private TableView<?> MovieListTableView;
+    @FXML
+    private TableColumn<?, ?> nameMovieTableColumn;
 
     MainPageModel mainPageModel;
     float newValueFloat;
@@ -131,7 +136,6 @@ public class MainPageController implements Initializable {
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         categoryTableView.setItems(mainPageModel.getAllCategories());
     }
-    // int id, String name, float rating, String fileLink, int lastView, String category1, String category2, String category3
 
 
     private void filterLogic() throws MovieDAOException {
@@ -211,6 +215,49 @@ public class MainPageController implements Initializable {
 
     }
 
+    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException, Exception {
+        Movie movieToDelete = tableView.getSelectionModel().getSelectedItem();
+        mainPageModel.removeMoviesFromCat(movieToDelete);
+        mainPageModel.removeMovie(movieToDelete);
+        //tableView.getItems().remove(tableView.getSelectionModel().getSelectedIndex());
+        //tableView.getSelectionModel().clearSelection();
+    }
+
+    public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException, Exception {
+        Category categoryToDelete = categoryTableView.getSelectionModel().getSelectedItem();
+        mainPageModel.removeFromCat(categoryToDelete);
+        mainPageModel.removeCategory(categoryToDelete);
+        //categoryTableView.getItems().remove(categoryTableView.getSelectionModel().getSelectedIndex());
+        //categoryTableView.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    void toCloseApp(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void handleRemoveMovieFromCategory(ActionEvent event) throws Exception {
+        Movie movietoDelete = tableView.getSelectionModel().getSelectedItem();
+        Category categoryToBeDeleted = categoryTableView.getSelectionModel().getSelectedItem();
+        mainPageModel.removeFromCategory(categoryToBeDeleted, movietoDelete);
+        System.out.println("after delete: " + categoryToBeDeleted.getAllMoviesInCategory().size());
+    }
+    @FXML
+    void handleAddMovieToCategory(ActionEvent event) throws Exception {
+        Movie movietoAdd = tableView.getSelectionModel().getSelectedItem();
+        Category categoryToBeAdded = categoryTableView.getSelectionModel().getSelectedItem();
+        mainPageModel.addToCategory(categoryToBeAdded, movietoAdd);
+    }
+
+    @FXML
+    void handleShowMoviesInCategory(MouseEvent event) {
+
+    }
+
+}
+
+
 
     /*public void warningWindow()
     {
@@ -227,21 +274,3 @@ public class MainPageController implements Initializable {
             }
         }
     }*/
-
-    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException {
-        mainPageModel.removeMovie(tableView.getSelectionModel().getSelectedItem());
-        tableView.getItems().remove(tableView.getSelectionModel().getSelectedIndex());
-        tableView.getSelectionModel().clearSelection();
-    }
-
-    public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException {
-        mainPageModel.removeCategory(categoryTableView.getSelectionModel().getSelectedItem());
-        categoryTableView.getItems().remove(categoryTableView.getSelectionModel().getSelectedIndex());
-        categoryTableView.getSelectionModel().clearSelection();
-    }
-
-    @FXML
-    void toCloseApp(ActionEvent event) {
-        System.exit(0);
-    }
-}

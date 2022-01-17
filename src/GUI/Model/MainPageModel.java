@@ -52,7 +52,6 @@ public class MainPageModel {
     }
     //Category methods
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
-        categoryObservableList.clear();
         List<Category> newCategoryList = movieCollectionFacade.getAllCategories();
         categoryObservableList.setAll(newCategoryList);
         return categoryObservableList;
@@ -64,7 +63,7 @@ public class MainPageModel {
     public void removeCategory(Category category) throws CategoryDAOException {
         movieCollectionFacade.deleteCategory(category);
     }
-
+// CatMovie methods
     public List<Movie> getCategoryMovie(int id) throws Exception {
         return movieCollectionFacade.getCategoryMovie(id);
     }

@@ -61,7 +61,7 @@ public class CatMovieDAO implements CatMovieIDAO {
             preparedStmt.setInt(2, selectedMovie.getId());
             preparedStmt.execute();
         }
-    }
+    } // when I remove the exact connection of movie and category
 
     public void removeFromCat(Category selectedItem) throws Exception {
         try (Connection con = DBconnector.getConnection()) {
@@ -70,7 +70,7 @@ public class CatMovieDAO implements CatMovieIDAO {
             preparedStmt.setInt(1, selectedItem.getId());
             preparedStmt.execute();
         }
-    }
+    } // when I remove the category at all
 
     public void removeMoviesFromCat(Movie selectedItem) throws Exception {
         try (Connection con = DBconnector.getConnection()) {
@@ -79,5 +79,5 @@ public class CatMovieDAO implements CatMovieIDAO {
             preparedStmt.setInt(1, selectedItem.getId());
             preparedStmt.execute();
         }
-    }
+    } // when I remove the movie at all
 }

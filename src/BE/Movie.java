@@ -51,4 +51,9 @@ public class Movie {
     public float getImdb() {return imdb;}
 
     public void setImdb(float imdb) {this.imdb = imdb;}
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
