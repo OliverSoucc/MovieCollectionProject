@@ -59,11 +59,11 @@ public class AddRemoveMovieController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        if (!selectedFile.getAbsolutePath().equals("")) {
+        if (selectedFile != null) {
             String filepath = selectedFile.getAbsolutePath();
             fileTextField.setText(filepath);
         }
-    } // TODO fix this
+    }
 
     //Closes current window
     private void closeWindow(Button button) {
