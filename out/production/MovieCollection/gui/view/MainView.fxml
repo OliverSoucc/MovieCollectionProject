@@ -40,7 +40,7 @@
                   </HBox>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <Label fx:id="currentMovie" text="Label" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+                        <Label fx:id="currentMovie" text="Movie.." textAlignment="CENTER" BorderPane.alignment="CENTER" />
                      </center>
                   </BorderPane>
                </children>
@@ -93,7 +93,7 @@
                         </HBox>
                      </left>
                   </BorderPane>
-                  <TableView fx:id="MovieListTableView" fixedCellSize="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TableView fx:id="MovieListTableView" fixedCellSize="0.0" onMousePressed="#selectedMovie1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn fx:id="nameMovieTableColumn" minWidth="150.0" prefWidth="267.50001525878906" text="Name of the movie" />
                     </columns>
