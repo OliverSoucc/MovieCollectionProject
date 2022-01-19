@@ -50,7 +50,7 @@ public class Movie {
 
     public float getImdb() {return imdb;}
 
-    public void setImdb(float imdb) {this.imdb = imdb;}
+    public void setRating(float rating) {this.rating = rating;}
 
     @Override
     public String toString() {

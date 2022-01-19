@@ -1,5 +1,6 @@
 package GUI.Controller;
 
+import BE.Movie;
 import BLL.Exceptions.MovieCollectionManagerException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,13 +17,14 @@ public class AddChangeRatingController {
     private TextField ratingTextField;
 
     MainPageController mainPageController;
+    Movie movie;
 
-    public AddChangeRatingController() {
-        try {
-            mainPageController = new MainPageController();
-        } catch (MovieCollectionManagerException e) {
-            e.printStackTrace();
-        }
+    public void setMainPageController(MainPageController mainPageController){
+        this.mainPageController = mainPageController;
+    }
+    public void setMovieToBeUpdated(Movie movie) {
+        this.movie = movie;
+        ratingTextField.setText(String.valueOf(movie.getRating()));
     }
 
     public void isCanceled(ActionEvent event) {
@@ -37,7 +39,10 @@ public class AddChangeRatingController {
     }
 
     public void isSaved(ActionEvent event) {
-        float rating = mainPageController.tableView.getSelectionModel().getSelectedItem().getRating();
-        ratingTextField.setText(String.valueOf(rating));
+       if (ratingTextField.getText() == null || ratingTextField.getText().equals("")){
+           System.out.println("Enter a valid name");
+       } else {
+           movie.setRating(Float.parseFloat(ratingTextField.getText().trim()));
+       }
     }
 }

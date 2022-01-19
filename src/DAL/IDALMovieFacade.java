@@ -24,4 +24,6 @@ public interface IDALMovieFacade {
     public void removeFromCat(Category selectedItem) throws Exception;
     public void removeMoviesFromCat(Movie selectedItem) throws Exception;
 
+    void updateRating()
+
 }
