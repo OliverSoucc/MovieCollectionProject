@@ -67,23 +67,23 @@ public class MainPageController implements Initializable {
         try {
             tableViewProperty();
         } catch (MovieDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
         try {
             setupCategoryTableView();
         } catch (CategoryDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
         try {
             updateTableViewMovie();
             updateTableViewCategory();
         } catch (MovieDAOException | CategoryDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
         try {
             filterLogic();
         } catch (MovieDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
     }
 
@@ -235,7 +235,7 @@ public class MainPageController implements Initializable {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
 
     }
@@ -257,13 +257,13 @@ public class MainPageController implements Initializable {
         try {
             updateTableViewMovie();
         } catch (MovieDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
         setupCategoryTableView();
         try {
             updateTableViewCatMovies();
         } catch (MovieDAOException e) {
-            e.printStackTrace();
+            displayError(e);
         }
     }
 
@@ -315,6 +315,13 @@ public class MainPageController implements Initializable {
             currentMovie.setText(MovieListTableView.getSelectionModel().getSelectedItem().getName());
         if(tableView.getSelectionModel().getSelectedItem() != null)
             tableView.getSelectionModel().clearSelection();
+    }
+    private void displayError(Throwable t)
+    {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Something went wrong...");
+        alert.setHeaderText(t.getMessage());
+        alert.showAndWait();
     }
 }
 
