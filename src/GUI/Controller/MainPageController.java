@@ -9,6 +9,7 @@ import GUI.Model.MainPageModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -165,7 +166,9 @@ public class MainPageController implements Initializable {
                 return false;
             });
         });
-        tableView.setItems(filteredData);
+        SortedList<Movie> sortedData = new SortedList<>(filteredData);
+        sortedData.comparatorProperty().bind(tableView.comparatorProperty());
+        tableView.setItems(sortedData);
     }
 
     private static boolean isNumeric(String str) {
