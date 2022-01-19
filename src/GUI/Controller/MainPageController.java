@@ -319,7 +319,7 @@ public class MainPageController implements Initializable {
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Something went wrong...");
+        alert.setTitle("Error");
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
     }
