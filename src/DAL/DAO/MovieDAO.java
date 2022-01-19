@@ -90,18 +90,16 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public Movie updateMovieRating(Movie movieToUpdate, String name, float newRating, String fileLink, int lastView, float imdb) throws Exception {
+    public void updateMovieRating(Movie movie) throws Exception {
         String sql = "UPDATE Movie SET Rating = ? WHERE Id = ? ";
         Movie newMovie;
         try (Connection connection = DBconnector.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setFloat(1, newRating);
-            statement.setInt(2, movieToUpdate.getId());
+            statement.setFloat(1, movie.getRating());
+            statement.setInt(2, movie.getId());
             statement.executeUpdate();
-            newMovie = new Movie(movieToUpdate.getId(), name, newRating, fileLink, lastView, imdb);
         }
-        return newMovie;
-    } // returns an updated movie with new personal rating
+    }
 
     private int getNextId() throws Exception {
         int newestID = -1;
