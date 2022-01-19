@@ -11,7 +11,7 @@ import BLL.MovieCollectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 
 public class MainPageModel {
@@ -42,7 +42,7 @@ public class MainPageModel {
 
 
 //public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException
-    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException {
+    public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws MovieDAOException {
         //Movie newMovie = new Movie( , movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         Movie newMovieToCreate = movieCollectionFacade.createMovie(name, rating, fileLink, lastView, imdb);
         //movieObservableList.add(newMovie);
@@ -60,6 +60,9 @@ public class MainPageModel {
 
     public void updateRating(Movie movie) throws MovieDAOException {
         movieCollectionFacade.updateMovieRating(movie);
+    }
+    public void updateMovieLastView(Movie selectedItem) throws MovieDAOException {
+       movieCollectionFacade.updateMovieLastView(selectedItem);
     }
     public Movie getMovie(int movieId) throws MovieDAOException {
         return movieCollectionFacade.getMovie(movieId);

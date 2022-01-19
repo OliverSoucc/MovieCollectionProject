@@ -31,7 +31,7 @@ public class MovieDAO implements MovieIDAO {
                 String name = resultSet.getString("Name");
                 float rating = resultSet.getFloat("Rating");
                 String fileLink = resultSet.getString("FileLink");
-                int lastView = resultSet.getInt("LastView");
+                java.sql.Date lastView = resultSet.getDate("LastView");
                 float imdb = resultSet.getFloat("Imdb");
                 Movie movie = new Movie(id, name, rating, fileLink, lastView, imdb);
 
@@ -42,7 +42,7 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception{
+    public Movie createMovie(String name, float rating, String fileLink, java.sql.Date lastView, float imdb) throws Exception{
 
         try (Connection connection = DBconnector.getConnection()){
             String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?)";
@@ -50,7 +50,7 @@ public class MovieDAO implements MovieIDAO {
             preparedStatement.setString(1, name);
             preparedStatement.setFloat(2, rating);
             preparedStatement.setString(3, fileLink);
-            preparedStatement.setInt(4, lastView);
+            preparedStatement.setDate(4, lastView);
             preparedStatement.setFloat(5, imdb);
             preparedStatement.execute();
 
@@ -83,7 +83,7 @@ public class MovieDAO implements MovieIDAO {
                 String name = resultSet.getString("Name");
                 float rating = resultSet.getFloat("Rating");
                 String fileLink = resultSet.getString("FileLink");
-                int lastView = resultSet.getInt("LastView");
+                java.sql.Date lastView = resultSet.getDate("LastView");
                 float imdb = resultSet.getFloat("Imdb");
                 movie = new Movie(id, name, rating, fileLink, lastView, imdb);
             }
@@ -99,6 +99,20 @@ public class MovieDAO implements MovieIDAO {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setFloat(1, movie.getRating());
             statement.setInt(2, movie.getId());
+            statement.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updateMovieLastView(Movie selectedItem) throws Exception {
+        java.util.Date utilStartDate = new Date();
+        java.sql.Date date = new java.sql.Date(utilStartDate.getTime());
+        String sql = "UPDATE Movie SET LastView = ? WHERE Id = ? ";
+        Movie newMovie;
+        try (Connection connection = DBconnector.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setDate(1, date);
+            statement.setInt(2, selectedItem.getId());
             statement.executeUpdate();
         }
     }
@@ -120,18 +134,4 @@ public class MovieDAO implements MovieIDAO {
         }
     }
 
-    public Movie updateMovieDate(Movie movie) throws Exception {
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        String sql = "UPDATE Movie set LastView = ? WHERE id = ?";
-
-        try (Connection con = DBconnector.getConnection()) {
-            PreparedStatement preparedStmt = con.prepareStatement(sql);
-            preparedStmt.setDate(1, sqlDate);
-            preparedStmt.setInt(2, movie.getId());
-            preparedStmt.executeUpdate();
-            Movie movietoUpdate = new Movie(movie.getId(), movie.getName(), movie.getRating(), movie.getFileLink(), date, movie.getImdb());
-            return movietoUpdate;
-        }
-    }
 }

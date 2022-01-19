@@ -17,6 +17,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 
 public class AddRemoveMovieController {
     @FXML
@@ -25,7 +28,6 @@ public class AddRemoveMovieController {
     public TextField titleTextField, ratingTextField, fileTextField, imdbRating;
     @FXML
     public AnchorPane anchorPane;
-
     MainPageModel mainPageModel;
     MainPageController mainPageController;
 
@@ -36,7 +38,7 @@ public class AddRemoveMovieController {
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) throws MovieDAOException {
-        Movie movie = mainPageModel.createMovie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), 0, Float.parseFloat(imdbRating.getText()));
+        Movie movie = mainPageModel.createMovie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), new Date(0), Float.parseFloat(imdbRating.getText()));
         System.out.println(mainPageModel.getMovieObservableList());
         closeWindow(saveBtn);
     }

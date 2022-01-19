@@ -7,6 +7,7 @@ import DAL.DAO.CatMovieDAO;
 import DAL.DAO.CategoryDAO;
 import DAL.DAO.MovieDAO;
 
+import java.sql.Date;
 import java.util.List;
 
 public class DAOFacade implements IDALMovieFacade{
@@ -37,7 +38,7 @@ public class DAOFacade implements IDALMovieFacade{
         return movieDAO.getAllMovies();
     }
 
-    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception {
+    public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws Exception {
         return movieDAO.createMovie(name, rating, fileLink, lastView, imdb);
     }
 
@@ -52,6 +53,11 @@ public class DAOFacade implements IDALMovieFacade{
 
     public void updateMovieRating(Movie movie) throws Exception {
         movieDAO.updateMovieRating(movie);
+    }
+
+    @Override
+    public void updateMovieLastView(Movie selectedItem) throws Exception {
+        movieDAO.updateMovieLastView(selectedItem);
     }
 
     public Movie getMovie(int id) throws Exception {

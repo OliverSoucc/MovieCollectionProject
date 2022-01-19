@@ -33,7 +33,7 @@ public class CatMovieDAO implements CatMovieIDAO {
             ResultSet rs = preparedStmt.executeQuery();
             while (rs.next()) {
                 Movie movie = new Movie(rs.getInt("Id"), rs.getString("Name"), rs.getFloat("Rating"),
-                        rs.getString("FileLink"), rs.getInt("LastView"), rs.getInt("Imdb"));
+                        rs.getString("FileLink"), rs.getDate("LastView"), rs.getInt("Imdb"));
                 newMovieList.add(movie); //adds movies to a movie array
             }
             return newMovieList;

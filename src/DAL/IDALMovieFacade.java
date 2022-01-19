@@ -5,6 +5,7 @@ import BE.Category;
 import BE.Movie;
 import BLL.Exceptions.CategoryDAOException;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface IDALMovieFacade {
@@ -13,7 +14,7 @@ public interface IDALMovieFacade {
     Category createCategory(String categoryName) throws Exception;
     void deleteCategory(Category categoryToDelete) throws Exception;
     List<Movie> getAllMovies() throws Exception;
-    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception;
+    public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws Exception;
     void deleteMovie(Movie movieToDelete) throws Exception;
     void updateMovie(Movie movie) throws Exception;
     Movie getMovie(int id) throws Exception;
@@ -25,5 +26,5 @@ public interface IDALMovieFacade {
     public void removeMoviesFromCat(Movie selectedItem) throws Exception;
 
     void updateMovieRating(Movie movie) throws Exception;
-
+    void updateMovieLastView(Movie selectedItem)throws Exception;
 }

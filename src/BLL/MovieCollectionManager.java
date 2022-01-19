@@ -9,6 +9,7 @@ import BLL.Exceptions.MovieDAOException;
 import DAL.DAOFacade;
 import DAL.IDALMovieFacade;
 
+import java.sql.Date;
 import java.util.List;
 
 public class MovieCollectionManager implements MovieCollectionFacade {
@@ -24,7 +25,7 @@ public class MovieCollectionManager implements MovieCollectionFacade {
     }
 
     @Override
-    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException {
+    public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws MovieDAOException {
         try {
             return idalMovieFacade.createMovie(name, rating, fileLink, lastView, imdb);
         } catch (Exception e) {
@@ -147,6 +148,15 @@ public class MovieCollectionManager implements MovieCollectionFacade {
             idalMovieFacade.removeMoviesFromCat(selectedItem);
         } catch (Exception e) {
             throw new CatMovieDAOException("Could not remove movie from CatMovie, when deleting whole movie",e);
+        }
+    }
+
+    @Override
+    public void updateMovieLastView(Movie selectedItem) throws MovieDAOException {
+        try {
+            idalMovieFacade.updateMovieLastView(selectedItem);
+        } catch (Exception e) {
+            throw new MovieDAOException("Couldn't update LastView", e);
         }
     }
 }

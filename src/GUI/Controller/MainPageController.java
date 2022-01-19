@@ -34,7 +34,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 public class MainPageController implements Initializable {
     @FXML
-    public TableColumn<Movie, String> nameColumn, ratingColumn, imdbRatingColumn;
+    public TableColumn<Movie, String> nameColumn, ratingColumn, imdbRatingColumn, lastViewColumn;
     @FXML
     public TextField filter;
     @FXML
@@ -133,6 +133,9 @@ public class MainPageController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
+        lastViewColumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
+        if(lastViewColumn.getText() == "0")
+            lastViewColumn.setText("");
         tableView.setItems(mainPageModel.getMovieObservableList());
 
         if(wasChecked == false)
@@ -199,6 +202,7 @@ public class MainPageController implements Initializable {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
+        lastViewColumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
         tableView.setItems(mainPageModel.getMovieObservableList());
     }
 
@@ -220,22 +224,33 @@ public class MainPageController implements Initializable {
             if(os.contains("Windows")) {
                 if (tableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
-                    Process p = runtime.exec(command);}
+                    Process p = runtime.exec(command);
+                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());}
                 else if (MovieListTableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command = {"cmd.exe", "/k", "Start", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
-                    Process p = runtime.exec(command);}
+                    Process p = runtime.exec(command);
+                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());}
             }
             else {
                 if(tableView.getSelectionModel().getSelectedItem() != null){
             String[] command2 = {"open -a /Applications/Utilities/Terminal.app", tableView.getSelectionModel().getSelectedItem().getFileLink()};
-            Process p = runtime.exec(command2);}
+            Process p = runtime.exec(command2);
+                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());}
             else if(MovieListTableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command2 = {"open -a /Applications/Utilities/Terminal.app", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
-                    Process p = runtime.exec(command2);}
+                    Process p = runtime.exec(command2);
+                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());}
             }
+        updateTableViewMovie();
 
         } catch (IOException e) {
             displayError(e);
+            e.printStackTrace();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        } catch (CategoryDAOException e) {
+            e.printStackTrace();
+
         }
 
     }
@@ -316,12 +331,15 @@ public class MainPageController implements Initializable {
         if(tableView.getSelectionModel().getSelectedItem() != null)
             tableView.getSelectionModel().clearSelection();
     }
+
     private void displayError(Throwable t)
     {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
+
+   
     }
 }
 

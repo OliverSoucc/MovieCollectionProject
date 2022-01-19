@@ -73,7 +73,7 @@
                       <TableColumn fx:id="nameColumn" minWidth="90.0" prefWidth="-1.0" text="Name" />
                       <TableColumn fx:id="imdbRatingColumn" minWidth="90.0" prefWidth="-1.0" text="IMDB Rating" />
                         <TableColumn fx:id="ratingColumn" minWidth="90.0" prefWidth="-1.0" text="User rating" />
-                        <TableColumn minWidth="90.0" prefWidth="-1.0" text="Last viewed" />
+                        <TableColumn fx:id="lastViewColumn" minWidth="90.0" prefWidth="-1.0" text="Last viewed" />
                     </columns>
                   </TableView>
                   <BorderPane GridPane.columnIndex="2" GridPane.rowIndex="1">
