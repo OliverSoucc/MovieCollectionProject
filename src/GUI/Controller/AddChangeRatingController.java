@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Movie;
+import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
 import GUI.Model.MainPageModel;
@@ -42,7 +43,7 @@ public class AddChangeRatingController {
         }
     }
 
-    public void isSaved(ActionEvent event) throws MovieDAOException {
+    public void isSaved(ActionEvent event) throws MovieDAOException, CategoryDAOException {
        if (ratingTextField.getText() == null || ratingTextField.getText().equals("")){
            System.out.println("Enter a valid name");
        } else {
@@ -53,6 +54,7 @@ public class AddChangeRatingController {
            alert.setHeaderText("Do you want to close this window?");
 
            if (alert.showAndWait().get() == ButtonType.OK) {
+               mainPageController.updateTableViewMovie();
                Stage stage = (Stage) saveButton.getScene().getWindow();
                stage.close();
            }
