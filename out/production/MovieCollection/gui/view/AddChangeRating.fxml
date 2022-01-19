@@ -41,7 +41,7 @@
                   <HBox spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#isCanceled" text="Cancel" />
-                        <Button mnemonicParsing="false" onAction="#isSaved" text="Save" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#isSaved" text="Save" />
                      </children>
                   </HBox>
                </right>

@@ -96,6 +96,15 @@ public class MovieCollectionManager implements MovieCollectionFacade {
     }
 
     @Override
+    public void updateMovieRating(Movie movie) throws MovieDAOException {
+        try {
+            idalMovieFacade.updateMovieRating(movie);
+        } catch (Exception e) {
+            throw new MovieDAOException("Couldn't update rating", e);
+        }
+    }
+
+    @Override
     public List<Movie> getCategoryMovie(int id) throws Exception {
         return idalMovieFacade.getCategoryMovie(id);
     }

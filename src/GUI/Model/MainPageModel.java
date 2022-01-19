@@ -98,5 +98,10 @@ public class MainPageModel {
     public void removeMoviesFromCat(Movie selectedItem) throws Exception {
         movieCollectionFacade.removeMoviesFromCat(selectedItem);
     } // when I remove the movie at all
-
+    public void updateRating(Movie movie) throws MovieDAOException {
+        movieCollectionFacade.updateMovieRating(movie);
+    }
+    public Movie getMovie(int movieId) throws MovieDAOException {
+        return movieCollectionFacade.getMovie(movieId);
+    }
 }

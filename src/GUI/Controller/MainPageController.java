@@ -55,7 +55,7 @@ public class MainPageController implements Initializable {
     boolean wasChecked = false;
     private ObservableList<Movie> catMoviesToShowList;
     private Category currentCategory;
-
+    private int currentMovieInt = -1;
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = MainPageModel.getInstance();
 
@@ -111,7 +111,7 @@ public class MainPageController implements Initializable {
         stage.show();
     }
 
-    public void createNewRating(ActionEvent actionEvent) throws IOException {
+    public void createNewRating(ActionEvent actionEvent) throws IOException, MovieDAOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/GUI/View/AddChangeRating.fxml"));
@@ -120,6 +120,11 @@ public class MainPageController implements Initializable {
         stage.setTitle("Add/Change Rating");
         stage.setScene(new Scene(root));
         stage.show();
+        AddChangeRatingController addChangeRatingController = loader.getController();
+        addChangeRatingController.setMainPageController(this);
+
+        currentMovieInt = tableView.getSelectionModel().getSelectedItem().getId();
+        addChangeRatingController.setMovieToBeUpdated(mainPageModel.getMovie(currentMovieInt));
     }
 
 

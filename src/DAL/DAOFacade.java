@@ -50,8 +50,8 @@ public class DAOFacade implements IDALMovieFacade{
 
     }
 
-    public void updateMovie(Movie movie, float newRating) throws Exception {
-        movieDAO.updateMovieRating(movie, newRating);
+    public void updateMovieRating(Movie movie) throws Exception {
+        movieDAO.updateMovieRating(movie);
     }
 
     public Movie getMovie(int id) throws Exception {
