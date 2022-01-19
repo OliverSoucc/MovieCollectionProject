@@ -17,7 +17,7 @@ public class DatabaseConnector {
         dataSource.setPortNumber(1433);
     }
 
-    public Connection getConnection() throws SQLServerException {
+    public Connection getConnection() throws Exception {
         return dataSource.getConnection();
     }
 

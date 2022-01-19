@@ -2,6 +2,7 @@ package BLL;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CatMovieDAOException;
 import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
@@ -103,29 +104,49 @@ public class MovieCollectionManager implements MovieCollectionFacade {
             throw new MovieDAOException("Couldn't update rating", e);
         }
     }
-
+/////////
     @Override
-    public List<Movie> getCategoryMovie(int id) throws Exception {
-        return idalMovieFacade.getCategoryMovie(id);
+    public List<Movie> getCategoryMovie(int id) throws CatMovieDAOException {
+        try {
+            return idalMovieFacade.getCategoryMovie(id);
+        } catch (Exception e) {
+            throw new CatMovieDAOException("Could not get all category movie (CatMovie)",e);
+        }
     }
 
     @Override
-    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
-        idalMovieFacade.addToCategory(selectedCategory, selectedMovie);
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws CatMovieDAOException {
+        try {
+            idalMovieFacade.addToCategory(selectedCategory, selectedMovie);
+        } catch (Exception e) {
+            throw new CatMovieDAOException("Could not add movie to category (CatMovie)",e);
+        }
     }
 
     @Override
-    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
-        idalMovieFacade.removeFromCategory(selectedCatagory, selectedMovie);
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws CatMovieDAOException {
+        try {
+            idalMovieFacade.removeFromCategory(selectedCatagory, selectedMovie);
+        } catch (Exception e) {
+            throw new CatMovieDAOException("Could not remove movie from category (CatMovie)",e);
+        }
     }
 
     @Override
-    public void removeFromCat(Category selectedItem) throws Exception {
-        idalMovieFacade.removeFromCat(selectedItem);
+    public void removeFromCat(Category selectedItem) throws CatMovieDAOException {
+        try {
+            idalMovieFacade.removeFromCat(selectedItem);
+        } catch (Exception e) {
+            throw new CatMovieDAOException("Could not remove category from CatMovie, when deleting whole category",e);
+        }
     }
 
     @Override
-    public void removeMoviesFromCat(Movie selectedItem) throws Exception {
-        idalMovieFacade.removeMoviesFromCat(selectedItem);
+    public void removeMoviesFromCat(Movie selectedItem) throws CatMovieDAOException {
+        try {
+            idalMovieFacade.removeMoviesFromCat(selectedItem);
+        } catch (Exception e) {
+            throw new CatMovieDAOException("Could not remove movie from CatMovie, when deleting whole movie",e);
+        }
     }
 }

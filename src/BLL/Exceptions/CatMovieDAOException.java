@@ -1,9 +1,9 @@
 package BLL.Exceptions;
 
-public class CatMovieException extends Throwable{
-    private String message;
+public class CatMovieDAOException extends Throwable{
+    String message;
 
-    public CatMovieException(String message, Exception e){
+    public CatMovieDAOException(String message, Exception e) {
         this.message = message;
         e.printStackTrace();
     }

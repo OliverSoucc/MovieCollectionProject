@@ -2,6 +2,7 @@ package GUI.Model;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CatMovieDAOException;
 import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
@@ -56,6 +57,13 @@ public class MainPageModel {
         movieCollectionFacade.deleteMovie(movie);
         movieObservableList.remove(movie);
     }
+
+    public void updateRating(Movie movie) throws MovieDAOException {
+        movieCollectionFacade.updateMovieRating(movie);
+    }
+    public Movie getMovie(int movieId) throws MovieDAOException {
+        return movieCollectionFacade.getMovie(movieId);
+    }
     //Category methods
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
         categoryObservableList = FXCollections.observableArrayList();
@@ -74,34 +82,28 @@ public class MainPageModel {
         categoryObservableList.remove(category);
     }
 // CatMovie methods
-    public List<Movie> getCategoryMovie(int id) throws Exception {
+    public List<Movie> getCategoryMovie(int id) throws CatMovieDAOException {
         return movieCollectionFacade.getCategoryMovie(id);
     }
-    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws CatMovieDAOException {
         movieCollectionFacade.addToCategory(selectedCategory, selectedMovie);
         List<Movie> movieList = selectedCategory.getAllMoviesInCategory();
         movieList.add(selectedMovie);
         selectedCategory.setAllMoviesInCategory(movieList);
     }
 
-    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws CatMovieDAOException {
         movieCollectionFacade.removeFromCategory(selectedCatagory, selectedMovie);
         List<Movie> movieList = selectedCatagory.getAllMoviesInCategory();
         movieList.remove(selectedMovie);
         selectedCatagory.setAllMoviesInCategory(movieList);
     }// when I remove the exact connection of movie and category
 
-    public void removeFromCat(Category selectedItem) throws Exception {
+    public void removeFromCat(Category selectedItem) throws CatMovieDAOException {
         movieCollectionFacade.removeFromCat(selectedItem);
     }// when I remove the category at all
 
-    public void removeMoviesFromCat(Movie selectedItem) throws Exception {
+    public void removeMoviesFromCat(Movie selectedItem) throws CatMovieDAOException {
         movieCollectionFacade.removeMoviesFromCat(selectedItem);
     } // when I remove the movie at all
-    public void updateRating(Movie movie) throws MovieDAOException {
-        movieCollectionFacade.updateMovieRating(movie);
-    }
-    public Movie getMovie(int movieId) throws MovieDAOException {
-        return movieCollectionFacade.getMovie(movieId);
-    }
 }

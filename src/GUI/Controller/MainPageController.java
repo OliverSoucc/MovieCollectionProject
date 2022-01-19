@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CatMovieDAOException;
 import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
@@ -239,14 +240,14 @@ public class MainPageController implements Initializable {
 
     }
 
-    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException, Exception, CategoryDAOException {
+    public void handleDeleteMovieBtn(ActionEvent event) throws MovieDAOException, CatMovieDAOException, CategoryDAOException {
         Movie movieToDelete = tableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeMoviesFromCat(movieToDelete);
         mainPageModel.removeMovie(movieToDelete);
         updateTableViewMovie();
     }
 
-    public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException, Exception {
+    public void handleDeleteCategoryBtn(ActionEvent event) throws CategoryDAOException, CatMovieDAOException {
         Category categoryToDelete = categoryTableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeFromCat(categoryToDelete);
         mainPageModel.removeCategory(categoryToDelete);
@@ -272,7 +273,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void handleRemoveMovieFromCategory(ActionEvent event) throws Exception, CategoryDAOException, MovieDAOException {
+    void handleRemoveMovieFromCategory(ActionEvent event) throws CatMovieDAOException {
         Movie movietoDelete = MovieListTableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeFromCategory(currentCategory, movietoDelete);
         //updateTableViewCatMovies();
@@ -280,7 +281,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void handleAddMovieToCategory(ActionEvent event) throws Exception {
+    void handleAddMovieToCategory(ActionEvent event) throws CatMovieDAOException {
         Movie movietoAdd = tableView.getSelectionModel().getSelectedItem();
         Category categoryToBeAdded = categoryTableView.getSelectionModel().getSelectedItem();
         mainPageModel.addToCategory(categoryToBeAdded, movietoAdd);

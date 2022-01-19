@@ -2,6 +2,7 @@ package BLL;
 
 import BE.Category;
 import BE.Movie;
+import BLL.Exceptions.CatMovieDAOException;
 import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieDAOException;
 import BLL.Exceptions.MovieException;
@@ -18,9 +19,9 @@ public interface MovieCollectionFacade {
     Category createCategory(String categoryName) throws CategoryDAOException;
     void deleteCategory(Category category) throws CategoryDAOException;
     void updateMovieRating(Movie movie) throws MovieDAOException;
-    public List<Movie> getCategoryMovie(int id) throws Exception;
-    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception;
-    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception;
-    public void removeFromCat(Category selectedItem) throws Exception;
-    public void removeMoviesFromCat(Movie selectedItem) throws Exception;
+    public List<Movie> getCategoryMovie(int id) throws CatMovieDAOException;
+    public void addToCategory(Category selectedCategory, Movie selectedMovie) throws CatMovieDAOException;
+    public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws CatMovieDAOException;
+    public void removeFromCat(Category selectedItem) throws CatMovieDAOException;
+    public void removeMoviesFromCat(Movie selectedItem) throws CatMovieDAOException;
 }
