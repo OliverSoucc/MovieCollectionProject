@@ -8,6 +8,8 @@ import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+
 
 public class MovieDAO implements MovieIDAO {
     private DatabaseConnector DBconnector;
@@ -115,6 +117,21 @@ public class MovieDAO implements MovieIDAO {
             throw new Exception("Cannot connect to server");
         } catch (SQLException ex) {
             throw new Exception("Query cannot be executed");
+        }
+    }
+
+    public Movie updateMovieDate(Movie movie) throws Exception {
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        String sql = "UPDATE Movie set LastView = ? WHERE id = ?";
+
+        try (Connection con = DBconnector.getConnection()) {
+            PreparedStatement preparedStmt = con.prepareStatement(sql);
+            preparedStmt.setDate(1, sqlDate);
+            preparedStmt.setInt(2, movie.getId());
+            preparedStmt.executeUpdate();
+            Movie movietoUpdate = new Movie(movie.getId(), movie.getName(), movie.getRating(), movie.getFileLink(), date, movie.getImdb());
+            return movietoUpdate;
         }
     }
 }

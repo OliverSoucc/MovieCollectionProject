@@ -14,10 +14,6 @@ public class Category {
         this.allMoviesInCategory = allMoviesInCategory;
     }
 
-//    public Category(String name){
-//        this.name = name;
-//    }
-
     public int getId() {
         return id;
     }
