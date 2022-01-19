@@ -38,11 +38,20 @@ public class MainPageModel {
         movieObservableList.setAll(movieCollectionFacade.getAllMovies());
         return movieObservableList;
     }
-    public void createMovie(Movie movie) throws MovieDAOException {
-        Movie newMovie = new Movie(movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
-        movieCollectionFacade.createMovie(newMovie);
-        movieObservableList.add(newMovie);
+
+
+//public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException {
+        //Movie newMovie = new Movie( , movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
+        Movie newMovieToCreate = movieCollectionFacade.createMovie(name, rating, fileLink, lastView, imdb);
+        //movieObservableList.add(newMovie);
+        movieObservableList.add(newMovieToCreate);
+        System.out.println("id of the new movie is in model " + newMovieToCreate.getId());
+        return newMovieToCreate;
     }
+
+
+
     public void removeMovie(Movie movie) throws MovieDAOException {
         movieCollectionFacade.deleteMovie(movie);
         movieObservableList.remove(movie);
@@ -54,10 +63,12 @@ public class MainPageModel {
         return categoryObservableList;
     }
     public void createCategory(String name) throws CategoryDAOException {
-        movieCollectionFacade.createCategory(name);
-        categoryObservableList.add(new Category(name));
-        System.out.println(movieCollectionFacade.getAllCategories());
+        Category newCategory = movieCollectionFacade.createCategory(name);
+        categoryObservableList.add(newCategory);
+        System.out.println("id of the new category is in model " + newCategory.getId());
     }
+
+
     public void removeCategory(Category category) throws CategoryDAOException {
         movieCollectionFacade.deleteCategory(category);
         categoryObservableList.remove(category);

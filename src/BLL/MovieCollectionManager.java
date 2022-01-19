@@ -23,9 +23,9 @@ public class MovieCollectionManager implements MovieCollectionFacade {
     }
 
     @Override
-    public Movie createMovie(Movie movie) throws MovieDAOException {
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException {
         try {
-            return idalMovieFacade.createMovie(movie);
+            return idalMovieFacade.createMovie(name, rating, fileLink, lastView, imdb);
         } catch (Exception e) {
             throw new MovieDAOException("Couldn't create a movie", e);
         }

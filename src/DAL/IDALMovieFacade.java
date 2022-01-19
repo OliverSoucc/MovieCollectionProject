@@ -13,7 +13,7 @@ public interface IDALMovieFacade {
     Category createCategory(String categoryName) throws Exception;
     void deleteCategory(Category categoryToDelete) throws Exception;
     List<Movie> getAllMovies() throws Exception;
-    Movie createMovie(Movie movieToCreate) throws Exception;
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception;
     void deleteMovie(Movie movieToDelete) throws Exception;
     void updateMovie(Movie movie) throws Exception;
     Movie getMovie(int id) throws Exception;

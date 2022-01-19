@@ -41,7 +41,7 @@ public class CategoryDAO implements CategoryIDAO {
 
     @Override
     public Category createCategory(String name) throws Exception {
-        int id = 0;
+
         List<Movie> allMoviesInCategory = new ArrayList<>();
         try (Connection connection = DBconnector.getConnection()){
             String sql = "INSERT INTO Category(Name) VALUES (?)";
@@ -50,7 +50,9 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.addBatch();
             preparedStatement.executeBatch();
         }
-        Category categoryToCreate = new Category(id, name, allMoviesInCategory);
+        Category categoryToCreate = new Category(getNextId(), name, allMoviesInCategory);
+        System.out.println("Next id is: " + getNextId());
+        System.out.println("Id of this new category is: " + categoryToCreate.getId());
         return categoryToCreate; // returns created Category object
     }
 
@@ -63,4 +65,21 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.execute();
         }
     } // deletes the specific category by ID
+
+    private int getNextId() throws Exception {
+        int newestID = -1;
+        try (Connection con = DBconnector.getConnection()) {
+            String query = "SELECT TOP(1) * FROM Category ORDER by id desc";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+            while (rs.next()) {
+                newestID = rs.getInt("id");
+            }
+            return newestID;
+        } catch (SQLServerException ex) {
+            throw new Exception("Cannot connect to server");
+        } catch (SQLException ex) {
+            throw new Exception("Query cannot be executed");
+        }
+    }
 }

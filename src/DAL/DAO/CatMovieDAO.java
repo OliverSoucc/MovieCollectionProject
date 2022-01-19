@@ -43,6 +43,8 @@ public class CatMovieDAO implements CatMovieIDAO {
 
     public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
         String sql = "INSERT INTO CatMovie(CategoryId,MovieId) VALUES (?,?)";
+        System.out.println("Id of the selected " + selectedCategory.getName() + " is " + selectedCategory.getId());
+        System.out.println("Id of the selected " + selectedMovie.getName() + " is " + selectedMovie.getId());
         try (Connection con = DBconnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, selectedCategory.getId());
@@ -50,7 +52,7 @@ public class CatMovieDAO implements CatMovieIDAO {
             ps.addBatch();
             ps.executeBatch();
         }
-    }
+    }// TODO this method gives me categoryId which is always 0
 
     public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
         try (Connection con = DBconnector.getConnection()) {

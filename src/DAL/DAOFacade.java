@@ -25,6 +25,7 @@ public class DAOFacade implements IDALMovieFacade{
     }
 
     public Category createCategory(String name) throws Exception{
+
         return categoryDAO.createCategory(name);
     }
 
@@ -36,8 +37,8 @@ public class DAOFacade implements IDALMovieFacade{
         return movieDAO.getAllMovies();
     }
 
-    public Movie createMovie(Movie movieToCreate) throws Exception{
-        return movieDAO.createMovie(movieToCreate);
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception {
+        return movieDAO.createMovie(name, rating, fileLink, lastView, imdb);
     }
 
     public void deleteMovie(Movie movieToDelete) throws Exception{

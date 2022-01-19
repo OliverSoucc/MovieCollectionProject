@@ -20,13 +20,6 @@ public class Movie {
         this.fileLink = fileLink;
         this.lastView = lastView;
     }
-    public Movie(String name, float rating, String fileLink, int lastView, float imdb){
-        this.name = name;
-        this.rating = rating;
-        this.imdb = imdb;
-        this.fileLink = fileLink;
-        this.lastView = lastView;
-    }
     
     public int getId() {
         return id;
@@ -52,8 +45,13 @@ public class Movie {
 
     public void setImdb(float imdb) {this.imdb = imdb;}
 
+    public void setId(int id) {
+        this.id = id;
+    }
     @Override
     public String toString() {
         return name;
     }
+
+
 }

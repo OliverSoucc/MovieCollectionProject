@@ -9,7 +9,7 @@ import BLL.Exceptions.MovieException;
 import java.util.List;
 
 public interface MovieCollectionFacade {
-    Movie createMovie(Movie movie) throws MovieDAOException;
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException;
     List<Movie> getAllMovies() throws MovieDAOException;
     List<Category> getAllCategories() throws CategoryDAOException;
     void deleteMovie(Movie movie) throws MovieDAOException;
