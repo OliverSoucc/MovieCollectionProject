@@ -5,7 +5,6 @@ import BE.Movie;
 import BLL.Exceptions.CatMovieDAOException;
 import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieDAOException;
-import BLL.Exceptions.MovieException;
 
 import java.util.List;
 
