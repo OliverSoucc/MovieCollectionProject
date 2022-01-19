@@ -78,11 +78,11 @@ public class MainPageController implements Initializable {
         } catch (MovieDAOException | CategoryDAOException e) {
             e.printStackTrace();
         }
-//        try {
-////            filterLogic();
-//        } catch (MovieDAOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            filterLogic();
+        } catch (MovieDAOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -271,11 +271,17 @@ public class MainPageController implements Initializable {
     @FXML
     void handleShowMoviesInCategory(MouseEvent event) {
         Category categoryMoviesToShow = categoryTableView.getSelectionModel().getSelectedItem();
-        catMoviesToShowList = FXCollections.observableArrayList();
-        catMoviesToShowList.setAll(categoryMoviesToShow.getAllMoviesInCategory());
-        nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        MovieListTableView.setItems(catMoviesToShowList);
-        currentCategory = categoryMoviesToShow;
+        if (categoryMoviesToShow.getAllMoviesInCategory() == null) {
+            MovieListTableView.getItems().clear();
+            System.out.println("the chosen category is empty.");
+        }
+        else {
+            catMoviesToShowList = FXCollections.observableArrayList();
+            catMoviesToShowList.setAll(categoryMoviesToShow.getAllMoviesInCategory());
+            nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+            MovieListTableView.setItems(catMoviesToShowList);
+            currentCategory = categoryMoviesToShow;
+        }
     }
 
     public void selectedMovie(MouseEvent mouseEvent) {

@@ -36,4 +36,9 @@ public class Category {
     public void setAllMoviesInCategory(List<Movie> allMoviesInCategory) {
         this.allMoviesInCategory = allMoviesInCategory;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

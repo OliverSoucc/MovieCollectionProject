@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class MainPageModel {
-    private final ObservableList<Movie> movieObservableList;
-    private final ObservableList<Category> categoryObservableList;
+    private  ObservableList<Movie> movieObservableList;
+    private  ObservableList<Category> categoryObservableList;
     private final MovieCollectionFacade movieCollectionFacade;
 
     private static MainPageModel single_instance = null;
@@ -30,16 +30,12 @@ public class MainPageModel {
     }
 
     public MainPageModel() throws MovieCollectionManagerException {
-        movieObservableList = FXCollections.observableArrayList();
-        categoryObservableList = FXCollections.observableArrayList();
-
         movieCollectionFacade = new MovieCollectionManager();
     }
     //Movie methods
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
-        movieObservableList.clear();
-        List<Movie> newMovieList = movieCollectionFacade.getAllMovies();
-        movieObservableList.setAll(newMovieList);
+        movieObservableList = FXCollections.observableArrayList();
+        movieObservableList.setAll(movieCollectionFacade.getAllMovies());
         return movieObservableList;
     }
     public void createMovie(Movie movie) throws MovieDAOException {
@@ -49,19 +45,22 @@ public class MainPageModel {
     }
     public void removeMovie(Movie movie) throws MovieDAOException {
         movieCollectionFacade.deleteMovie(movie);
+        movieObservableList.remove(movie);
     }
     //Category methods
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
-        List<Category> newCategoryList = movieCollectionFacade.getAllCategories();
-        categoryObservableList.setAll(newCategoryList);
+        categoryObservableList = FXCollections.observableArrayList();
+        categoryObservableList.setAll(movieCollectionFacade.getAllCategories());
         return categoryObservableList;
     }
     public void createCategory(String name) throws CategoryDAOException {
         movieCollectionFacade.createCategory(name);
-        categoryObservableList.add(new Category(name)); // NEW
+        categoryObservableList.add(new Category(name));
+        System.out.println(movieCollectionFacade.getAllCategories());
     }
     public void removeCategory(Category category) throws CategoryDAOException {
         movieCollectionFacade.deleteCategory(category);
+        categoryObservableList.remove(category);
     }
 // CatMovie methods
     public List<Movie> getCategoryMovie(int id) throws Exception {
@@ -69,14 +68,24 @@ public class MainPageModel {
     }
     public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
         movieCollectionFacade.addToCategory(selectedCategory, selectedMovie);
+        List<Movie> movieList = selectedCategory.getAllMoviesInCategory();
+        movieList.add(selectedMovie);
+        selectedCategory.setAllMoviesInCategory(movieList);
     }
+
     public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
         movieCollectionFacade.removeFromCategory(selectedCatagory, selectedMovie);
-    }
+        List<Movie> movieList = selectedCatagory.getAllMoviesInCategory();
+        movieList.remove(selectedMovie);
+        selectedCatagory.setAllMoviesInCategory(movieList);
+    }// when I remove the exact connection of movie and category
+
     public void removeFromCat(Category selectedItem) throws Exception {
         movieCollectionFacade.removeFromCat(selectedItem);
-    }
+    }// when I remove the category at all
+
     public void removeMoviesFromCat(Movie selectedItem) throws Exception {
         movieCollectionFacade.removeMoviesFromCat(selectedItem);
-    } // these last 5 methods need to change exceptions
+    } // when I remove the movie at all
+
 }
