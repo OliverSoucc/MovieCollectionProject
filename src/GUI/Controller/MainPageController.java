@@ -208,12 +208,23 @@ public class MainPageController implements Initializable {
         Runtime runtime = Runtime.getRuntime();
         String os = System.getProperty("os.name");
         try {
-            if(os.contains("Windows")){
-            String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
-            Process p =  runtime.exec(command);}
+            if(os.contains("Windows")) {
+                if (tableView.getSelectionModel().getSelectedItem() != null) {
+                    String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
+                    Process p = runtime.exec(command);}
+                else if (MovieListTableView.getSelectionModel().getSelectedItem() != null) {
+                    String[] command = {"cmd.exe", "/k", "Start", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
+                    Process p = runtime.exec(command);}
+            }
             else {
+                if(tableView.getSelectionModel().getSelectedItem() != null){
             String[] command2 = {"open -a /Applications/Utilities/Terminal.app", tableView.getSelectionModel().getSelectedItem().getFileLink()};
             Process p = runtime.exec(command2);}
+            else if(MovieListTableView.getSelectionModel().getSelectedItem() != null) {
+                    String[] command2 = {"open -a /Applications/Utilities/Terminal.app", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
+                    Process p = runtime.exec(command2);}
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -287,6 +298,14 @@ public class MainPageController implements Initializable {
     public void selectedMovie(MouseEvent mouseEvent) {
         if(tableView.getSelectionModel().getSelectedItem() != null)
         currentMovie.setText(tableView.getSelectionModel().getSelectedItem().getName());
+        if(MovieListTableView.getSelectionModel().getSelectedItem() != null)
+            MovieListTableView.getSelectionModel().clearSelection();
+    }
+    public void selectedMovie1(MouseEvent mouseEvent){
+        if(MovieListTableView.getSelectionModel().getSelectedItem() != null)
+            currentMovie.setText(MovieListTableView.getSelectionModel().getSelectedItem().getName());
+        if(tableView.getSelectionModel().getSelectedItem() != null)
+            tableView.getSelectionModel().clearSelection();
     }
 }
 
