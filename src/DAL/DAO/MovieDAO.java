@@ -3,6 +3,7 @@ package DAL.DAO;
 import BE.Movie;
 import DAL.DatabaseConnector;
 import DAL.Intefaces.MovieIDAO;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -39,13 +40,7 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public Movie createMovie(Movie movieToCreate) throws Exception{
-        int id = 0;
-        String name = movieToCreate.getName();
-        float rating = movieToCreate.getRating();
-        String fileLink = movieToCreate.getFileLink();
-        int lastView = movieToCreate.getLastView();
-        float imdb = movieToCreate.getImdb();
+    public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws Exception{
 
         try (Connection connection = DBconnector.getConnection()){
             String sql = "INSERT INTO Movie VALUES (?, ?, ?, ?, ?)";
@@ -58,7 +53,8 @@ public class MovieDAO implements MovieIDAO {
             preparedStatement.execute();
 
         }
-        movieToCreate = new Movie(id, name, rating, fileLink, lastView, imdb);
+        Movie movieToCreate = new Movie(getNextId(), name, rating, fileLink, lastView, imdb);
+        System.out.println("Id of the new created movie in DAO is " + movieToCreate.getId());
         return movieToCreate; // returns created movie object
     }
 
@@ -94,16 +90,33 @@ public class MovieDAO implements MovieIDAO {
     }
 
     @Override
-    public Movie updateMovieRating(Movie movie, float newRating) throws Exception {
+    public Movie updateMovieRating(Movie movieToUpdate, String name, float newRating, String fileLink, int lastView, float imdb) throws Exception {
         String sql = "UPDATE Movie SET Rating = ? WHERE Id = ? ";
         Movie newMovie;
         try (Connection connection = DBconnector.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setFloat(1, newRating);
-            statement.setInt(2, movie.getId());
+            statement.setInt(2, movieToUpdate.getId());
             statement.executeUpdate();
-            newMovie = new Movie(movie.getId(), movie.getName(), newRating, movie.getFileLink(), movie.getLastView(), movie.getImdb());
+            newMovie = new Movie(movieToUpdate.getId(), name, newRating, fileLink, lastView, imdb);
         }
         return newMovie;
     } // returns an updated movie with new personal rating
+
+    private int getNextId() throws Exception {
+        int newestID = -1;
+        try (Connection con = DBconnector.getConnection()) {
+            String query = "SELECT TOP(1) * FROM Movie ORDER by id desc";
+            PreparedStatement preparedStmt = con.prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+            while (rs.next()) {
+                newestID = rs.getInt("id");
+            }
+            return newestID;
+        } catch (SQLServerException ex) {
+            throw new Exception("Cannot connect to server");
+        } catch (SQLException ex) {
+            throw new Exception("Query cannot be executed");
+        }
+    }
 }
