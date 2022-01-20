@@ -1,7 +1,6 @@
 package GUI.Controller;
 
 import BE.Movie;
-import BLL.Exceptions.CategoryDAOException;
 import BLL.Exceptions.MovieCollectionManagerException;
 import BLL.Exceptions.MovieDAOException;
 import GUI.Model.MainPageModel;
@@ -12,14 +11,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 
 public class AddRemoveMovieController {
     @FXML
@@ -30,7 +26,6 @@ public class AddRemoveMovieController {
     public AnchorPane anchorPane;
     MainPageModel mainPageModel;
     MainPageController mainPageController;
-
 
     public AddRemoveMovieController() throws MovieCollectionManagerException {
         mainPageModel = MainPageModel.getInstance();
@@ -43,7 +38,6 @@ public class AddRemoveMovieController {
         closeWindow(saveBtn);
     }
 
-
     public void handleCancelMovieBtn(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Alert window");
@@ -55,7 +49,6 @@ public class AddRemoveMovieController {
     }
 
 
-    //Handles choosing a file
     public void handleChooseFile(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Movie Files", "*.mp4", "*.mpeg4"));
@@ -66,23 +59,8 @@ public class AddRemoveMovieController {
         }
     }
 
-    //Closes current window
     private void closeWindow(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();
     }
-
-    /*public void handleChooseFile1(ActionEvent actionEvent) {
-        final DirectoryChooser directoryChooser = new DirectoryChooser();
-
-        Stage stage = (Stage) anchorPane.getScene().getWindow();
-        File file = directoryChooser.showDialog(stage);
-
-
-        if(file != null){
-            fileTextField.setText(file.getAbsolutePath());
-            //System.out.println(file.getAbsolutePath());
-        }
-
-    }*/   // old method
 }

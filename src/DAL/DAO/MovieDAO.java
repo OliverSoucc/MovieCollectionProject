@@ -38,7 +38,7 @@ public class MovieDAO implements MovieIDAO {
                 allMovies.add(movie);
             }
         }
-        return allMovies; // returns List of all Movies
+        return allMovies;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MovieDAO implements MovieIDAO {
         }
         Movie movieToCreate = new Movie(getNextId(), name, rating, fileLink, lastView, imdb);
         System.out.println("Id of the new created movie in DAO is " + movieToCreate.getId());
-        return movieToCreate; // returns created movie object
+        return movieToCreate;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MovieDAO implements MovieIDAO {
             preparedStatement.setInt(1, movieToDelete.getId());
             preparedStatement.execute();
         }
-    } // deletes the specific movie by ID
+    }
 
     @Override
     public Movie getMovie(int id) throws Exception {
@@ -94,7 +94,6 @@ public class MovieDAO implements MovieIDAO {
     @Override
     public void updateMovieRating(Movie movie) throws Exception {
         String sql = "UPDATE Movie SET Rating = ? WHERE Id = ? ";
-        Movie newMovie;
         try (Connection connection = DBconnector.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setFloat(1, movie.getRating());

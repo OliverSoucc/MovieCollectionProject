@@ -14,11 +14,12 @@ public interface MovieCollectionFacade {
     List<Movie> getAllMovies() throws MovieDAOException;
     List<Category> getAllCategories() throws CategoryDAOException;
     void deleteMovie(Movie movie) throws MovieDAOException;
-    void updateMovie(Movie movie) throws MovieDAOException;
     Movie getMovie(int id) throws MovieDAOException;
+
     Category createCategory(String categoryName) throws CategoryDAOException;
     void deleteCategory(Category category) throws CategoryDAOException;
     void updateMovieRating(Movie movie) throws MovieDAOException;
+
     public List<Movie> getCategoryMovie(int id) throws CatMovieDAOException;
     public void addToCategory(Category selectedCategory, Movie selectedMovie) throws CatMovieDAOException;
     public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws CatMovieDAOException;

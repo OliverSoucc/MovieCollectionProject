@@ -26,15 +26,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import static javax.swing.JOptionPane.showMessageDialog;
 
 public class MainPageController implements Initializable {
     @FXML
@@ -93,7 +86,6 @@ public class MainPageController implements Initializable {
     }
 
 
-    //Button methods
     public void createNewMovie(ActionEvent actionEvent) throws IOException {
         Parent root;
         FXMLLoader loader = new FXMLLoader();
@@ -144,7 +136,6 @@ public class MainPageController implements Initializable {
 
         if (wasChecked == false) {
             warningWindow();
-            //System.out.println("not checked");
         }
         wasChecked = true;
     }
@@ -154,13 +145,12 @@ public class MainPageController implements Initializable {
         categoryTableView.setItems(mainPageModel.getAllCategories());
     }
 
-
     private void filterLogic() throws MovieDAOException {
         FilteredList<Movie> filteredData = new FilteredList<>(mainPageModel.getMovieObservableList(), b -> true);
 
         filter.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(movie -> {
-                // If filter text is empty, display all persons.
+
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
@@ -219,7 +209,6 @@ public class MainPageController implements Initializable {
         nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         MovieListTableView.setItems(catMoviesToShowList);
     }
-
 
     public void playMovie(ActionEvent actionEvent) {
         Runtime runtime = Runtime.getRuntime();
@@ -339,7 +328,6 @@ public class MainPageController implements Initializable {
             tableView.getSelectionModel().clearSelection();
     }
 
-
     private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -348,7 +336,6 @@ public class MainPageController implements Initializable {
 
 
     }
-
 
     public void warningWindow() {
         for (int i = 0; i < tableView.getItems().size(); i++) {

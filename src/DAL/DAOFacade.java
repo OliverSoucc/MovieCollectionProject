@@ -2,7 +2,6 @@ package DAL;
 
 import BE.Category;
 import BE.Movie;
-import BLL.Exceptions.CategoryDAOException;
 import DAL.DAO.CatMovieDAO;
 import DAL.DAO.CategoryDAO;
 import DAL.DAO.MovieDAO;
@@ -46,10 +45,6 @@ public class DAOFacade implements IDALMovieFacade{
         movieDAO.deleteMovie(movieToDelete);
     }
 
-    @Override
-    public void updateMovie(Movie movie) throws Exception {
-
-    }
 
     public void updateMovieRating(Movie movie) throws Exception {
         movieDAO.updateMovieRating(movie);

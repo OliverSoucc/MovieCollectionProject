@@ -2,7 +2,6 @@ package DAL.DAO;
 
 import BE.Category;
 import BE.Movie;
-import BLL.Exceptions.CategoryDAOException;
 import DAL.Intefaces.CategoryIDAO;
 import DAL.DatabaseConnector;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
@@ -36,7 +35,7 @@ public class CategoryDAO implements CategoryIDAO {
                 allCategories.add(category);
             }
         }
-        return allCategories; // returns List of all Categories
+        return allCategories;
     }
 
     @Override
@@ -64,7 +63,7 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.setInt(1, categoryToDelete.getId());
             preparedStatement.execute();
         }
-    } // deletes the specific category by ID
+    }
 
     private int getNextId() throws Exception {
         int newestID = -1;

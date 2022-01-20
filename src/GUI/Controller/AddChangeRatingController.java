@@ -14,13 +14,17 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AddChangeRatingController {
+
     @FXML
     private Button cancelButton, saveButton;
+
     @FXML
     private TextField ratingTextField;
+
     MainPageModel mainPageModel;
     MainPageController mainPageController;
     Movie movie;
+
     public AddChangeRatingController() throws MovieCollectionManagerException {
         mainPageModel = new MainPageModel();
     }

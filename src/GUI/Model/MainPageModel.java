@@ -21,8 +21,6 @@ public class MainPageModel {
 
     private static MainPageModel single_instance = null;
 
-    // Static method
-    // Static method to create instance of Singleton class
     public static MainPageModel getInstance() throws MovieCollectionManagerException {
         if (single_instance == null)
             single_instance = new MainPageModel();
@@ -33,7 +31,7 @@ public class MainPageModel {
     public MainPageModel() throws MovieCollectionManagerException {
         movieCollectionFacade = new MovieCollectionManager();
     }
-    //Movie methods
+
     public ObservableList<Movie> getMovieObservableList() throws MovieDAOException {
         movieObservableList = FXCollections.observableArrayList();
         movieObservableList.setAll(movieCollectionFacade.getAllMovies());
@@ -41,11 +39,8 @@ public class MainPageModel {
     }
 
 
-//public Movie createMovie(String name, float rating, String fileLink, int lastView, float imdb) throws MovieDAOException
     public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws MovieDAOException {
-        //Movie newMovie = new Movie( , movie.getName(), movie.getRating(), movie.getFileLink(), movie.getLastView(), movie.getImdb());
         Movie newMovieToCreate = movieCollectionFacade.createMovie(name, rating, fileLink, lastView, imdb);
-        //movieObservableList.add(newMovie);
         movieObservableList.add(newMovieToCreate);
         System.out.println("id of the new movie is in model " + newMovieToCreate.getId());
         return newMovieToCreate;
@@ -61,18 +56,21 @@ public class MainPageModel {
     public void updateRating(Movie movie) throws MovieDAOException {
         movieCollectionFacade.updateMovieRating(movie);
     }
+
     public void updateMovieLastView(Movie selectedItem) throws MovieDAOException {
        movieCollectionFacade.updateMovieLastView(selectedItem);
     }
+
     public Movie getMovie(int movieId) throws MovieDAOException {
         return movieCollectionFacade.getMovie(movieId);
     }
-    //Category methods
+
     public ObservableList<Category> getAllCategories() throws CategoryDAOException {
         categoryObservableList = FXCollections.observableArrayList();
         categoryObservableList.setAll(movieCollectionFacade.getAllCategories());
         return categoryObservableList;
     }
+
     public void createCategory(String name) throws CategoryDAOException {
         Category newCategory = movieCollectionFacade.createCategory(name);
         categoryObservableList.add(newCategory);
@@ -84,10 +82,11 @@ public class MainPageModel {
         movieCollectionFacade.deleteCategory(category);
         categoryObservableList.remove(category);
     }
-// CatMovie methods
+
     public List<Movie> getCategoryMovie(int id) throws CatMovieDAOException {
         return movieCollectionFacade.getCategoryMovie(id);
     }
+
     public void addToCategory(Category selectedCategory, Movie selectedMovie) throws CatMovieDAOException {
         movieCollectionFacade.addToCategory(selectedCategory, selectedMovie);
         List<Movie> movieList = selectedCategory.getAllMoviesInCategory();
@@ -100,13 +99,13 @@ public class MainPageModel {
         List<Movie> movieList = selectedCatagory.getAllMoviesInCategory();
         movieList.remove(selectedMovie);
         selectedCatagory.setAllMoviesInCategory(movieList);
-    }// when I remove the exact connection of movie and category
+    }
 
     public void removeFromCat(Category selectedItem) throws CatMovieDAOException {
         movieCollectionFacade.removeFromCat(selectedItem);
-    }// when I remove the category at all
+    }
 
     public void removeMoviesFromCat(Movie selectedItem) throws CatMovieDAOException {
         movieCollectionFacade.removeMoviesFromCat(selectedItem);
-    } // when I remove the movie at all
+    }
 }
