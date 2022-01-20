@@ -26,6 +26,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -57,6 +61,7 @@ public class MainPageController implements Initializable {
     private ObservableList<Movie> catMoviesToShowList;
     private Category currentCategory;
     private int currentMovieInt = -1;
+
     public MainPageController() throws MovieCollectionManagerException {
         mainPageModel = MainPageModel.getInstance();
 
@@ -134,14 +139,12 @@ public class MainPageController implements Initializable {
         ratingColumn.setCellValueFactory(new PropertyValueFactory<>("rating"));
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         lastViewColumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
-        if(lastViewColumn.getText() == "0")
-            lastViewColumn.setText("");
         tableView.setItems(mainPageModel.getMovieObservableList());
 
-        if(wasChecked == false)
-        {
-            //warningWindow();
-            System.out.println("not checked");
+
+        if (wasChecked == false) {
+            warningWindow();
+            //System.out.println("not checked");
         }
         wasChecked = true;
     }
@@ -204,6 +207,7 @@ public class MainPageController implements Initializable {
         imdbRatingColumn.setCellValueFactory(new PropertyValueFactory<>("imdb"));
         lastViewColumn.setCellValueFactory(new PropertyValueFactory<>("lastView"));
         tableView.setItems(mainPageModel.getMovieObservableList());
+
     }
 
     public void updateTableViewCategory() throws MovieDAOException, CategoryDAOException {
@@ -221,34 +225,37 @@ public class MainPageController implements Initializable {
         Runtime runtime = Runtime.getRuntime();
         String os = System.getProperty("os.name");
         try {
-            if(os.contains("Windows")) {
+            if (os.contains("Windows")) {
                 if (tableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command = {"cmd.exe", "/k", "Start", tableView.getSelectionModel().getSelectedItem().getFileLink()};
                     Process p = runtime.exec(command);
-                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());}
-                else if (MovieListTableView.getSelectionModel().getSelectedItem() != null) {
+                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());
+                } else if (MovieListTableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command = {"cmd.exe", "/k", "Start", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
                     Process p = runtime.exec(command);
-                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());}
-            }
-            else {
-                if(tableView.getSelectionModel().getSelectedItem() != null){
-            String[] command2 = {"open -a /Applications/Utilities/Terminal.app", tableView.getSelectionModel().getSelectedItem().getFileLink()};
-            Process p = runtime.exec(command2);
-                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());}
-            else if(MovieListTableView.getSelectionModel().getSelectedItem() != null) {
+                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());
+                }
+            } else {
+                if (tableView.getSelectionModel().getSelectedItem() != null) {
+                    String[] command2 = {"open -a /Applications/Utilities/Terminal.app", tableView.getSelectionModel().getSelectedItem().getFileLink()};
+                    Process p = runtime.exec(command2);
+                    mainPageModel.updateMovieLastView(tableView.getSelectionModel().getSelectedItem());
+                } else if (MovieListTableView.getSelectionModel().getSelectedItem() != null) {
                     String[] command2 = {"open -a /Applications/Utilities/Terminal.app", MovieListTableView.getSelectionModel().getSelectedItem().getFileLink()};
                     Process p = runtime.exec(command2);
-                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());}
+                    mainPageModel.updateMovieLastView(MovieListTableView.getSelectionModel().getSelectedItem());
+                }
             }
-        updateTableViewMovie();
+            updateTableViewMovie();
 
         } catch (IOException e) {
             displayError(e);
             e.printStackTrace();
         } catch (MovieDAOException e) {
+            displayError(e);
             e.printStackTrace();
         } catch (CategoryDAOException e) {
+            displayError(e);
             e.printStackTrace();
 
         }
@@ -309,8 +316,7 @@ public class MainPageController implements Initializable {
         if (categoryMoviesToShow.getAllMoviesInCategory() == null) {
             MovieListTableView.getItems().clear();
             System.out.println("the chosen category is empty.");
-        }
-        else {
+        } else {
             catMoviesToShowList = FXCollections.observableArrayList();
             catMoviesToShowList.setAll(categoryMoviesToShow.getAllMoviesInCategory());
             nameMovieTableColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -320,43 +326,47 @@ public class MainPageController implements Initializable {
     }
 
     public void selectedMovie(MouseEvent mouseEvent) {
-        if(tableView.getSelectionModel().getSelectedItem() != null)
-        currentMovie.setText(tableView.getSelectionModel().getSelectedItem().getName());
-        if(MovieListTableView.getSelectionModel().getSelectedItem() != null)
+        if (tableView.getSelectionModel().getSelectedItem() != null)
+            currentMovie.setText(tableView.getSelectionModel().getSelectedItem().getName());
+        if (MovieListTableView.getSelectionModel().getSelectedItem() != null)
             MovieListTableView.getSelectionModel().clearSelection();
     }
-    public void selectedMovie1(MouseEvent mouseEvent){
-        if(MovieListTableView.getSelectionModel().getSelectedItem() != null)
+
+    public void selectedMovie1(MouseEvent mouseEvent) {
+        if (MovieListTableView.getSelectionModel().getSelectedItem() != null)
             currentMovie.setText(MovieListTableView.getSelectionModel().getSelectedItem().getName());
-        if(tableView.getSelectionModel().getSelectedItem() != null)
+        if (tableView.getSelectionModel().getSelectedItem() != null)
             tableView.getSelectionModel().clearSelection();
     }
 
-    private void displayError(Throwable t)
-    {
+
+    private void displayError(Throwable t) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
 
-   
+
     }
-}
 
 
-
-    /*public void warningWindow()
-    {
-        for(int i = 0;i < tableView.getItems().size();i++) {
+    public void warningWindow() {
+        for (int i = 0; i < tableView.getItems().size(); i++) {
             float rating = tableView.getItems().get(i).getRating();
-            if (rating < 6.0) {
+            long datetable = tableView.getItems().get(i).getLastView().getTime();
+            java.util.Date utilStartDate = new java.util.Date();
+            java.sql.Date date = new java.sql.Date(utilStartDate.getTime());
+            long longdata = date.getTime();
 
-                    Alert alert;
-                    alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setContentText("Remember to delete movies with personal rating under 6.0 and movies that have not been watched for over two years.");
-                    alert.showAndWait();
-                    break;
+            if (rating < 6.0 || datetable + 63072000000l <longdata) {
+
+                Alert alert;
+                alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Remember to delete movies with personal rating under 6.0 and movies that have not been watched for over two years.");
+                alert.showAndWait();
+                break;
 
             }
         }
-    }*/
+    }
+}

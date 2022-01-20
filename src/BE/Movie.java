@@ -1,6 +1,6 @@
 package BE;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Movie {
     private int id;
@@ -46,6 +46,10 @@ public class Movie {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setLastView(Date lastView) {
+        this.lastView = lastView;
     }
 
     @Override
