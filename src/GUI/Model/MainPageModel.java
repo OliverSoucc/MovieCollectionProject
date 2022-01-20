@@ -42,7 +42,6 @@ public class MainPageModel {
     public Movie createMovie(String name, float rating, String fileLink, Date lastView, float imdb) throws MovieDAOException {
         Movie newMovieToCreate = movieCollectionFacade.createMovie(name, rating, fileLink, lastView, imdb);
         movieObservableList.add(newMovieToCreate);
-        System.out.println("id of the new movie is in model " + newMovieToCreate.getId());
         return newMovieToCreate;
     }
 
@@ -74,7 +73,6 @@ public class MainPageModel {
     public void createCategory(String name) throws CategoryDAOException {
         Category newCategory = movieCollectionFacade.createCategory(name);
         categoryObservableList.add(newCategory);
-        System.out.println("id of the new category is in model " + newCategory.getId());
     }
 
 

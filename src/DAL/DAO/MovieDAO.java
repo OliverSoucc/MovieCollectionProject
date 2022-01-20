@@ -56,7 +56,6 @@ public class MovieDAO implements MovieIDAO {
 
         }
         Movie movieToCreate = new Movie(getNextId(), name, rating, fileLink, lastView, imdb);
-        System.out.println("Id of the new created movie in DAO is " + movieToCreate.getId());
         return movieToCreate;
     }
 

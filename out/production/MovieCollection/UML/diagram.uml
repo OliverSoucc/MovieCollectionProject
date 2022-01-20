@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="40.5" y="-34.5">com</node>
+    <node x="1472.0" y="-34.5">images</node>
+    <node x="4027.0" y="-34.5">netscape</node>
+    <node x="3887.0" y="-34.5">BE</node>
+    <node x="3744.5" y="-34.5">BLL</node>
+    <node x="1323.5" y="-34.5">org</node>
+    <node x="3574.0" y="-34.5">videos</node>
+    <node x="3303.0" y="-34.5">toolbarButtonGraphics</node>
+    <node x="3104.5" y="-34.5">microsoft</node>
+    <node x="2943.5" y="-34.5">sun</node>
+    <node x="1161.5" y="-34.5">DAL</node>
+    <node x="1005.0" y="-34.5">jdk</node>
+    <node x="803.0" y="-34.5">META-INF</node>
+    <node x="2703.5" y="-34.5">groovyjarjarasm</node>
+    <node x="2542.5" y="-34.5">java</node>
+    <node x="632.0" y="-34.5">groovy</node>
+    <node x="480.5" y="-34.5">UML</node>
+    <node x="2379.0" y="-34.5">javax</node>
+    <node x="2137.0" y="-34.5">groovyjarjarpicocli</node>
+    <node x="1983.0" y="-34.5">GUI</node>
+    <node x="198.5" y="-34.5">groovyjarjarcommonscli</node>
+    <node x="1817.0" y="-34.5">javafx</node>
+    <node x="1656.0" y="-34.5">mssql</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Compact" zoom="0.38430050565856005" showDependencies="false" x="2106.5" y="-20.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
