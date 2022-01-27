@@ -6,7 +6,9 @@ import BLL.Exceptions.CategoryDAOException;
 import java.util.List;
 
 public interface CategoryIDAO {
-    public List<Category> getAllCategories() throws Exception;
-    public Category createCategory(String name) throws Exception;
-    public void deleteCategory(Category categoryToDelete) throws Exception;
+    List<Category> getAllCategories() throws Exception;
+
+    Category createCategory(String name) throws Exception;
+
+    void deleteCategory(Category categoryToDelete) throws Exception;
 }

@@ -33,8 +33,7 @@ public class AddRemoveMovieController {
     }
 
     public void handleSaveMovieBtn(ActionEvent actionEvent) throws MovieDAOException {
-        Movie movie = mainPageModel.createMovie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), new Date(0), Float.parseFloat(imdbRating.getText()));
-        System.out.println(mainPageModel.getMovieObservableList());
+        mainPageModel.createMovie(titleTextField.getText(), Float.parseFloat(ratingTextField.getText()), fileTextField.getText(), new Date(0), Float.parseFloat(imdbRating.getText()));
         closeWindow(saveBtn);
     }
 

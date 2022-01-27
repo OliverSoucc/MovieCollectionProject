@@ -37,7 +37,7 @@ public class MainPageController implements Initializable {
     @FXML
     public TableView<Movie> tableView;
     @FXML
-    public Button filterButton, deleteMovieBtn;
+    public Button filterButton;
     @FXML
     private TableView<Category> categoryTableView;
     @FXML
@@ -284,10 +284,10 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    void handleRemoveMovieFromCategory(ActionEvent event) throws CatMovieDAOException {
+    void handleRemoveMovieFromCategory(ActionEvent event) throws CatMovieDAOException, CategoryDAOException, MovieDAOException {
         Movie movietoDelete = MovieListTableView.getSelectionModel().getSelectedItem();
         mainPageModel.removeFromCategory(currentCategory, movietoDelete);
-        //updateTableViewCatMovies();
+//        updateTableViewCatMovies();
         catMoviesToShowList.remove(movietoDelete);
     }
 
@@ -333,8 +333,6 @@ public class MainPageController implements Initializable {
         alert.setTitle("Error");
         alert.setHeaderText(t.getMessage());
         alert.showAndWait();
-
-
     }
 
     public void warningWindow() {
@@ -345,7 +343,7 @@ public class MainPageController implements Initializable {
             java.sql.Date date = new java.sql.Date(utilStartDate.getTime());
             long longdata = date.getTime();
 
-            if (rating < 6.0 || datetable + 63072000000l <longdata) {
+            if (rating < 6.0 || datetable + 63_072_000_000l <longdata) {
 
                 Alert alert;
                 alert = new Alert(Alert.AlertType.WARNING);

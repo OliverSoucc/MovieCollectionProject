@@ -50,8 +50,6 @@ public class CategoryDAO implements CategoryIDAO {
             preparedStatement.executeBatch();
         }
         Category categoryToCreate = new Category(getNextId(), name, allMoviesInCategory);
-        System.out.println("Next id is: " + getNextId());
-        System.out.println("Id of this new category is: " + categoryToCreate.getId());
         return categoryToCreate; // returns created Category object
     }
 
@@ -75,10 +73,6 @@ public class CategoryDAO implements CategoryIDAO {
                 newestID = rs.getInt("id");
             }
             return newestID;
-        } catch (SQLServerException ex) {
-            throw new Exception("Cannot connect to server");
-        } catch (SQLException ex) {
-            throw new Exception("Query cannot be executed");
         }
     }
 }

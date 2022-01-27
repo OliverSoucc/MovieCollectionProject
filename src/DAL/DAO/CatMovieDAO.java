@@ -30,8 +30,13 @@ public class CatMovieDAO implements CatMovieIDAO {
             preparedStmt.setInt(1, id);
             ResultSet rs = preparedStmt.executeQuery();
             while (rs.next()) {
-                Movie movie = new Movie(rs.getInt("Id"), rs.getString("Name"), rs.getFloat("Rating"),
-                        rs.getString("FileLink"), rs.getDate("LastView"), rs.getInt("Imdb"));
+                Movie movie = new Movie(
+                        rs.getInt("Id"),
+                        rs.getString("Name"),
+                        rs.getFloat("Rating"),
+                        rs.getString("FileLink"),
+                        rs.getDate("LastView"),
+                        rs.getInt("Imdb"));
                 newMovieList.add(movie);
             }
             return newMovieList;
@@ -41,8 +46,6 @@ public class CatMovieDAO implements CatMovieIDAO {
 
     public void addToCategory(Category selectedCategory, Movie selectedMovie) throws Exception {
         String sql = "INSERT INTO CatMovie(CategoryId,MovieId) VALUES (?,?)";
-        System.out.println("Id of the selected " + selectedCategory.getName() + " is " + selectedCategory.getId());
-        System.out.println("Id of the selected " + selectedMovie.getName() + " is " + selectedMovie.getId());
         try (Connection con = DBconnector.getConnection()) {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, selectedCategory.getId());
@@ -54,7 +57,6 @@ public class CatMovieDAO implements CatMovieIDAO {
 
     public void removeFromCategory(Category selectedCatagory, Movie selectedMovie) throws Exception {
         try (Connection con = DBconnector.getConnection()) {
-            System.out.println(selectedCatagory.getId() + " " + selectedMovie.getId());
             String query = "DELETE from CatMovie WHERE CategoryId = ? AND MovieId = ?";
             PreparedStatement preparedStmt = con.prepareStatement(query);
             preparedStmt.setInt(1, selectedCatagory.getId());

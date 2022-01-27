@@ -125,10 +125,6 @@ public class MovieDAO implements MovieIDAO {
                 newestID = rs.getInt("id");
             }
             return newestID;
-        } catch (SQLServerException ex) {
-            throw new Exception("Cannot connect to server");
-        } catch (SQLException ex) {
-            throw new Exception("Query cannot be executed");
         }
     }
 
